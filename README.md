@@ -27,4 +27,4 @@ Run the following commands from a CLI terminal inside the relevant directory.
 
 ## Terraform Azure Documentation
 
-* `https://www.terraform.io/docs/providers/azurerm/index.html`
+* [Terraform Azure](https://www.terraform.io/docs/providers/azurerm/index.html)
