@@ -3,8 +3,8 @@ resource "azurerm_sql_server" "dsSQL" {
   location                          = "${var.location}"
   resource_group_name               = "${azurerm_resource_group.rg.name}"
   version                           = "12.0"
-  administrator_login               = "${var.admin_username}"
-  administrator_login_password      = "${var.admin_password}"
+  administrator_login               = "${var.vm_username}"
+  administrator_login_password      = "${var.vm_password}"
 
   tags {
     "display_name"                  = "Azure SQL"
@@ -47,8 +47,8 @@ resource "azurerm_sql_server" "cisSQL" {
   location                          = "${var.location}"
   resource_group_name               = "${azurerm_resource_group.rg.name}"
   version                           = "12.0"
-  administrator_login               = "${var.admin_username}"
-  administrator_login_password      = "${var.admin_password}"
+  administrator_login               = "${var.vm_username}"
+  administrator_login_password      = "${var.vm_password}"
 
   tags {
     "display_name"                  = "Azure SQL"

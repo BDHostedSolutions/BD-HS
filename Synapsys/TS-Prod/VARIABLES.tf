@@ -157,11 +157,121 @@ variable "carriervm0_name" {
 variable "carriervm1_name" {
     description = ""
 }
-
-variable "local_sql_rdp_nsg_name" {
+variable "ssisvm0_name" {
+    description = ""
+}
+variable "ssisvm1_name" {
     description = ""
 }
 
+variable "sapdsvm0_name" {
+    description = ""
+}
+variable "shavlikvm0_name" {
+    description = ""
+}
+variable "shavlikvm1_name" {
+    description = ""
+}
+variable "dns_avs_name" {
+    description = ""
+}
+variable "dnsvm1_name" {
+    description = ""
+}
+variable "splunkvm_name" {
+    description = ""
+}
+variable "calinux_name" {
+    description = ""
+}
+variable "splunk_nsg_name" {
+    description = ""
+}
+variable "carrier_avs_name" {
+    description = ""
+}
+variable "sapdsvm1_name" {
+    description = ""
+}
+variable "sapds_avs_name" {
+    description = ""
+}
+variable "dnsvm0_name" {
+    description = ""
+}
+variable "ext_ws_nsg_name" {
+    description = ""
+}
+variable "ssis_avs_name" {
+    description = ""
+}
+variable "cis_sql_server_name" {
+    description = ""
+}
+variable "local_sql_rdp_nsg_name" {
+    description = ""
+}
 variable "splunk_rdp_nsg_name" {
+    description = ""
+}
+variable "ds_sql_server_name" {
+    description = ""
+}
+variable "db_rson" {
+    description = ""
+}
+variable "db_collation" {
+    description = ""
+}
+variable "db_edition" {
+    description = ""
+}
+variable "cis_sql_db_name" {
+    description = ""
+}
+variable "sapds_ilb_name" {
+    description = ""
+}
+variable "local_ws_rdp_nsg_name" {
+    description = ""
+}
+variable "carrier_ilb_name" {
+    description = ""
+}
+variable "etl_db_backup_storage_acct_name" {
+    description = ""
+}
+variable "local_ws_nsg_name" {
+    description = ""
+}
+variable "calinux_avs_name" {
+    description = ""
+}
+variable "shavlik_avs_name" {
+    description = ""
+}
+variable "prod_subnet_name" {
+    description = ""
+}
+variable "prod_subnet_prefix" {
+    description = ""
+}
+variable "splunk_avs_name" {
+    description = ""
+}
+variable "local_sql_nsg_name" {
+    description = ""
+}
+variable "etl_storage_acct_name" {
+    description = ""
+}
+variable "etl_backup_storage_acct_name" {
+    description = ""
+}
+variable "gw_subnet_name" {
+    description = ""
+}
+variable "gw_subnet_prefix" {
     description = ""
 }
