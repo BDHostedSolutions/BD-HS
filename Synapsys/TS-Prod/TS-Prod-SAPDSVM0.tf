@@ -22,7 +22,7 @@ resource "azurerm_network_interface" "sapdsvm0-nic" {
         subnet_id                               = "${azurerm_subnet.prod_subnet.id}"
         private_ip_address_allocation           = "dynamic"
         public_ip_address_id                    = "${azurerm_public_ip.sapdsvm0_pip.id}"
-        load_balancer_backend_address_pools_ids = "${azurerm_lb_backend_address_pool.sapds_ilb_pool.id}"
+        load_balancer_backend_address_pools_ids = ["${azurerm_lb_backend_address_pool.sapds_ilb_pool.id}"]
     }
 
     network_security_group_id                   = "${azurerm_network_security_group.rdp_nsg.id}"
