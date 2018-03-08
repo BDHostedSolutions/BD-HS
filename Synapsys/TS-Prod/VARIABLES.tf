@@ -22,7 +22,7 @@ variable "tenant_id" {
   description = "Enter Tenant ID"
 }
 
-variable "shared_resource_group_name" {
+variable "resource_group_name" {
     description = ""
 }
 
@@ -147,5 +147,21 @@ variable "db2_nsg_name" {
 }
 
 variable "servicebus_name" {
+    description = ""
+}
+
+variable "carriervm0_name" {
+    description = ""
+}
+
+variable "carriervm1_name" {
+    description = ""
+}
+
+variable "local_sql_rdp_nsg_name" {
+    description = ""
+}
+
+variable "splunk_rdp_nsg_name" {
     description = ""
 }
