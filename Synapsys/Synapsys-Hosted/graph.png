@@ -1,0 +1,206 @@
+digraph {
+	compound = "true"
+	newrank = "true"
+	subgraph "root" {
+		"[root] azurerm_availability_set.FWAVS" [label = "azurerm_availability_set.FWAVS", shape = "box"]
+		"[root] azurerm_availability_set.app-server-avs" [label = "azurerm_availability_set.app-server-avs", shape = "box"]
+		"[root] azurerm_availability_set.db-server-avs" [label = "azurerm_availability_set.db-server-avs", shape = "box"]
+		"[root] azurerm_lb.app_ilb" [label = "azurerm_lb.app_ilb", shape = "box"]
+		"[root] azurerm_lb_backend_address_pool.ilb_bep" [label = "azurerm_lb_backend_address_pool.ilb_bep", shape = "box"]
+		"[root] azurerm_lb_nat_rule.rdp0" [label = "azurerm_lb_nat_rule.rdp0", shape = "box"]
+		"[root] azurerm_lb_nat_rule.rdp1" [label = "azurerm_lb_nat_rule.rdp1", shape = "box"]
+		"[root] azurerm_lb_probe.lbprobe2" [label = "azurerm_lb_probe.lbprobe2", shape = "box"]
+		"[root] azurerm_lb_rule.lbrule2" [label = "azurerm_lb_rule.lbrule2", shape = "box"]
+		"[root] azurerm_network_interface.MGMT" [label = "azurerm_network_interface.MGMT", shape = "box"]
+		"[root] azurerm_network_interface.RDS-NIC" [label = "azurerm_network_interface.RDS-NIC", shape = "box"]
+		"[root] azurerm_network_interface.TRUST" [label = "azurerm_network_interface.TRUST", shape = "box"]
+		"[root] azurerm_network_interface.UNTRUST" [label = "azurerm_network_interface.UNTRUST", shape = "box"]
+		"[root] azurerm_network_interface.app-vm0-nic" [label = "azurerm_network_interface.app-vm0-nic", shape = "box"]
+		"[root] azurerm_network_interface.app-vm1-nic" [label = "azurerm_network_interface.app-vm1-nic", shape = "box"]
+		"[root] azurerm_network_interface.db-vm-nic" [label = "azurerm_network_interface.db-vm-nic", shape = "box"]
+		"[root] azurerm_network_security_group.nsg_App1" [label = "azurerm_network_security_group.nsg_App1", shape = "box"]
+		"[root] azurerm_network_security_group.nsg_App2" [label = "azurerm_network_security_group.nsg_App2", shape = "box"]
+		"[root] azurerm_network_security_group.nsg_DB1" [label = "azurerm_network_security_group.nsg_DB1", shape = "box"]
+		"[root] azurerm_network_security_group.nsg_DB2" [label = "azurerm_network_security_group.nsg_DB2", shape = "box"]
+		"[root] azurerm_network_security_group.nsg_MGMT" [label = "azurerm_network_security_group.nsg_MGMT", shape = "box"]
+		"[root] azurerm_network_security_group.nsg_RDP" [label = "azurerm_network_security_group.nsg_RDP", shape = "box"]
+		"[root] azurerm_network_security_group.nsg_TRUST" [label = "azurerm_network_security_group.nsg_TRUST", shape = "box"]
+		"[root] azurerm_network_security_group.nsg_UNTRUST" [label = "azurerm_network_security_group.nsg_UNTRUST", shape = "box"]
+		"[root] azurerm_public_ip.App2_pip" [label = "azurerm_public_ip.App2_pip", shape = "box"]
+		"[root] azurerm_public_ip.App_pip" [label = "azurerm_public_ip.App_pip", shape = "box"]
+		"[root] azurerm_public_ip.DB_pip" [label = "azurerm_public_ip.DB_pip", shape = "box"]
+		"[root] azurerm_public_ip.FW_mgmt_pip" [label = "azurerm_public_ip.FW_mgmt_pip", shape = "box"]
+		"[root] azurerm_public_ip.FW_untrust_pip" [label = "azurerm_public_ip.FW_untrust_pip", shape = "box"]
+		"[root] azurerm_public_ip.ilb_pip" [label = "azurerm_public_ip.ilb_pip", shape = "box"]
+		"[root] azurerm_resource_group.rg" [label = "azurerm_resource_group.rg", shape = "box"]
+		"[root] azurerm_route_table.trust_route_table" [label = "azurerm_route_table.trust_route_table", shape = "box"]
+		"[root] azurerm_servicebus_namespace.basic" [label = "azurerm_servicebus_namespace.basic", shape = "box"]
+		"[root] azurerm_storage_account.synapsysdbprd" [label = "azurerm_storage_account.synapsysdbprd", shape = "box"]
+		"[root] azurerm_storage_account.synapsysprd" [label = "azurerm_storage_account.synapsysprd", shape = "box"]
+		"[root] azurerm_storage_account.veritorimagesprd" [label = "azurerm_storage_account.veritorimagesprd", shape = "box"]
+		"[root] azurerm_storage_container.vhds" [label = "azurerm_storage_container.vhds", shape = "box"]
+		"[root] azurerm_subnet.mgmt_subnet" [label = "azurerm_subnet.mgmt_subnet", shape = "box"]
+		"[root] azurerm_subnet.trust_subnet" [label = "azurerm_subnet.trust_subnet", shape = "box"]
+		"[root] azurerm_subnet.untrust_subnet" [label = "azurerm_subnet.untrust_subnet", shape = "box"]
+		"[root] azurerm_virtual_machine.FW" [label = "azurerm_virtual_machine.FW", shape = "box"]
+		"[root] azurerm_virtual_machine.RDS01" [label = "azurerm_virtual_machine.RDS01", shape = "box"]
+		"[root] azurerm_virtual_machine.app-vm0" [label = "azurerm_virtual_machine.app-vm0", shape = "box"]
+		"[root] azurerm_virtual_machine.app-vm1" [label = "azurerm_virtual_machine.app-vm1", shape = "box"]
+		"[root] azurerm_virtual_machine.db-vm" [label = "azurerm_virtual_machine.db-vm", shape = "box"]
+		"[root] azurerm_virtual_network.vnet" [label = "azurerm_virtual_network.vnet", shape = "box"]
+		"[root] provider.azurerm" [label = "provider.azurerm", shape = "diamond"]
+		"[root] azurerm_availability_set.FWAVS" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_availability_set.app-server-avs" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_availability_set.app-server-avs" -> "[root] var.app_server_avs_name"
+		"[root] azurerm_availability_set.db-server-avs" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_availability_set.db-server-avs" -> "[root] var.db_server_avs_name"
+		"[root] azurerm_lb.app_ilb" -> "[root] azurerm_public_ip.ilb_pip"
+		"[root] azurerm_lb.app_ilb" -> "[root] var.lb_name"
+		"[root] azurerm_lb_backend_address_pool.ilb_bep" -> "[root] azurerm_lb.app_ilb"
+		"[root] azurerm_lb_nat_rule.rdp0" -> "[root] azurerm_lb.app_ilb"
+		"[root] azurerm_lb_nat_rule.rdp1" -> "[root] azurerm_lb.app_ilb"
+		"[root] azurerm_lb_probe.lbprobe2" -> "[root] azurerm_lb.app_ilb"
+		"[root] azurerm_lb_rule.lbrule2" -> "[root] azurerm_lb_backend_address_pool.ilb_bep"
+		"[root] azurerm_lb_rule.lbrule2" -> "[root] azurerm_lb_probe.lbprobe2"
+		"[root] azurerm_network_interface.MGMT" -> "[root] azurerm_public_ip.FW_mgmt_pip"
+		"[root] azurerm_network_interface.MGMT" -> "[root] azurerm_subnet.mgmt_subnet"
+		"[root] azurerm_network_interface.MGMT" -> "[root] var.firewall_name"
+		"[root] azurerm_network_interface.RDS-NIC" -> "[root] azurerm_network_interface.TRUST"
+		"[root] azurerm_network_interface.RDS-NIC" -> "[root] var.rds01_name"
+		"[root] azurerm_network_interface.TRUST" -> "[root] azurerm_subnet.trust_subnet"
+		"[root] azurerm_network_interface.TRUST" -> "[root] var.firewall_name"
+		"[root] azurerm_network_interface.UNTRUST" -> "[root] azurerm_public_ip.FW_untrust_pip"
+		"[root] azurerm_network_interface.UNTRUST" -> "[root] azurerm_subnet.untrust_subnet"
+		"[root] azurerm_network_interface.UNTRUST" -> "[root] var.firewall_name"
+		"[root] azurerm_network_interface.app-vm0-nic" -> "[root] azurerm_lb_backend_address_pool.ilb_bep"
+		"[root] azurerm_network_interface.app-vm0-nic" -> "[root] azurerm_lb_nat_rule.rdp0"
+		"[root] azurerm_network_interface.app-vm0-nic" -> "[root] azurerm_network_security_group.nsg_App1"
+		"[root] azurerm_network_interface.app-vm0-nic" -> "[root] azurerm_subnet.trust_subnet"
+		"[root] azurerm_network_interface.app-vm0-nic" -> "[root] var.appvm0_name"
+		"[root] azurerm_network_interface.app-vm1-nic" -> "[root] azurerm_lb_backend_address_pool.ilb_bep"
+		"[root] azurerm_network_interface.app-vm1-nic" -> "[root] azurerm_lb_nat_rule.rdp1"
+		"[root] azurerm_network_interface.app-vm1-nic" -> "[root] azurerm_network_security_group.nsg_App1"
+		"[root] azurerm_network_interface.app-vm1-nic" -> "[root] azurerm_subnet.trust_subnet"
+		"[root] azurerm_network_interface.app-vm1-nic" -> "[root] var.appvm1_name"
+		"[root] azurerm_network_interface.db-vm-nic" -> "[root] azurerm_network_security_group.nsg_DB1"
+		"[root] azurerm_network_interface.db-vm-nic" -> "[root] azurerm_public_ip.DB_pip"
+		"[root] azurerm_network_interface.db-vm-nic" -> "[root] azurerm_subnet.trust_subnet"
+		"[root] azurerm_network_interface.db-vm-nic" -> "[root] var.dbvm_name"
+		"[root] azurerm_network_security_group.nsg_App1" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_network_security_group.nsg_App1" -> "[root] var.app1_nsg_name"
+		"[root] azurerm_network_security_group.nsg_App2" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_network_security_group.nsg_App2" -> "[root] var.app2_nsg_name"
+		"[root] azurerm_network_security_group.nsg_DB1" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_network_security_group.nsg_DB1" -> "[root] var.db1_nsg_name"
+		"[root] azurerm_network_security_group.nsg_DB2" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_network_security_group.nsg_DB2" -> "[root] var.bdips"
+		"[root] azurerm_network_security_group.nsg_DB2" -> "[root] var.bdips1"
+		"[root] azurerm_network_security_group.nsg_DB2" -> "[root] var.bdips2"
+		"[root] azurerm_network_security_group.nsg_DB2" -> "[root] var.bdips3"
+		"[root] azurerm_network_security_group.nsg_DB2" -> "[root] var.db2_nsg_name"
+		"[root] azurerm_network_security_group.nsg_MGMT" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_network_security_group.nsg_MGMT" -> "[root] var.mgmt_subnet"
+		"[root] azurerm_network_security_group.nsg_RDP" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_network_security_group.nsg_RDP" -> "[root] var.bdips"
+		"[root] azurerm_network_security_group.nsg_RDP" -> "[root] var.bdips1"
+		"[root] azurerm_network_security_group.nsg_RDP" -> "[root] var.bdips2"
+		"[root] azurerm_network_security_group.nsg_RDP" -> "[root] var.bdips3"
+		"[root] azurerm_network_security_group.nsg_RDP" -> "[root] var.rdp_nsg_name"
+		"[root] azurerm_network_security_group.nsg_TRUST" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_network_security_group.nsg_UNTRUST" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_public_ip.App2_pip" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_public_ip.App_pip" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_public_ip.DB_pip" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_public_ip.FW_mgmt_pip" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_public_ip.FW_untrust_pip" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_public_ip.ilb_pip" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_resource_group.rg" -> "[root] provider.azurerm"
+		"[root] azurerm_resource_group.rg" -> "[root] var.location"
+		"[root] azurerm_resource_group.rg" -> "[root] var.resource_group_name"
+		"[root] azurerm_route_table.trust_route_table" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_servicebus_namespace.basic" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_servicebus_namespace.basic" -> "[root] var.servicebus_name"
+		"[root] azurerm_storage_account.synapsysdbprd" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_storage_account.synapsysdbprd" -> "[root] var.db_storage_acct_name"
+		"[root] azurerm_storage_account.synapsysprd" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_storage_account.synapsysprd" -> "[root] var.storage_acct_name"
+		"[root] azurerm_storage_account.veritorimagesprd" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_storage_account.veritorimagesprd" -> "[root] var.veritor_storage_acct_name"
+		"[root] azurerm_storage_container.vhds" -> "[root] azurerm_storage_account.synapsysprd"
+		"[root] azurerm_subnet.mgmt_subnet" -> "[root] azurerm_network_security_group.nsg_MGMT"
+		"[root] azurerm_subnet.mgmt_subnet" -> "[root] azurerm_virtual_network.vnet"
+		"[root] azurerm_subnet.trust_subnet" -> "[root] azurerm_network_security_group.nsg_TRUST"
+		"[root] azurerm_subnet.trust_subnet" -> "[root] azurerm_route_table.trust_route_table"
+		"[root] azurerm_subnet.trust_subnet" -> "[root] azurerm_virtual_network.vnet"
+		"[root] azurerm_subnet.trust_subnet" -> "[root] var.trust_subnet"
+		"[root] azurerm_subnet.untrust_subnet" -> "[root] azurerm_network_security_group.nsg_UNTRUST"
+		"[root] azurerm_subnet.untrust_subnet" -> "[root] azurerm_virtual_network.vnet"
+		"[root] azurerm_subnet.untrust_subnet" -> "[root] var.untrust_subnet"
+		"[root] azurerm_virtual_machine.FW" -> "[root] azurerm_availability_set.FWAVS"
+		"[root] azurerm_virtual_machine.FW" -> "[root] azurerm_network_interface.MGMT"
+		"[root] azurerm_virtual_machine.FW" -> "[root] azurerm_network_interface.TRUST"
+		"[root] azurerm_virtual_machine.FW" -> "[root] azurerm_network_interface.UNTRUST"
+		"[root] azurerm_virtual_machine.FW" -> "[root] azurerm_storage_container.vhds"
+		"[root] azurerm_virtual_machine.FW" -> "[root] var.fw_password"
+		"[root] azurerm_virtual_machine.FW" -> "[root] var.fw_username"
+		"[root] azurerm_virtual_machine.RDS01" -> "[root] azurerm_network_interface.RDS-NIC"
+		"[root] azurerm_virtual_machine.RDS01" -> "[root] azurerm_storage_container.vhds"
+		"[root] azurerm_virtual_machine.RDS01" -> "[root] var.vm_password"
+		"[root] azurerm_virtual_machine.RDS01" -> "[root] var.vm_username"
+		"[root] azurerm_virtual_machine.app-vm0" -> "[root] azurerm_availability_set.app-server-avs"
+		"[root] azurerm_virtual_machine.app-vm0" -> "[root] azurerm_network_interface.app-vm0-nic"
+		"[root] azurerm_virtual_machine.app-vm0" -> "[root] azurerm_storage_container.vhds"
+		"[root] azurerm_virtual_machine.app-vm0" -> "[root] var.vm_password"
+		"[root] azurerm_virtual_machine.app-vm0" -> "[root] var.vm_username"
+		"[root] azurerm_virtual_machine.app-vm1" -> "[root] azurerm_availability_set.app-server-avs"
+		"[root] azurerm_virtual_machine.app-vm1" -> "[root] azurerm_network_interface.app-vm1-nic"
+		"[root] azurerm_virtual_machine.app-vm1" -> "[root] azurerm_storage_container.vhds"
+		"[root] azurerm_virtual_machine.app-vm1" -> "[root] var.vm_password"
+		"[root] azurerm_virtual_machine.app-vm1" -> "[root] var.vm_username"
+		"[root] azurerm_virtual_machine.db-vm" -> "[root] azurerm_availability_set.db-server-avs"
+		"[root] azurerm_virtual_machine.db-vm" -> "[root] azurerm_network_interface.db-vm-nic"
+		"[root] azurerm_virtual_machine.db-vm" -> "[root] azurerm_storage_container.vhds"
+		"[root] azurerm_virtual_machine.db-vm" -> "[root] var.vm_password"
+		"[root] azurerm_virtual_machine.db-vm" -> "[root] var.vm_username"
+		"[root] azurerm_virtual_network.vnet" -> "[root] azurerm_resource_group.rg"
+		"[root] azurerm_virtual_network.vnet" -> "[root] var.address_space"
+		"[root] azurerm_virtual_network.vnet" -> "[root] var.dns_server"
+		"[root] azurerm_virtual_network.vnet" -> "[root] var.global_dns_server"
+		"[root] azurerm_virtual_network.vnet" -> "[root] var.vnet_name"
+		"[root] meta.count-boundary (count boundary fixup)" -> "[root] azurerm_lb_rule.lbrule2"
+		"[root] meta.count-boundary (count boundary fixup)" -> "[root] azurerm_network_security_group.nsg_App2"
+		"[root] meta.count-boundary (count boundary fixup)" -> "[root] azurerm_network_security_group.nsg_DB2"
+		"[root] meta.count-boundary (count boundary fixup)" -> "[root] azurerm_network_security_group.nsg_RDP"
+		"[root] meta.count-boundary (count boundary fixup)" -> "[root] azurerm_public_ip.App2_pip"
+		"[root] meta.count-boundary (count boundary fixup)" -> "[root] azurerm_public_ip.App_pip"
+		"[root] meta.count-boundary (count boundary fixup)" -> "[root] azurerm_servicebus_namespace.basic"
+		"[root] meta.count-boundary (count boundary fixup)" -> "[root] azurerm_storage_account.synapsysdbprd"
+		"[root] meta.count-boundary (count boundary fixup)" -> "[root] azurerm_storage_account.veritorimagesprd"
+		"[root] meta.count-boundary (count boundary fixup)" -> "[root] azurerm_virtual_machine.FW"
+		"[root] meta.count-boundary (count boundary fixup)" -> "[root] azurerm_virtual_machine.RDS01"
+		"[root] meta.count-boundary (count boundary fixup)" -> "[root] azurerm_virtual_machine.app-vm0"
+		"[root] meta.count-boundary (count boundary fixup)" -> "[root] azurerm_virtual_machine.app-vm1"
+		"[root] meta.count-boundary (count boundary fixup)" -> "[root] azurerm_virtual_machine.db-vm"
+		"[root] provider.azurerm (close)" -> "[root] azurerm_lb_rule.lbrule2"
+		"[root] provider.azurerm (close)" -> "[root] azurerm_network_security_group.nsg_App2"
+		"[root] provider.azurerm (close)" -> "[root] azurerm_network_security_group.nsg_DB2"
+		"[root] provider.azurerm (close)" -> "[root] azurerm_network_security_group.nsg_RDP"
+		"[root] provider.azurerm (close)" -> "[root] azurerm_public_ip.App2_pip"
+		"[root] provider.azurerm (close)" -> "[root] azurerm_public_ip.App_pip"
+		"[root] provider.azurerm (close)" -> "[root] azurerm_servicebus_namespace.basic"
+		"[root] provider.azurerm (close)" -> "[root] azurerm_storage_account.synapsysdbprd"
+		"[root] provider.azurerm (close)" -> "[root] azurerm_storage_account.veritorimagesprd"
+		"[root] provider.azurerm (close)" -> "[root] azurerm_virtual_machine.FW"
+		"[root] provider.azurerm (close)" -> "[root] azurerm_virtual_machine.RDS01"
+		"[root] provider.azurerm (close)" -> "[root] azurerm_virtual_machine.app-vm0"
+		"[root] provider.azurerm (close)" -> "[root] azurerm_virtual_machine.app-vm1"
+		"[root] provider.azurerm (close)" -> "[root] azurerm_virtual_machine.db-vm"
+		"[root] provider.azurerm" -> "[root] var.client_id"
+		"[root] provider.azurerm" -> "[root] var.client_secret"
+		"[root] provider.azurerm" -> "[root] var.subscription_id"
+		"[root] provider.azurerm" -> "[root] var.tenant_id"
+		"[root] root" -> "[root] meta.count-boundary (count boundary fixup)"
+		"[root] root" -> "[root] provider.azurerm (close)"
+	}
+}
+
