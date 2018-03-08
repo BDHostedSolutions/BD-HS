@@ -6,272 +6,109 @@ provider "azurerm" {
   tenant_id = "${var.tenant_id}"
 }
 
-variable "subscription_id" {
-  description = "Enter Subscription ID for provisioning resources in Azure"
-}
+variable "subscription_id" {}
+variable "client_id" {}
+variable "client_secret" {}
+variable "tenant_id" {}
 
-variable "client_id" {
-  description = "Enter Client ID"
-}
+variable "resource_group_name" {}
 
-variable "client_secret" {
-  description = "Enter Client secret"
-}
+variable "location" {}
 
-variable "tenant_id" {
-  description = "Enter Tenant ID"
-}
+variable "vm_username" {}
+variable "vm_password" {}
 
-variable "resource_group_name" {
-    description = ""
-}
+variable "storage_acct_name" {}
+variable "db_storage_acct_name" {}
+variable "veritor_storage_acct_name" {}
+variable "etl_storage_acct_name" {}
+variable "etl_db_backup_storage_acct_name" {}
+variable "etl_backup_storage_acct_name" {}
 
-variable "location" {
-    description = ""
-}
+variable "vnet_name" {}
+variable "address_space" {}
+variable "prod_subnet_name" {}
+variable "prod_subnet_prefix" {}
+variable "gw_subnet_name" {}
+variable "gw_subnet_prefix" {}
 
-variable "vm_username" {
-  description = ""
-}
+variable "bdips" {}
+variable "bdips1" {}
+variable "bdips2" {}
+variable "bdips3" {}
 
-variable "vm_password" {
-  description = ""
-}
+variable "dns_server" {}
+variable "global_dns_server" {}
 
-variable "storage_acct_name" {
-    description = ""
-}
+variable "app_server_avs_name" {}
+variable "appvm1_name" {}
+variable "app1_nsg_name" {}
+variable "appvm2_name" {}
+variable "app2_nsg_name" {}
 
-variable "db_storage_acct_name" {
-    description = ""
-}
+variable "db_server_avs_name" {}
+variable "dbvm_name" {}
+variable "db1_nsg_name" {}
+variable "db2_nsg_name" {}
 
-variable "veritor_storage_acct_name" {
-    description = ""
-}
+variable "carrier_avs_name" {}
+variable "carriervm0_name" {}
+variable "carriervm1_name" {}
 
-variable "vnet_name" {
-    description = ""
-}
+variable "ssis_avs_name" {}
+variable "ssisvm0_name" {}
+variable "ssisvm1_name" {}
 
-variable "address_space" {
-    description = ""
-}
+variable "sapds_avs_name" {}
+variable "sapdsvm0_name" {}
+variable "sapdsvm1_name" {}
 
-variable "subnet1_name" {
-    description = ""
-}
+variable "shavlik_avs_name" {}
+variable "shavlikvm0_name" {}
+variable "shavlikvm1_name" {}
 
-variable "subnet1_prefix" {
-    description = ""
-}
+variable "rdp_nsg_name" {}
 
-variable "subnet2_name" {
-    description = ""
-}
 
-variable "subnet2_prefix" {
-    description = ""
-}
+variable "servicebus_name" {}
 
-variable "dns_server" {
-    description = ""
-}
+variable "dns_avs_name" {}
+variable "dnsvm0_name" {}
+variable "dnsvm1_name" {}
 
-variable "global_dns_server" {
-    description = ""
-}
+variable "splunk_avs_name" {}
+variable "splunk_rdp_nsg_name" {}
+variable "splunk_nsg_name" {}
+variable "splunkvm_name" {}
 
-variable "appvm1_name" {
-    description = ""
-}
+variable "calinux_avs_name" {}
+variable "calinux_name" {}
 
-variable "ds_sql_db_name" {
-    description = ""
-}
+variable "local_ws_nsg_name" {}
+variable "local_ws_rdp_nsg_name" {}
 
-variable "appvm2_name" {
-    description = ""
-}
+variable "ext_ws_nsg_name" {}
 
-variable "app_server_avs_name" {
-    description = ""
-}
+variable "local_sql_nsg_name" {}
+variable "local_sql_rdp_nsg_name" {}
 
-variable "dbvm_name" {
-    description = ""
-}
+variable "cis_sql_server_name" {}
+variable "cis_sql_db_name" {}
+variable "ds_sql_server_name" {}
+variable "ds_sql_db_name" {}
+variable "db_rson" {}
+variable "db_collation" {}
+variable "db_edition" {}
 
-variable "db_server_avs_name" {
-    description = ""
-}
+variable "carrier_ilb_name" {}
+variable "sapds_ilb_name" {}
 
-variable "bdips" {
-    description = ""
-}
 
-variable "bdips1" {
-    description = ""
-}
 
-variable "bdips2" {
-    description = ""
-}
 
-variable "bdips3" {
-    description = ""
-}
 
-variable "lb_name" {
-    description = ""
-}
 
-variable "rdp_nsg_name" {
-    description = ""
-}
 
-variable "app1_nsg_name" {
-    description = ""
-}
 
-variable "app2_nsg_name" {
-    description = ""
-}
 
-variable "db1_nsg_name" {
-    description = ""
-}
 
-variable "db2_nsg_name" {
-    description = ""
-}
-
-variable "servicebus_name" {
-    description = ""
-}
-
-variable "carriervm0_name" {
-    description = ""
-}
-
-variable "carriervm1_name" {
-    description = ""
-}
-variable "ssisvm0_name" {
-    description = ""
-}
-variable "ssisvm1_name" {
-    description = ""
-}
-
-variable "sapdsvm0_name" {
-    description = ""
-}
-variable "shavlikvm0_name" {
-    description = ""
-}
-variable "shavlikvm1_name" {
-    description = ""
-}
-variable "dns_avs_name" {
-    description = ""
-}
-variable "dnsvm1_name" {
-    description = ""
-}
-variable "splunkvm_name" {
-    description = ""
-}
-variable "calinux_name" {
-    description = ""
-}
-variable "splunk_nsg_name" {
-    description = ""
-}
-variable "carrier_avs_name" {
-    description = ""
-}
-variable "sapdsvm1_name" {
-    description = ""
-}
-variable "sapds_avs_name" {
-    description = ""
-}
-variable "dnsvm0_name" {
-    description = ""
-}
-variable "ext_ws_nsg_name" {
-    description = ""
-}
-variable "ssis_avs_name" {
-    description = ""
-}
-variable "cis_sql_server_name" {
-    description = ""
-}
-variable "local_sql_rdp_nsg_name" {
-    description = ""
-}
-variable "splunk_rdp_nsg_name" {
-    description = ""
-}
-variable "ds_sql_server_name" {
-    description = ""
-}
-variable "db_rson" {
-    description = ""
-}
-variable "db_collation" {
-    description = ""
-}
-variable "db_edition" {
-    description = ""
-}
-variable "cis_sql_db_name" {
-    description = ""
-}
-variable "sapds_ilb_name" {
-    description = ""
-}
-variable "local_ws_rdp_nsg_name" {
-    description = ""
-}
-variable "carrier_ilb_name" {
-    description = ""
-}
-variable "etl_db_backup_storage_acct_name" {
-    description = ""
-}
-variable "local_ws_nsg_name" {
-    description = ""
-}
-variable "calinux_avs_name" {
-    description = ""
-}
-variable "shavlik_avs_name" {
-    description = ""
-}
-variable "prod_subnet_name" {
-    description = ""
-}
-variable "prod_subnet_prefix" {
-    description = ""
-}
-variable "splunk_avs_name" {
-    description = ""
-}
-variable "local_sql_nsg_name" {
-    description = ""
-}
-variable "etl_storage_acct_name" {
-    description = ""
-}
-variable "etl_backup_storage_acct_name" {
-    description = ""
-}
-variable "gw_subnet_name" {
-    description = ""
-}
-variable "gw_subnet_prefix" {
-    description = ""
-}
