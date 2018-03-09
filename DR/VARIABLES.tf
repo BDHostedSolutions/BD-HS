@@ -37,4 +37,7 @@ variable "appgw_subnet" {
 
 variable "firewall_name" {}
 variable "fw_username" {}
-variable "fw_password" {}
+
+variable "fw_password" {
+  description = "Enter Firewall Password"
+}
