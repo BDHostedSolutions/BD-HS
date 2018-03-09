@@ -3,7 +3,7 @@ data "azurerm_resource_group" "DR" {
 }
 
 resource "azurerm_virtual_network" "vnet" {
-  name                = "${data.azurerm_resource_group.DR.name}-vnet"  
+  name                = "${data.azurerm_resource_group.DR.name}-vnet"
   location            = "${data.azurerm_resource_group.DR.location}"
   address_space       = ["${var.address_space}"]
   resource_group_name = "${data.azurerm_resource_group.DR.name}"
@@ -35,7 +35,7 @@ resource "azurerm_subnet" "trust_subnet" {
 }
 
 resource "azurerm_subnet" "dmz_subnet" {
-  name                       = "sn-dmz"
+  name                      = "sn-dmz"
   virtual_network_name      = "${azurerm_virtual_network.vnet.name}"
   resource_group_name       = "${data.azurerm_resource_group.DR.name}"
   address_prefix            = "${var.dmz_subnet}"
@@ -44,9 +44,8 @@ resource "azurerm_subnet" "dmz_subnet" {
 }
 
 resource "azurerm_subnet" "appgw_subnet" {
-  name                      = "sn-appgw"
-  virtual_network_name      = "${azurerm_virtual_network.vnet.name}"
-  resource_group_name       = "${data.azurerm_resource_group.DR.name}"
-  address_prefix            = "${var.appgw_subnet}"
-  network_security_group_id = "${azurerm_network_security_group.nsg_APPGW.id}"
+  name                 = "sn-appgw"
+  virtual_network_name = "${azurerm_virtual_network.vnet.name}"
+  resource_group_name  = "${data.azurerm_resource_group.DR.name}"
+  address_prefix       = "${var.appgw_subnet}"
 }
