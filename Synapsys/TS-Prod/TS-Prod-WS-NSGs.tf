@@ -2,6 +2,7 @@ resource "azurerm_network_security_group" "ext_ws_nsg" {
   name                          = "${var.ext_ws_nsg_name}" 
   location                      = "${var.location}"
   resource_group_name           = "${azurerm_resource_group.rg.name}"
+
   security_rule {
     name                        = "Allow-Internet"
     description                 = "Allow 443"
@@ -14,6 +15,7 @@ resource "azurerm_network_security_group" "ext_ws_nsg" {
     source_address_prefix       = "INTERNET"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Allow-Local"
     description                 = "Allow 80"
@@ -26,6 +28,7 @@ resource "azurerm_network_security_group" "ext_ws_nsg" {
     source_address_prefix       = "VirtualNetwork"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Allow-Shavlik"
     description                 = "Allow 4155"
@@ -38,6 +41,7 @@ resource "azurerm_network_security_group" "ext_ws_nsg" {
     source_address_prefix       = "INTERNET"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-RDP"
     description                 = "Block 3389"
@@ -50,6 +54,7 @@ resource "azurerm_network_security_group" "ext_ws_nsg" {
     source_address_prefix       = "*"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-WD"
     description                 = "Block 8172"
@@ -62,15 +67,18 @@ resource "azurerm_network_security_group" "ext_ws_nsg" {
     source_address_prefix       = "*"
     destination_address_prefix  = "*"
   }
+
   tags {
     display_name                = "NSG for Web Service (ext access)"
     description                 = "Applies to each NIC"
   }
 }
+
 resource "azurerm_network_security_group" "ext_ws_rdp_nsg" {
   name                          = "${var.ext_ws_nsg_name}" 
   location                      = "${var.location}"
   resource_group_name           = "${azurerm_resource_group.rg.name}"
+
   security_rule {
     name                        = "Allow-Internet"
     description                 = "Allow 443"
@@ -83,6 +91,7 @@ resource "azurerm_network_security_group" "ext_ws_rdp_nsg" {
     source_address_prefix       = "INTERNET"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Allow-Local"
     description                 = "Allow 80"
@@ -95,6 +104,7 @@ resource "azurerm_network_security_group" "ext_ws_rdp_nsg" {
     source_address_prefix       = "VirtualNetwork"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Allow-Shavlik"
     description                 = "Allow 4155"
@@ -107,6 +117,7 @@ resource "azurerm_network_security_group" "ext_ws_rdp_nsg" {
     source_address_prefix       = "INTERNET"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Allow-RDP"
     description                 = "Allow 3389"
@@ -119,6 +130,7 @@ resource "azurerm_network_security_group" "ext_ws_rdp_nsg" {
     source_address_prefix       = "*"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Allow-WD"
     description                 = "Allow 8172"
@@ -131,15 +143,18 @@ resource "azurerm_network_security_group" "ext_ws_rdp_nsg" {
     source_address_prefix       = "*"
     destination_address_prefix  = "*"
   }
+
   tags {
     display_name                = "NSG for Web Service (ext access)"
     description                 = "Applies to each NIC"
   }
 }
+
 resource "azurerm_network_security_group" "local_ws_nsg" {
   name                          = "${var.local_ws_nsg_name}" 
   location                      = "${var.location}"
   resource_group_name           = "${azurerm_resource_group.rg.name}"
+
   security_rule {
     name                        = "Block-BDNet1"
     description                 = "Block 80"
@@ -152,6 +167,7 @@ resource "azurerm_network_security_group" "local_ws_nsg" {
     source_address_prefix       = "${var.bdips}"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-BDNet1-SSL"
     description                 = "Block 443"
@@ -164,6 +180,7 @@ resource "azurerm_network_security_group" "local_ws_nsg" {
     source_address_prefix       = "${var.bdips}"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-BDNet2"
     description                 = "Block 80"
@@ -176,6 +193,7 @@ resource "azurerm_network_security_group" "local_ws_nsg" {
     source_address_prefix       = "${var.bdips1}"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-BDNet2-SSL"
     description                 = "Block 443"
@@ -188,6 +206,7 @@ resource "azurerm_network_security_group" "local_ws_nsg" {
     source_address_prefix       = "${var.bdips1}"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-BDNet3"
     description                 = "Block 80"
@@ -200,6 +219,7 @@ resource "azurerm_network_security_group" "local_ws_nsg" {
     source_address_prefix       = "${var.bdips2}"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-BDNet3-SSL"
     description                 = "Block 443"
@@ -212,6 +232,7 @@ resource "azurerm_network_security_group" "local_ws_nsg" {
     source_address_prefix       = "${var.bdips2}"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-BDNet4"
     description                 = "Block 80"
@@ -224,6 +245,7 @@ resource "azurerm_network_security_group" "local_ws_nsg" {
     source_address_prefix       = "${var.bdips3}"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-BDNet4-SSL"
     description                 = "Block 443"
@@ -236,6 +258,7 @@ resource "azurerm_network_security_group" "local_ws_nsg" {
     source_address_prefix       = "${var.bdips3}"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-Internet"
     description                 = "Block 80"
@@ -248,6 +271,7 @@ resource "azurerm_network_security_group" "local_ws_nsg" {
     source_address_prefix       = "INTERNET"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-Internet-SSL"
     description                 = "Block 443"
@@ -260,6 +284,7 @@ resource "azurerm_network_security_group" "local_ws_nsg" {
     source_address_prefix       = "INTERNET"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Allow-Local"
     description                 = "Allow 80"
@@ -272,6 +297,7 @@ resource "azurerm_network_security_group" "local_ws_nsg" {
     source_address_prefix       = "VirtualNetwork"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Allow-Local-SSL"
     description                 = "Allow 443"
@@ -284,6 +310,7 @@ resource "azurerm_network_security_group" "local_ws_nsg" {
     source_address_prefix       = "VirtualNetwork"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Allow-Shavlik"
     description                 = "Allow 4155"
@@ -296,6 +323,7 @@ resource "azurerm_network_security_group" "local_ws_nsg" {
     source_address_prefix       = "INTERNET"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-RDP"
     description                 = "Block 3389"
@@ -308,6 +336,7 @@ resource "azurerm_network_security_group" "local_ws_nsg" {
     source_address_prefix       = "*"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-WD"
     description                 = "Block 8172"
@@ -320,6 +349,7 @@ resource "azurerm_network_security_group" "local_ws_nsg" {
     source_address_prefix       = "*"
     destination_address_prefix  = "*"
   }
+
   tags {
     display_name                = "NSG for VMs running local vnet SQL Server with RDP Access"
     description                 = "Applies to individual NICs"
@@ -330,6 +360,7 @@ resource "azurerm_network_security_group" "local_ws_rdp_nsg" {
   name                          = "${var.local_ws_rdp_nsg_name}" 
   location                      = "${var.location}"
   resource_group_name           = "${azurerm_resource_group.rg.name}"
+
   security_rule {
     name                        = "Block-BDNet1"
     description                 = "Block 80"
@@ -342,6 +373,7 @@ resource "azurerm_network_security_group" "local_ws_rdp_nsg" {
     source_address_prefix       = "${var.bdips}"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-BDNet1-SSL"
     description                 = "Block 443"
@@ -354,6 +386,7 @@ resource "azurerm_network_security_group" "local_ws_rdp_nsg" {
     source_address_prefix       = "${var.bdips}"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-BDNet2"
     description                 = "Block 80"
@@ -366,6 +399,7 @@ resource "azurerm_network_security_group" "local_ws_rdp_nsg" {
     source_address_prefix       = "${var.bdips1}"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-BDNet2-SSL"
     description                 = "Block 443"
@@ -378,6 +412,7 @@ resource "azurerm_network_security_group" "local_ws_rdp_nsg" {
     source_address_prefix       = "${var.bdips1}"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-BDNet3"
     description                 = "Block 80"
@@ -390,6 +425,7 @@ resource "azurerm_network_security_group" "local_ws_rdp_nsg" {
     source_address_prefix       = "${var.bdips2}"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-BDNet3-SSL"
     description                 = "Block 443"
@@ -402,6 +438,7 @@ resource "azurerm_network_security_group" "local_ws_rdp_nsg" {
     source_address_prefix       = "${var.bdips2}"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-BDNet4"
     description                 = "Block 80"
@@ -414,6 +451,7 @@ resource "azurerm_network_security_group" "local_ws_rdp_nsg" {
     source_address_prefix       = "${var.bdips3}"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-BDNet4-SSL"
     description                 = "Block 443"
@@ -426,6 +464,7 @@ resource "azurerm_network_security_group" "local_ws_rdp_nsg" {
     source_address_prefix       = "${var.bdips3}"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-Internet"
     description                 = "Block 80"
@@ -438,6 +477,7 @@ resource "azurerm_network_security_group" "local_ws_rdp_nsg" {
     source_address_prefix       = "INTERNET"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-Internet-SSL"
     description                 = "Block 443"
@@ -450,6 +490,7 @@ resource "azurerm_network_security_group" "local_ws_rdp_nsg" {
     source_address_prefix       = "INTERNET"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Allow-Local"
     description                 = "Allow 80"
@@ -462,6 +503,7 @@ resource "azurerm_network_security_group" "local_ws_rdp_nsg" {
     source_address_prefix       = "VirtualNetwork"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Allow-Local-SSL"
     description                 = "Allow 443"
@@ -474,6 +516,7 @@ resource "azurerm_network_security_group" "local_ws_rdp_nsg" {
     source_address_prefix       = "VirtualNetwork"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Allow-Shavlik"
     description                 = "Allow 4155"
@@ -486,6 +529,7 @@ resource "azurerm_network_security_group" "local_ws_rdp_nsg" {
     source_address_prefix       = "INTERNET"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Allow-RDP"
     description                 = "Allow 3389"
@@ -498,6 +542,7 @@ resource "azurerm_network_security_group" "local_ws_rdp_nsg" {
     source_address_prefix       = "*"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Allow-WD"
     description                 = "Allow 8172"
@@ -510,6 +555,7 @@ resource "azurerm_network_security_group" "local_ws_rdp_nsg" {
     source_address_prefix       = "*"
     destination_address_prefix  = "*"
   }
+  
   tags {
     display_name                = "NSG for VMs running local vnet SQL Server with RDP Access"
     description                 = "Applies to individual NICs"

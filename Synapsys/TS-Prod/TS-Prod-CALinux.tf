@@ -4,6 +4,7 @@ resource "azurerm_public_ip" "calinux_pip" {
     resource_group_name                 = "${azurerm_resource_group.rg.name}"
     public_ip_address_allocation        = "dynamic"
     idle_timeout_in_minutes             = 4
+
     tags {
         display_name                    = "UbuntuPublicIP"
       }
@@ -13,9 +14,6 @@ resource "azurerm_network_interface" "calinux-nic" {
     name                                = "${var.calinux_name}-eth0"
     location                            = "${var.location}"
     resource_group_name                 = "${azurerm_resource_group.rg.name}"
-    tags {
-        display_name                    = "UbuntuCAServerNic"
-      }
 
     ip_configuration {
         name                            = "ipconfig1"
@@ -23,6 +21,10 @@ resource "azurerm_network_interface" "calinux-nic" {
         private_ip_address_allocation   = "dynamic"
         public_ip_address_id            = "${azurerm_public_ip.calinux_pip.id}"
     }
+
+    tags {
+        display_name                    = "UbuntuCAServerNic"
+      }
 }
 
 resource "azurerm_virtual_machine" "calinux" {
@@ -32,9 +34,7 @@ resource "azurerm_virtual_machine" "calinux" {
     network_interface_ids               = ["${azurerm_network_interface.calinux-nic.id}"]
     availability_set_id                 = "${azurerm_availability_set.calinux-avs.id}"
     vm_size                             = "Basic_A1"
-    tags {
-        display_name                    = "UbuntuCAServer"
-    }
+
     storage_image_reference {
         publisher                       = "Canonical"
         offer                           = "UbuntuServer"
@@ -59,6 +59,10 @@ resource "azurerm_virtual_machine" "calinux" {
         disable_password_authentication = false
     }
 
+    tags {
+        display_name                    = "UbuntuCAServer"
+    }
+
     depends_on                          = ["azurerm_storage_account.storage_acct"]
 }
 
@@ -81,4 +85,3 @@ resource "azurerm_virtual_machine_extension" "calinux_enablevmaccess" {
 
   depends_on                            = ["azurerm_virtual_machine.calinux"]
 }
-

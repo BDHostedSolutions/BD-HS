@@ -3,6 +3,7 @@ resource "azurerm_availability_set" "calinux-avs" {
     location                                    = "${var.location}"
     resource_group_name                         = "${azurerm_resource_group.rg.name}"
     managed                                     = false
+    
     tags {
         display_name                            = "AvailabilitySet"
       }
@@ -13,6 +14,7 @@ resource "azurerm_availability_set" "carrier-avs" {
     location                                    = "${var.location}"
     resource_group_name                         = "${azurerm_resource_group.rg.name}"
     managed                                     = false
+
     tags {
         display_name                            = "AvailabilitySet"
       }
@@ -23,6 +25,7 @@ resource "azurerm_availability_set" "dns-avs" {
     location                                    = "${var.location}"
     resource_group_name                         = "${azurerm_resource_group.rg.name}"
     managed                                     = false
+
     tags {
         display_name                            = "AvailabilitySet"
       }
@@ -33,6 +36,7 @@ resource "azurerm_availability_set" "sapds-avs" {
     location                                    = "${var.location}"
     resource_group_name                         = "${azurerm_resource_group.rg.name}"
     managed                                     = false
+
     tags {
         display_name                            = "AvailabilitySet"
       }
@@ -43,6 +47,7 @@ resource "azurerm_availability_set" "shavlik-avs" {
     location                                    = "${var.location}"
     resource_group_name                         = "${azurerm_resource_group.rg.name}"
     managed                                     = false
+
     tags {
         display_name                            = "AvailabilitySet"
       }
@@ -53,6 +58,7 @@ resource "azurerm_availability_set" "ssis-avs" {
     location                                    = "${var.location}"
     resource_group_name                         = "${azurerm_resource_group.rg.name}"
     managed                                     = false
+
     tags {
         display_name                            = "AvailabilitySet"
       }
@@ -63,6 +69,7 @@ resource "azurerm_availability_set" "splunk-avs" {
     location                                    = "${var.location}"
     resource_group_name                         = "${azurerm_resource_group.rg.name}"
     managed                                     = false
+
     tags {
         display_name                            = "AvailabilitySet"
       }

@@ -4,6 +4,7 @@ resource "azurerm_public_ip" "carriervm0_pip" {
     resource_group_name                         = "${azurerm_resource_group.rg.name}"
     public_ip_address_allocation                = "dynamic"
     idle_timeout_in_minutes                     = 4
+
     tags {
         display_name                            = "CS APP VM Public IPs"
       }
@@ -13,9 +14,7 @@ resource "azurerm_network_interface" "carriervm0-nic" {
     name                                        = "${var.carriervm0_name}-eth0"
     location                                    = "${var.location}"
     resource_group_name                         = "${azurerm_resource_group.rg.name}"
-    tags {
-        display_name                            = "CS App NICs"
-      }
+    network_security_group_id                   = "${azurerm_network_security_group.rdp_nsg.id}"
 
     ip_configuration {
         name                                    = "ipconfig1"
@@ -25,9 +24,10 @@ resource "azurerm_network_interface" "carriervm0-nic" {
         load_balancer_backend_address_pools_ids = ["${azurerm_lb_backend_address_pool.carrier_ilb_pool.id}"]
     }
 
-    network_security_group_id                   = "${azurerm_network_security_group.rdp_nsg.id}"
+    tags {
+        display_name                            = "CS App NICs"
+    }
 }
-
 
 resource "azurerm_virtual_machine" "carriervm0" {
     name                                        = "${var.carriervm0_name}"
@@ -36,9 +36,7 @@ resource "azurerm_virtual_machine" "carriervm0" {
     network_interface_ids                       = ["${azurerm_network_interface.carriervm0-nic.id}"]
     availability_set_id                         = "${azurerm_availability_set.carrier-avs.id}"
     vm_size                                     = "Standard_A3"
-    tags {
-        display_name                            = "CS APP Virtual Machines"
-    }
+
     storage_image_reference {
         publisher                               = "MicrosoftWindowsServer"
         offer                                   = "WindowsServer"
@@ -62,6 +60,10 @@ resource "azurerm_virtual_machine" "carriervm0" {
     os_profile_windows_config {
         provision_vm_agent                      = true
         enable_automatic_upgrades               = true
+    }
+
+    tags {
+        display_name                            = "CS APP Virtual Machines"
     }
 
     depends_on                                  = ["azurerm_storage_account.storage_acct"]

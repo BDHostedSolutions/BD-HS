@@ -15,6 +15,7 @@ resource "azurerm_network_security_group" "rdp_nsg" {
     source_address_prefix       = "${var.bdips}"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Allow-BDNet2"
     description                 = "Allow RDP"
@@ -27,6 +28,7 @@ resource "azurerm_network_security_group" "rdp_nsg" {
     source_address_prefix       = "${var.bdips1}"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Allow-BDNet3"
     description                 = "Allow RDP"
@@ -39,6 +41,7 @@ resource "azurerm_network_security_group" "rdp_nsg" {
     source_address_prefix       = "${var.bdips2}"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Allow-BDNet4"
     description                 = "Allow RDP"
@@ -51,6 +54,7 @@ resource "azurerm_network_security_group" "rdp_nsg" {
     source_address_prefix       = "${var.bdips3}"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Allow-BDNet1-WD"
     description                 = "Allow WD"
@@ -63,6 +67,7 @@ resource "azurerm_network_security_group" "rdp_nsg" {
     source_address_prefix       = "${var.bdips}"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Allow-BDNet2-WD"
     description                 = "Allow WD"
@@ -75,6 +80,7 @@ resource "azurerm_network_security_group" "rdp_nsg" {
     source_address_prefix       = "${var.bdips1}"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Allow-BDNet3-WD"
     description                 = "Allow WD"
@@ -87,6 +93,7 @@ resource "azurerm_network_security_group" "rdp_nsg" {
     source_address_prefix       = "${var.bdips2}"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Allow-BDNet4-WD"
     description                 = "Allow WD"
@@ -99,6 +106,7 @@ resource "azurerm_network_security_group" "rdp_nsg" {
     source_address_prefix       = "${var.bdips3}"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-Local"
     description                 = "Block RDP"
@@ -111,6 +119,7 @@ resource "azurerm_network_security_group" "rdp_nsg" {
     source_address_prefix       = "VirtualNetwork"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-Internet-WD"
     description                 = "Block WD"
@@ -123,6 +132,7 @@ resource "azurerm_network_security_group" "rdp_nsg" {
     source_address_prefix       = "INTERNET"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Block-Local-WD"
     description                 = "Block WD"
@@ -135,6 +145,7 @@ resource "azurerm_network_security_group" "rdp_nsg" {
     source_address_prefix       = "VirtualNetwork"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "Allow-All"
     description                 = "Allow All"
@@ -147,6 +158,7 @@ resource "azurerm_network_security_group" "rdp_nsg" {
     source_address_prefix       = "*"
     destination_address_prefix  = "*"
   }
+
   security_rule {
     name                        = "RDP-External"
     priority                    = 104
@@ -158,6 +170,7 @@ resource "azurerm_network_security_group" "rdp_nsg" {
     source_address_prefix       = "*"
     destination_address_prefix  = "*"
   }
+  
   tags {
     display_name                = "NSG for RDP and Web Deploy in QA"
     description                 = "Applies to each subnet on the QA Vnet"

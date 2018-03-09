@@ -10,9 +10,7 @@ resource "azurerm_network_interface" "splunkvm-nic" {
     name                                        = "${var.splunkvm_name}-eth0"
     location                                    = "${var.location}"
     resource_group_name                         = "${azurerm_resource_group.rg.name}"
-    tags {
-        display_name                            = "Splunk NIC"
-      }
+    network_security_group_id                   = "${azurerm_network_security_group.splunk_rdp_nsg.id}"
 
     ip_configuration {
         name                                    = "ipconfig1"
@@ -21,7 +19,9 @@ resource "azurerm_network_interface" "splunkvm-nic" {
         public_ip_address_id                    = "${azurerm_public_ip.splunkvm_pip.id}"
     }
     
-    network_security_group_id                   = "${azurerm_network_security_group.splunk_rdp_nsg.id}"
+    tags {
+        display_name                            = "Splunk NIC"
+    }
 }
 
 resource "azurerm_virtual_machine" "splunkvm" {
@@ -31,9 +31,7 @@ resource "azurerm_virtual_machine" "splunkvm" {
     network_interface_ids                       = ["${azurerm_network_interface.splunkvm-nic.id}"]
     availability_set_id                         = "${azurerm_availability_set.splunk-avs.id}"
     vm_size                                     = "Standard_A3"
-    tags {
-        display_name                            = "Splunk Virtual Machine"
-    }
+
     storage_image_reference {
         publisher                               = "MicrosoftWindowsServer"
         offer                                   = "WindowsServer"
@@ -57,6 +55,10 @@ resource "azurerm_virtual_machine" "splunkvm" {
     os_profile_windows_config {
         provision_vm_agent                      = true
         enable_automatic_upgrades               = true
+    }
+
+    tags {
+        display_name                            = "Splunk Virtual Machine"
     }
 
     depends_on                                  = ["azurerm_storage_account.storage_acct"]

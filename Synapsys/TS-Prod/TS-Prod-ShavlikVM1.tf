@@ -4,6 +4,7 @@ resource "azurerm_public_ip" "shavlikvm1_pip" {
     resource_group_name                         = "${azurerm_resource_group.rg.name}"
     public_ip_address_allocation                = "dynamic"
     idle_timeout_in_minutes                     = 4
+    
     tags {
         display_name                            = "MU Public IPs"
       }
@@ -13,15 +14,16 @@ resource "azurerm_network_interface" "shavlikvm1-nic" {
     name                                        = "${var.shavlikvm1_name}-eth0"
     location                                    = "${var.location}"
     resource_group_name                         = "${azurerm_resource_group.rg.name}"
-    tags {
-        display_name                            = "MU NICs"
-      }
 
     ip_configuration {
         name                                    = "ipconfig1"
         subnet_id                               = "${azurerm_subnet.prod_subnet.id}"
         private_ip_address_allocation           = "dynamic"
         public_ip_address_id                    = "${azurerm_public_ip.shavlikvm1_pip.id}"
+    }
+
+    tags {
+        display_name                            = "MU NICs"
     }
 }
 
@@ -32,9 +34,7 @@ resource "azurerm_virtual_machine" "shavlikvm1" {
     network_interface_ids                       = ["${azurerm_network_interface.shavlikvm1-nic.id}"]
     availability_set_id                         = "${azurerm_availability_set.shavlik-avs.id}"
     vm_size                                     = "Standard_A3"
-    tags {
-        display_name                            = "MU APP (Shavlik) Virtual Machines"
-    }
+
     storage_image_reference {
         publisher                               = "MicrosoftWindowsServer"
         offer                                   = "WindowsServer"
@@ -58,6 +58,10 @@ resource "azurerm_virtual_machine" "shavlikvm1" {
     os_profile_windows_config {
         provision_vm_agent                      = true
         enable_automatic_upgrades               = true
+    }
+
+    tags {
+        display_name                            = "MU APP (Shavlik) Virtual Machines"
     }
 
     depends_on                                  = ["azurerm_storage_account.storage_acct"]
