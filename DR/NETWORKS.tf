@@ -43,6 +43,20 @@ resource "azurerm_subnet" "dmz_subnet" {
   route_table_id            = "${azurerm_route_table.dmz_route_table.id}"
 }
 
+resource "azurerm_subnet" "mm_subnet" {
+  name                 = "sn-medmined"
+  virtual_network_name = "${azurerm_virtual_network.vnet.name}"
+  resource_group_name  = "${data.azurerm_resource_group.DR.name}"
+  address_prefix       = "${var.mm_subnet}"
+}
+
+resource "azurerm_subnet" "hs_subnet" {
+  name                 = "sn-hs"
+  virtual_network_name = "${azurerm_virtual_network.vnet.name}"
+  resource_group_name  = "${data.azurerm_resource_group.DR.name}"
+  address_prefix       = "${var.hs_subnet}"
+}
+
 resource "azurerm_subnet" "appgw_subnet" {
   name                 = "sn-appgw"
   virtual_network_name = "${azurerm_virtual_network.vnet.name}"

@@ -16,6 +16,8 @@ variable "mgmt_subnet" {}
 variable "untrust_subnet" {}
 variable "trust_subnet" {}
 variable "dmz_subnet" {}
+variable "mm_subnet" {}
+variable "hs_subnet" {}
 variable "appgw_subnet" {}
 
 variable "firewall_name" {}
