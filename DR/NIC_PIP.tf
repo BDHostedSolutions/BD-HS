@@ -63,16 +63,16 @@ resource "azurerm_network_interface" "TRUST" {
   }
 }
 
-resource "azurerm_network_interface" "DMZ" {
-  name                      = "${var.firewall_name}-eth3"
-  location                  = "${data.azurerm_resource_group.DR.location}"
-  resource_group_name       = "${data.azurerm_resource_group.DR.name}"
-  network_security_group_id = "${azurerm_network_security_group.nsg_DMZ.id}"
+# resource "azurerm_network_interface" "DMZ" {
+#   name                      = "${var.firewall_name}-eth3"
+#   location                  = "${data.azurerm_resource_group.DR.location}"
+#   resource_group_name       = "${data.azurerm_resource_group.DR.name}"
+#   network_security_group_id = "${azurerm_network_security_group.nsg_DMZ.id}"
 
-  ip_configuration {
-    name                          = "FW-DMZ"
-    subnet_id                     = "${azurerm_subnet.dmz_subnet.id}"
-    private_ip_address_allocation = "static"
-    private_ip_address            = "${cidrhost("${var.dmz_subnet}", 4)}"
-  }
-}
+#   ip_configuration {
+#     name                          = "FW-DMZ"
+#     subnet_id                     = "${azurerm_subnet.dmz_subnet.id}"
+#     private_ip_address_allocation = "static"
+#     private_ip_address            = "${cidrhost("${var.dmz_subnet}", 4)}"
+#   }
+#}
