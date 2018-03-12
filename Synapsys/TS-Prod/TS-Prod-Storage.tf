@@ -10,7 +10,7 @@ resource "azurerm_storage_account" "etl_storage_acct" {
   account_encryption_source = "Microsoft.Storage"
 
   tags {
-    display_name            = "SAP File Drop"
+    display_name = "SAP File Drop"
   }
 }
 
@@ -26,7 +26,7 @@ resource "azurerm_storage_account" "etl_db_backup_storage_acct" {
   account_encryption_source = "Microsoft.Storage"
 
   tags {
-    display_name            = "SSIS DB Backup"
+    display_name = "SSIS DB Backup"
   }
 }
 
@@ -42,7 +42,7 @@ resource "azurerm_storage_account" "etl_backup_storage_acct" {
   account_encryption_source = "Microsoft.Storage"
 
   tags {
-    display_name            = "SAP File Backup"
+    display_name = "SAP File Backup"
   }
 }
 
@@ -53,17 +53,17 @@ resource "azurerm_storage_account" "storage_acct" {
   account_tier              = "Standard"
   account_replication_type  = "LRS"
   enable_https_traffic_only = false
-  
+
   tags {
-    display_name            = "VHD Storage Account"
+    display_name = "VHD Storage Account"
   }
 }
 
 resource "azurerm_storage_container" "vhds" {
-  name                      = "vhds"
-  resource_group_name       = "${azurerm_resource_group.rg.name}"
-  storage_account_name      = "${var.storage_acct_name}"
-  container_access_type     = "private"
+  name                  = "vhds"
+  resource_group_name   = "${azurerm_resource_group.rg.name}"
+  storage_account_name  = "${var.storage_acct_name}"
+  container_access_type = "private"
 
-  depends_on                = ["azurerm_storage_account.storage_acct"]
+  depends_on = ["azurerm_storage_account.storage_acct"]
 }

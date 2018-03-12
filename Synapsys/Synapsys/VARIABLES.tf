@@ -1,9 +1,9 @@
 /* Configure Azure Provider and declare all the Variables that will be used in Terraform configurations */
 provider "azurerm" {
   subscription_id = "${var.subscription_id}"
-  client_id = "${var.client_id}"
-  client_secret = "${var.client_secret}"
-  tenant_id = "${var.tenant_id}"
+  client_id       = "${var.client_id}"
+  client_secret   = "${var.client_secret}"
+  tenant_id       = "${var.tenant_id}"
 }
 
 variable "subscription_id" {
@@ -23,11 +23,11 @@ variable "tenant_id" {
 }
 
 variable "shared_resource_group_name" {
-    description = ""
+  description = ""
 }
 
 variable "location" {
-    description = ""
+  description = ""
 }
 
 variable "vm_username" {
@@ -39,109 +39,109 @@ variable "vm_password" {
 }
 
 variable "storage_acct_name" {
-    description = ""
+  description = ""
 }
 
 variable "db_storage_acct_name" {
-    description = ""
+  description = ""
 }
 
 variable "veritor_storage_acct_name" {
-    description = ""
+  description = ""
 }
 
 variable "vnet_name" {
-    description = ""
+  description = ""
 }
 
 variable "address_space" {
-    description = ""
+  description = ""
 }
 
 variable "subnet1_name" {
-    description = ""
+  description = ""
 }
 
 variable "subnet1_prefix" {
-    description = ""
+  description = ""
 }
 
 variable "subnet2_name" {
-    description = ""
+  description = ""
 }
 
 variable "subnet2_prefix" {
-    description = ""
+  description = ""
 }
 
 variable "dns_server" {
-    description = ""
+  description = ""
 }
 
 variable "global_dns_server" {
-    description = ""
+  description = ""
 }
 
 variable "appvm1_name" {
-    description = ""
+  description = ""
 }
 
 variable "appvm2_name" {
-    description = ""
+  description = ""
 }
 
 variable "app_server_avs_name" {
-    description = ""
+  description = ""
 }
 
 variable "dbvm_name" {
-    description = ""
+  description = ""
 }
 
 variable "db_server_avs_name" {
-    description = ""
+  description = ""
 }
 
 variable "bdips" {
-    description = ""
+  description = ""
 }
 
 variable "bdips1" {
-    description = ""
+  description = ""
 }
 
 variable "bdips2" {
-    description = ""
+  description = ""
 }
 
 variable "bdips3" {
-    description = ""
+  description = ""
 }
 
 variable "lb_name" {
-    description = ""
+  description = ""
 }
 
 variable "rdp_nsg_name" {
-    description = ""
+  description = ""
 }
 
 variable "app1_nsg_name" {
-    description = ""
+  description = ""
 }
 
 variable "app2_nsg_name" {
-    description = ""
+  description = ""
 }
 
 variable "db1_nsg_name" {
-    description = ""
+  description = ""
 }
 
 variable "db2_nsg_name" {
-    description = ""
+  description = ""
 }
 
 variable "servicebus_name" {
-    description = ""
+  description = ""
 }

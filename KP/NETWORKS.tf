@@ -5,7 +5,7 @@ resource "azurerm_resource_group" "rg" {
 }
 
 resource "azurerm_virtual_network" "vnet" {
-  name                = "${azurerm_resource_group.rg.name}-vnet"  
+  name                = "${azurerm_resource_group.rg.name}-vnet"
   location            = "${var.location}"
   address_space       = ["${var.address_space}"]
   resource_group_name = "${azurerm_resource_group.rg.name}"
@@ -38,7 +38,7 @@ resource "azurerm_subnet" "trust_subnet" {
 }
 
 resource "azurerm_subnet" "dmz_subnet" {
-  name                       = "${var.subnet_name_prefix}dmz"
+  name                      = "${var.subnet_name_prefix}dmz"
   virtual_network_name      = "${azurerm_virtual_network.vnet.name}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
   address_prefix            = "${var.dmz_subnet}"
