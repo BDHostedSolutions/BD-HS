@@ -11,29 +11,12 @@ variable "client_id" {}
 variable "client_secret" {}
 variable "tenant_id" {}
 
-variable "address_space" {
-  description = "The address space that is used by the virtual network."
-}
-
-variable "mgmt_subnet" {
-  description = "The address prefix to use for the MGMT subnet."
-}
-
-variable "untrust_subnet" {
-  description = "The address prefix to use for the UNTRUST subnet."
-}
-
-variable "trust_subnet" {
-  description = "The address prefix to use for the TRUST subnet."
-}
-
-variable "dmz_subnet" {
-  description = "The address prefix to use for the DMZ subnet."
-}
-
-variable "appgw_subnet" {
-  description = "The address prefix to use for the AppGw subnet."
-}
+variable "address_space" {}
+variable "mgmt_subnet" {}
+variable "untrust_subnet" {}
+variable "trust_subnet" {}
+variable "dmz_subnet" {}
+variable "appgw_subnet" {}
 
 variable "firewall_name" {}
 variable "fw_username" {}
