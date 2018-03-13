@@ -25,7 +25,7 @@ resource "azurerm_virtual_machine" "FW" {
   name                         = "${var.firewall_name}"
   location                     = "${data.azurerm_resource_group.DR.location}"
   resource_group_name          = "${data.azurerm_resource_group.DR.name}"
-  network_interface_ids        = ["${azurerm_network_interface.MGMT.id}", "${azurerm_network_interface.UNTRUST.id}", "${azurerm_network_interface.TRUST.id}"]
+  network_interface_ids        = ["${azurerm_network_interface.MGMT.id}", "${azurerm_network_interface.UNTRUST.id}", "${azurerm_network_interface.TRUST.id}", "${azurerm_network_interface.DMZ.id}"]
   primary_network_interface_id = "${azurerm_network_interface.MGMT.id}"
   availability_set_id          = "${azurerm_availability_set.FWAVS.id}"
   vm_size                      = "Standard_D3_v2"
