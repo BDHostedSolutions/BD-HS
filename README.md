@@ -2,6 +2,7 @@
 
 Repository to hold Terraform projects related to BD in Azure.
 
+* DR
 * KP
 * Synapsys
 * MedMined
@@ -16,7 +17,8 @@ Repository to hold Terraform projects related to BD in Azure.
 
 Run the following commands from a CLI terminal inside the relevant directory.
 
-* `terraform plan` Shows you the changes that will be applied.
+* `terraform init`  Run once the first time from a new directory.
+* `terraform plan`  Shows you the changes that will be applied.
 * `terraform apply` Applies the changes to the environment.
 
 ## Subdirectories
