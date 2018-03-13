@@ -1,8 +1,22 @@
+data "azurerm_storage_account" "hsproddrstorage" {
+  name = "hsproddrstorage"
+  resource_group_name   = "${data.azurerm_resource_group.DR.name}"
+}
+
+resource "azurerm_storage_container" "vhds" {
+  name                  = "vhds"
+  resource_group_name   = "${data.azurerm_resource_group.DR.name}"
+  storage_account_name  = "${data.azurerm_storage_account.hsproddrstorage.name}"
+  container_access_type = "private"
+
+  depends_on = ["data.azurerm_storage_account.hsproddrstorage"]
+}
+
 resource "azurerm_availability_set" "FWAVS" {
   name                         = "avs-hs-fw"
   location                     = "${data.azurerm_resource_group.DR.location}"
   resource_group_name          = "${data.azurerm_resource_group.DR.name}"
-  managed                      = "true"
+  managed                      = false
   platform_update_domain_count = "5"
   platform_fault_domain_count  = "2"
 }
@@ -31,6 +45,8 @@ resource "azurerm_virtual_machine" "FW" {
 
   storage_os_disk {
     name          = "${var.firewall_name}_OS"
+    vhd_uri       = "${data.azurerm_storage_account.hsproddrstorage.primary_blob_endpoint}${azurerm_storage_container.vhds.name}/${var.firewall_name}_OS.vhd"
+    caching       = "ReadWrite"
     create_option = "FromImage"
   }
 
