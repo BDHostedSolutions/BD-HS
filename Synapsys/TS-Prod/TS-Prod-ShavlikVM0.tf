@@ -17,7 +17,7 @@ resource "azurerm_network_interface" "shavlikvm0-nic" {
 
   ip_configuration {
     name                          = "ipconfig1"
-    subnet_id                     = "${azurerm_subnet.prod_subnet.id}"
+    subnet_id                     = "${azurerm_subnet.stg_subnet.id}"
     private_ip_address_allocation = "dynamic"
     public_ip_address_id          = "${azurerm_public_ip.shavlikvm0_pip.id}"
   }

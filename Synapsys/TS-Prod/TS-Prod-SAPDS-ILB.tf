@@ -8,7 +8,7 @@ resource "azurerm_lb" "sapds_ilb" {
     name                          = "LoadBalancerFrontend"
     private_ip_address            = "172.16.96.10"
     private_ip_address_allocation = "Static"
-    subnet_id                     = "${azurerm_subnet.prod_subnet.id}"
+    subnet_id                     = "${azurerm_subnet.stg_subnet.id}"
   }
 
   tags {

@@ -15,11 +15,11 @@ resource "azurerm_virtual_network" "vnet" {
   }
 }
 
-resource "azurerm_subnet" "prod_subnet" {
-  name                 = "${var.prod_subnet_name}"
+resource "azurerm_subnet" "stg_subnet" {
+  name                 = "${var.stg_subnet_name}"
   virtual_network_name = "${azurerm_virtual_network.vnet.name}"
   resource_group_name  = "${azurerm_resource_group.rg.name}"
-  address_prefix       = "${var.prod_subnet_prefix}"
+  address_prefix       = "${var.stg_subnet_prefix}"
 }
 
 resource "azurerm_subnet" "gw_subnet" {

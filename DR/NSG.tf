@@ -118,8 +118,8 @@ resource "azurerm_network_security_group" "nsg_UNTRUST" {
   }
 }
 
-resource "azurerm_network_security_group" "nsg_TRUST" {
-  name                = "NSG-TRUST"
+resource "azurerm_network_security_group" "nsg_HS" {
+  name                = "NSG-HS"
   location            = "${data.azurerm_resource_group.DR.location}"
   resource_group_name = "${data.azurerm_resource_group.DR.name}"
 

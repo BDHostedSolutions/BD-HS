@@ -1,9 +1,9 @@
 data "azurerm_resource_group" "DR" {
-  name = "HS-PROD-LV-DR"
+  name = "HS-DR-EastUS2-RG-01"
 }
 
 resource "azurerm_virtual_network" "vnet" {
-  name                = "${data.azurerm_resource_group.DR.name}-vnet"
+  name                = "HS-DR-EastUS2-vnet"
   location            = "${data.azurerm_resource_group.DR.location}"
   address_space       = ["${var.address_space}"]
   resource_group_name = "${data.azurerm_resource_group.DR.name}"
@@ -25,14 +25,14 @@ resource "azurerm_subnet" "untrust_subnet" {
   network_security_group_id = "${azurerm_network_security_group.nsg_UNTRUST.id}"
 }
 
-resource "azurerm_subnet" "trust_subnet" {
-  name                      = "sn-trust"
-  virtual_network_name      = "${azurerm_virtual_network.vnet.name}"
-  resource_group_name       = "${data.azurerm_resource_group.DR.name}"
-  address_prefix            = "${var.trust_subnet}"
-  network_security_group_id = "${azurerm_network_security_group.nsg_TRUST.id}"
-  route_table_id            = "${azurerm_route_table.trust_route_table.id}"
-}
+# resource "azurerm_subnet" "trust_subnet" {
+#   name                      = "sn-trust"
+#   virtual_network_name      = "${azurerm_virtual_network.vnet.name}"
+#   resource_group_name       = "${data.azurerm_resource_group.DR.name}"
+#   address_prefix            = "${var.trust_subnet}"
+#   network_security_group_id = "${azurerm_network_security_group.nsg_TRUST.id}"
+#   route_table_id            = "${azurerm_route_table.trust_route_table.id}"
+# }
 
 resource "azurerm_subnet" "dmz_subnet" {
   name                      = "sn-dmz"
@@ -55,6 +55,7 @@ resource "azurerm_subnet" "hs_subnet" {
   virtual_network_name = "${azurerm_virtual_network.vnet.name}"
   resource_group_name  = "${data.azurerm_resource_group.DR.name}"
   address_prefix       = "${var.hs_subnet}"
+  route_table_id       = "${azurerm_route_table.hs_route_table.id}"
 }
 
 resource "azurerm_subnet" "appgw_subnet" {

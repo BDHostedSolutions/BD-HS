@@ -53,13 +53,13 @@ resource "azurerm_network_interface" "TRUST" {
   name                      = "${var.firewall_name}-eth2"
   location                  = "${data.azurerm_resource_group.DR.location}"
   resource_group_name       = "${data.azurerm_resource_group.DR.name}"
-  network_security_group_id = "${azurerm_network_security_group.nsg_TRUST.id}"
+  network_security_group_id = "${azurerm_network_security_group.nsg_HS.id}"
 
   ip_configuration {
     name                          = "FW-TRUST"
-    subnet_id                     = "${azurerm_subnet.trust_subnet.id}"
+    subnet_id                     = "${azurerm_subnet.hs_subnet.id}"
     private_ip_address_allocation = "static"
-    private_ip_address            = "${cidrhost("${var.trust_subnet}", 4)}"
+    private_ip_address            = "${cidrhost("${var.hs_subnet}", 4)}"
   }
 }
 

@@ -14,7 +14,7 @@ variable "tenant_id" {}
 variable "address_space" {}
 variable "mgmt_subnet" {}
 variable "untrust_subnet" {}
-variable "trust_subnet" {}
+#variable "trust_subnet" {}
 variable "dmz_subnet" {}
 variable "mm_subnet" {}
 variable "hs_subnet" {}
@@ -26,3 +26,7 @@ variable "fw_username" {}
 variable "fw_password" {
   description = "Enter Firewall Password"
 }
+
+variable "auth_cert_data" {}
+variable "ssl_data" {}
+variable "ssl_password" {}

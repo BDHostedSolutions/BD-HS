@@ -17,8 +17,8 @@ variable "resource_group_name" {}
 
 variable "vnet_name" {}
 variable "address_space" {}
-variable "prod_subnet_name" {}
-variable "prod_subnet_prefix" {}
+variable "stg_subnet_name" {}
+variable "stg_subnet_prefix" {}
 variable "gw_subnet_name" {}
 variable "gw_subnet_prefix" {}
 

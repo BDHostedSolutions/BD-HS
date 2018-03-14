@@ -18,7 +18,7 @@ resource "azurerm_network_interface" "carriervm1-nic" {
 
   ip_configuration {
     name                                    = "ipconfig1"
-    subnet_id                               = "${azurerm_subnet.prod_subnet.id}"
+    subnet_id                               = "${azurerm_subnet.stg_subnet.id}"
     private_ip_address_allocation           = "dynamic"
     public_ip_address_id                    = "${azurerm_public_ip.carriervm1_pip.id}"
     load_balancer_backend_address_pools_ids = ["${azurerm_lb_backend_address_pool.carrier_ilb_pool.id}"]

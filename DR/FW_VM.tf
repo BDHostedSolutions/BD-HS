@@ -1,15 +1,15 @@
-data "azurerm_storage_account" "hsproddrstorage" {
+data "azurerm_storage_account" "fw-sa" {
   name = "hsproddrstorage"
-  resource_group_name   = "${data.azurerm_resource_group.DR.name}"
+  resource_group_name   = "HS-PROD-LV-DR"
 }
 
 resource "azurerm_storage_container" "vhds" {
   name                  = "vhds"
-  resource_group_name   = "${data.azurerm_resource_group.DR.name}"
-  storage_account_name  = "${data.azurerm_storage_account.hsproddrstorage.name}"
+  resource_group_name   = "HS-PROD-LV-DR"
+  storage_account_name  = "${data.azurerm_storage_account.fw-sa.name}"
   container_access_type = "private"
 
-  depends_on = ["data.azurerm_storage_account.hsproddrstorage"]
+  depends_on = ["data.azurerm_storage_account.fw-sa"]
 }
 
 resource "azurerm_availability_set" "FWAVS" {
@@ -45,7 +45,7 @@ resource "azurerm_virtual_machine" "FW" {
 
   storage_os_disk {
     name          = "${var.firewall_name}_OS"
-    vhd_uri       = "${data.azurerm_storage_account.hsproddrstorage.primary_blob_endpoint}${azurerm_storage_container.vhds.name}/${var.firewall_name}_OS.vhd"
+    vhd_uri       = "${data.azurerm_storage_account.fw-sa.primary_blob_endpoint}${azurerm_storage_container.vhds.name}/${var.firewall_name}_OS.vhd"
     caching       = "ReadWrite"
     create_option = "FromImage"
   }
