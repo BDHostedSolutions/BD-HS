@@ -36,21 +36,20 @@ resource "azurerm_key_vault" "staging_key_vault" {
     ]
 
     certificate_permissions = [
-        "Get",
-        "List",
-        "Update",
-        "Create",
-        "Import",
-        "Delete",
-        "ManageContacts",
-        "ManageIssuers",
-        "GetIssuers",
-        "ListIssuers",
-        "SetIssuers",
-        "DeleteIssuers"
+      "Get",
+      "List",
+      "Update",
+      "Create",
+      "Import",
+      "Delete",
+      "ManageContacts",
+      "ManageIssuers",
+      "GetIssuers",
+      "ListIssuers",
+      "SetIssuers",
+      "DeleteIssuers",
     ]
   }
 
   enabled_for_disk_encryption = false
-
 }
