@@ -6,7 +6,7 @@ resource "azurerm_lb" "carrier_ilb" {
 
   frontend_ip_configuration {
     name                          = "LoadBalancerFrontend"
-    private_ip_address            = "172.16.96.11"
+    private_ip_address            = "${cidrhost("${var.stg_subnet_prefix}", 13)}"
     private_ip_address_allocation = "Static"
     subnet_id                     = "${azurerm_subnet.stg_subnet.id}"
   }
