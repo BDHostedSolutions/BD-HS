@@ -26,6 +26,7 @@ Run the following commands from a CLI terminal inside the relevant directory.
 * `/Synapsys/Synapsys-Hosted` Integrated Hybrid Infrastructure w/ Syapsys + HS Architecture.
 * `/Synapsys/Synapsys` Full Synapsys Infrastructure.
 * `/Scripts/TS-Prod` Full TS Production Infrastructure.
+* `/Scripts/TS-Staging` Full TS Staging Infrastructure.
 
 ## Terraform Azure Documentation
 
