@@ -89,7 +89,7 @@ resource "azurerm_lb_nat_rule" "rdp1" {
 }
 
 module "fw_infra" {
-    source = "../tf-module"
+    source = "github.com/BDHostedSolutions/BD-HS//testing//tf-module"
     resource_group_name             = "${azurerm_resource_group.rg.name}"
     location                        = "${azurerm_resource_group.rg.location}"
     vnet_name                       = "${var.vnet_name}"
