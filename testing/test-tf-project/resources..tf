@@ -5,6 +5,17 @@ provider "azurerm" {
   tenant_id       = "${var.tenant_id}"
 }
 
+
+# Remote tfstate File Reference
+terraform {
+  backend "azurerm"  {
+    storage_account_name = "tfstatefiles"
+    container_name       = "tfstate"
+    key                  = "terraform.tfstate"
+    access_key           = "nWj7Yk9yZKXGYj9TPRrRB/MuQhlOX9a3xwwvY2Vqq8pFUs+0zJEu2TU2aN/+8hvLs0Ojk/SLKPpPBPKbgaf2aA=="
+  }
+}
+
 # Resource Group
 resource "azurerm_resource_group" "rg" {
   name     = "${var.resource_group_name}"
@@ -18,7 +29,7 @@ resource "azurerm_public_ip" "ilb_pip" {
   public_ip_address_allocation = "dynamic"
 
   tags {
-    display_name = "Public IP"
+    display_name = "Module Public IP"
   }
 }
 
