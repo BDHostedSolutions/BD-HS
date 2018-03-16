@@ -1,21 +1,19 @@
 variable "subscription_id" {}
-
 variable "client_id" {}
-
 variable "client_secret" {}
-
 variable "tenant_id" {}
-
-variable "resource_group_name" {
-    default = "MOD-TEST"
-}
-
-variable "location" {
-    default = "eastus"
-}
-
-variable "lb_name" {
-    default = "MOD-ILB"
-}
-
+variable "resource_group_name" {}
+variable "location" {}
+variable "lb_name" {}
+variable "vnet_name" {}
+variable "address_space" {}
+variable "mgmt_subnet" {}
+variable "untrust_subnet" {}
+variable "trust_subnet" {}
+variable "dns_server" {}
+variable "global_dns_server" {}
+variable "storage_acct_name" {}
+variable "fwavs_name" {}
+variable "firewall_name" {}
+variable "fw_username" {}
 variable "fw_password" {}
