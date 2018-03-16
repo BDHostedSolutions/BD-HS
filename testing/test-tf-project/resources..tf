@@ -1,4 +1,5 @@
 provider "azurerm" {
+  version         = "~> 1.3"
   subscription_id = "${var.subscription_id}"
   client_id       = "${var.client_id}"
   client_secret   = "${var.client_secret}"
@@ -11,8 +12,7 @@ terraform {
   backend "azurerm"  {
     storage_account_name = "tfstatefiles"
     container_name       = "tfstate"
-    key                  = "terraform.tfstate"
-    access_key           = "nWj7Yk9yZKXGYj9TPRrRB/MuQhlOX9a3xwwvY2Vqq8pFUs+0zJEu2TU2aN/+8hvLs0Ojk/SLKPpPBPKbgaf2aA=="
+    key                  = "module.terraform.tfstate"
   }
 }
 
