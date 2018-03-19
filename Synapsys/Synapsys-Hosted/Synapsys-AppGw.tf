@@ -1,8 +1,14 @@
-#AppGw
+resource "azurerm_public_ip" "AppGw_pip" {
+  name                         = "AppGw-pip"
+  location                     = "${var.location}"
+  resource_group_name          = "${azurerm_resource_group.rg.name}"
+  public_ip_address_allocation = "dynamic"
+}
+
 resource "azurerm_application_gateway" "App_Gw" {
-  name                = "DRUS-AppGw"
-  location            = "${data.azurerm_resource_group.DR.location}"
-  resource_group_name = "${data.azurerm_resource_group.DR.name}"
+  name                = "${var.resource_name_prefix}-${var.appgw_name}"
+  location            = "${var.location}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
 
   sku {
     name     = "Standard_Medium"

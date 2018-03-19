@@ -1,6 +1,6 @@
 resource "azurerm_availability_set" "FWAVS" {
   name                         = "avs-hs-fw"
-  location                     = "${var.location}"
+  location                     = "${azurerm_resource_group.rg.location}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   managed                      = false
   platform_update_domain_count = "5"
@@ -9,21 +9,21 @@ resource "azurerm_availability_set" "FWAVS" {
 
 resource "azurerm_public_ip" "FW_mgmt_pip" {
   name                         = "FW-mgmt-pip"
-  location                     = "${var.location}"
+  location                     = "${azurerm_resource_group.rg.location}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   public_ip_address_allocation = "static"
 }
 
 resource "azurerm_public_ip" "FW_untrust_pip" {
   name                         = "FW-untrust-pip"
-  location                     = "${var.location}"
+  location                     = "${azurerm_resource_group.rg.location}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   public_ip_address_allocation = "static"
 }
 
 resource "azurerm_network_interface" "MGMT" {
-  name                      = "${var.firewall_name}-eth0"
-  location                  = "${var.location}"
+  name                      = "${var.resource_name_prefix}-${var.firewall_name}-eth0"
+  location                  = "${azurerm_resource_group.rg.location}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
   network_security_group_id = "${azurerm_network_security_group.nsg_MGMT.id}"
 
@@ -37,8 +37,8 @@ resource "azurerm_network_interface" "MGMT" {
 }
 
 resource "azurerm_network_interface" "UNTRUST" {
-  name                      = "${var.firewall_name}-eth1"
-  location                  = "${var.location}"
+  name                      = "${var.resource_name_prefix}-${var.firewall_name}-eth1"
+  location                  = "${azurerm_resource_group.rg.location}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
   network_security_group_id = "${azurerm_network_security_group.nsg_UNTRUST.id}"
 
@@ -52,8 +52,8 @@ resource "azurerm_network_interface" "UNTRUST" {
 }
 
 resource "azurerm_network_interface" "TRUST" {
-  name                      = "${var.firewall_name}-eth2"
-  location                  = "${var.location}"
+  name                      = "${var.resource_name_prefix}-${var.firewall_name}-eth2"
+  location                  = "${azurerm_resource_group.rg.location}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
   network_security_group_id = "${azurerm_network_security_group.nsg_TRUST.id}"
 
@@ -66,8 +66,8 @@ resource "azurerm_network_interface" "TRUST" {
 }
 
 resource "azurerm_virtual_machine" "FW" {
-  name                = "${var.firewall_name}"
-  location            = "${var.location}"
+  name                = "${var.resource_name_prefix}-${var.firewall_name}"
+  location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   network_interface_ids = ["${azurerm_network_interface.MGMT.id}", "${azurerm_network_interface.UNTRUST.id}",
@@ -92,14 +92,14 @@ resource "azurerm_virtual_machine" "FW" {
   }
 
   storage_os_disk {
-    name          = "${var.firewall_name}_OS"
+    name          = "${var.resource_name_prefix}-${var.firewall_name}_OS"
     vhd_uri       = "${azurerm_storage_account.synapsysprd.primary_blob_endpoint}${azurerm_storage_container.vhds.name}/${var.firewall_name}_OS.vhd"
     caching       = "ReadWrite"
     create_option = "FromImage"
   }
 
   os_profile {
-    computer_name  = "${var.firewall_name}"
+    computer_name  = "${var.resource_name_prefix}-${var.firewall_name}"
     admin_username = "${var.fw_username}"
     admin_password = "${var.fw_password}"
   }

@@ -1,7 +1,7 @@
 resource "azurerm_public_ip" "ilb_pip" {
   name                         = "ILB-pip"
-  location                     = "${azurerm_resource_group.rg.location}"
-  resource_group_name          = "${azurerm_resource_group.rg.name}"
+  location                     = "${var.location}"
+  resource_group_name          = "${var.resource_group_name}"
   public_ip_address_allocation = "dynamic"
 
   tags {
@@ -11,8 +11,8 @@ resource "azurerm_public_ip" "ilb_pip" {
 
 resource "azurerm_lb" "app_ilb" {
   name                = "${var.ilb_name}"
-  location            = "${azurerm_resource_group.rg.location}"
-  resource_group_name = "${azurerm_resource_group.rg.name}"
+  location            = "${var.location}"
+  resource_group_name = "${var.resource_group_name}"
 
   tags {
     display_name = "LoadBalancer"
@@ -26,13 +26,13 @@ resource "azurerm_lb" "app_ilb" {
 
 resource "azurerm_lb_backend_address_pool" "ilb_bep" {
   name                = "BackendPool1"
-  resource_group_name = "${azurerm_resource_group.rg.name}"
+  resource_group_name = "${var.resource_group_name}"
   loadbalancer_id     = "${azurerm_lb.app_ilb.id}"
 }
 
 resource "azurerm_lb_rule" "lbrule2" {
   name                           = "lbrule2"
-  resource_group_name            = "${azurerm_resource_group.rg.name}"
+  resource_group_name            = "${var.resource_group_name}"
   loadbalancer_id                = "${azurerm_lb.app_ilb.id}"
   protocol                       = "Tcp"
   frontend_port                  = 443
@@ -45,7 +45,7 @@ resource "azurerm_lb_rule" "lbrule2" {
 
 resource "azurerm_lb_probe" "lbprobe2" {
   name                = "lbprobe2"
-  resource_group_name = "${azurerm_resource_group.rg.name}"
+  resource_group_name = "${var.resource_group_name}"
   loadbalancer_id     = "${azurerm_lb.app_ilb.id}"
   protocol            = "Tcp"
   port                = 443
@@ -54,7 +54,7 @@ resource "azurerm_lb_probe" "lbprobe2" {
 }
 
 resource "azurerm_lb_nat_rule" "rdp0" {
-  resource_group_name            = "${azurerm_resource_group.rg.name}"
+  resource_group_name            = "${var.resource_group_name}"
   loadbalancer_id                = "${azurerm_lb.app_ilb.id}"
   name                           = "rdp-0"
   protocol                       = "Tcp"
@@ -65,7 +65,7 @@ resource "azurerm_lb_nat_rule" "rdp0" {
 }
 
 resource "azurerm_lb_nat_rule" "rdp1" {
-  resource_group_name            = "${azurerm_resource_group.rg.name}"
+  resource_group_name            = "${var.resource_group_name}"
   loadbalancer_id                = "${azurerm_lb.app_ilb.id}"
   name                           = "rdp-1"
   protocol                       = "Tcp"

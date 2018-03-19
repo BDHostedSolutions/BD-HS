@@ -1,6 +1,6 @@
 resource "azurerm_availability_set" "app-server-avs" {
   name                = "${var.app_server_avs_name}"
-  location            = "${var.location}"
+  location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
   managed             = false
 
@@ -11,7 +11,7 @@ resource "azurerm_availability_set" "app-server-avs" {
 
 resource "azurerm_public_ip" "App_pip" {
   name                         = "App-pip"
-  location                     = "${var.location}"
+  location                     = "${azurerm_resource_group.rg.location}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   public_ip_address_allocation = "dynamic"
 
@@ -21,8 +21,8 @@ resource "azurerm_public_ip" "App_pip" {
 }
 
 resource "azurerm_network_interface" "app-vm0-nic" {
-  name                      = "${var.appvm0_name}-eth0"
-  location                  = "${var.location}"
+  name                      = "${var.resource_name_prefix}-${var.appvm0_name}-eth0"
+  location                  = "${azurerm_resource_group.rg.location}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
   network_security_group_id = "${azurerm_network_security_group.nsg_App1.id}"
 
@@ -40,8 +40,8 @@ resource "azurerm_network_interface" "app-vm0-nic" {
 }
 
 resource "azurerm_virtual_machine" "app-vm0" {
-  name                  = "${var.appvm0_name}"
-  location              = "${var.location}"
+  name                  = "${var.resource_name_prefix}-${var.appvm0_name}"
+  location              = "${azurerm_resource_group.rg.location}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   network_interface_ids = ["${azurerm_network_interface.app-vm0-nic.id}"]
   availability_set_id   = "${azurerm_availability_set.app-server-avs.id}"
@@ -59,14 +59,14 @@ resource "azurerm_virtual_machine" "app-vm0" {
   }
 
   storage_os_disk {
-    name          = "${var.appvm0_name}_OS"
+    name          = "${var.resource_name_prefix}-${var.appvm0_name}_OS"
     vhd_uri       = "${azurerm_storage_account.synapsysprd.primary_blob_endpoint}${azurerm_storage_container.vhds.name}/${var.appvm0_name}_OS.vhd"
     caching       = "ReadWrite"
     create_option = "FromImage"
   }
 
   os_profile {
-    computer_name  = "${var.appvm0_name}"
+    computer_name  = "${var.resource_name_prefix}-${var.appvm0_name}"
     admin_username = "${var.vm_username}"
     admin_password = "${var.vm_password}"
   }

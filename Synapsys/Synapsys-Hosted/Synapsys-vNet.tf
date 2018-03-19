@@ -5,7 +5,7 @@ resource "azurerm_resource_group" "rg" {
 
 resource "azurerm_virtual_network" "vnet" {
   name                = "${var.vnet_name}"
-  location            = "${var.location}"
+  location            = "${azurerm_resource_group.rg.location}"
   address_space       = ["${var.address_space}"]
   resource_group_name = "${azurerm_resource_group.rg.name}"
   dns_servers         = ["${var.dns_server}", "${var.global_dns_server}"]
@@ -38,4 +38,11 @@ resource "azurerm_subnet" "trust_subnet" {
   address_prefix            = "${var.trust_subnet}"
   network_security_group_id = "${azurerm_network_security_group.nsg_TRUST.id}"
   route_table_id            = "${azurerm_route_table.trust_route_table.id}"
+}
+
+resource "azurerm_subnet" "appgw_subnet" {
+  name                 = "sn-appgw"
+  virtual_network_name = "${azurerm_virtual_network.vnet.name}"
+  resource_group_name  = "${azurerm_resource_group.rg.name}"
+  address_prefix       = "${var.appgw_subnet}"
 }

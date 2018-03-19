@@ -14,7 +14,7 @@ variable "client_secret" {}
 
 variable "tenant_id" {}
 
-#variable "resource_name_prefix" {}
+variable "resource_name_prefix" {}
 
 variable "resource_group_name" {}
 
@@ -46,6 +46,8 @@ variable "untrust_subnet" {}
 
 variable "trust_subnet" {}
 
+variable "appgw_subnet" {}
+
 variable "bdips" {}
 
 variable "bdips1" {}
@@ -68,9 +70,13 @@ variable "dbvm_name" {}
 
 variable "db_server_avs_name" {}
 
-variable "rds01_name" {}
+variable "rdsvm_name" {}
+
+variable "rds_server_avs_name" {}
 
 variable "lb_name" {}
+
+variable "appgw_name" {}
 
 variable "rdp_nsg_name" {}
 
@@ -83,3 +89,9 @@ variable "db1_nsg_name" {}
 variable "db2_nsg_name" {}
 
 variable "servicebus_name" {}
+
+variable "ssl_data" {}
+
+variable "ssl_password" {}
+
+variable "auth_cert_data" {}
