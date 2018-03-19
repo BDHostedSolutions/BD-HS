@@ -12,3 +12,4 @@ variable "dns_server" {}
 variable "global_dns_server" {}
 variable "resource_group_name" {}
 variable "location" {}
+variable "ilb_name" {}

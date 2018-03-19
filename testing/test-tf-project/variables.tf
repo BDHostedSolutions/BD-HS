@@ -4,7 +4,6 @@ variable "client_secret" {}
 variable "tenant_id" {}
 variable "resource_group_name" {}
 variable "location" {}
-variable "lb_name" {}
 variable "vnet_name" {}
 variable "address_space" {}
 variable "mgmt_subnet" {}
@@ -17,3 +16,4 @@ variable "fwavs_name" {}
 variable "firewall_name" {}
 variable "fw_username" {}
 variable "fw_password" {}
+variable "ilb_name" {}
