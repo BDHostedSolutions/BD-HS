@@ -50,5 +50,7 @@ resource "azurerm_virtual_machine" "rdsvm" {
     admin_password = "${var.vm_password}"
   }
 
-  os_profile_windows_config {}
+  os_profile_windows_config {
+    provision_vm_agent = true
+  }
 }

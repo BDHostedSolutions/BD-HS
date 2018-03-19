@@ -15,7 +15,7 @@ resource "azurerm_lb" "app_ilb" {
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   tags {
-    display_name = "LoadBalancer"
+    display_name = "Internal Load Balancer"
   }
 
   frontend_ip_configuration {

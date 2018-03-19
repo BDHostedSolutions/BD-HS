@@ -5,7 +5,7 @@ resource "azurerm_public_ip" "App2_pip" {
   public_ip_address_allocation = "dynamic"
 
   tags {
-    display_name = "Public IP"
+    display_name = "App VM1 Public IP"
   }
 }
 
@@ -15,7 +15,7 @@ resource "azurerm_network_interface" "app-vm1-nic" {
   resource_group_name       = "${azurerm_resource_group.rg.name}"
 
   tags {
-    display_name = "NetworkInterface"
+    display_name = "App VM1 Network Interface"
   }
 
   ip_configuration {

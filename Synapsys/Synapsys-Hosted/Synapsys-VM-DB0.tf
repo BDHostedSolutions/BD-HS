@@ -5,7 +5,7 @@ resource "azurerm_availability_set" "db-server-avs" {
   managed             = "false"
 
   tags {
-    display_name = "AvailabilitySet"
+    display_name = "DB Availability Set"
   }
 }
 
@@ -16,7 +16,7 @@ resource "azurerm_public_ip" "DB_pip" {
   public_ip_address_allocation = "dynamic"
 
   tags {
-    display_name = "Public IP"
+    display_name = "DB VM0 Public IP"
   }
 }
 
@@ -26,7 +26,7 @@ resource "azurerm_network_interface" "db-vm-nic" {
   resource_group_name       = "${azurerm_resource_group.rg.name}"
 
   tags {
-    display_name = "NetworkInterface"
+    display_name = "DB VM0 Network Interface"
   }
 
   ip_configuration {

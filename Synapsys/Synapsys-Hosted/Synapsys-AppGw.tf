@@ -102,4 +102,8 @@ resource "azurerm_application_gateway" "App_Gw" {
     backend_address_pool_name  = "FW-Pool"
     backend_http_settings_name = "HTTPS-Backend"
   }
+
+  tags {
+    display_name = "Application Gateway"
+  }
 }

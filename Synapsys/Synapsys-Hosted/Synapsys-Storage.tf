@@ -6,7 +6,7 @@ resource "azurerm_storage_account" "synapsysprd" {
   account_replication_type = "LRS"
 
   tags {
-    display_name = "storageaccount"
+    display_name = "Main Storage Account"
   }
 }
 
@@ -39,6 +39,6 @@ resource "azurerm_storage_account" "veritorimagesprd" {
   account_replication_type = "LRS"
 
   tags {
-    display_name = "Storage Account for veritor images"
+    display_name = "Storage Account for Veritor Images"
   }
 }
