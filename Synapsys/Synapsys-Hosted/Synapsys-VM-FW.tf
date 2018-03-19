@@ -25,7 +25,6 @@ resource "azurerm_network_interface" "MGMT" {
   name                      = "${var.resource_name_prefix}-${var.firewall_name}-eth0"
   location                  = "${azurerm_resource_group.rg.location}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
-  network_security_group_id = "${azurerm_network_security_group.nsg_MGMT.id}"
 
   ip_configuration {
     name                          = "FW-MGMT"
@@ -40,7 +39,6 @@ resource "azurerm_network_interface" "UNTRUST" {
   name                      = "${var.resource_name_prefix}-${var.firewall_name}-eth1"
   location                  = "${azurerm_resource_group.rg.location}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
-  network_security_group_id = "${azurerm_network_security_group.nsg_UNTRUST.id}"
 
   ip_configuration {
     name                          = "FW-UNTRUST"
@@ -55,7 +53,6 @@ resource "azurerm_network_interface" "TRUST" {
   name                      = "${var.resource_name_prefix}-${var.firewall_name}-eth2"
   location                  = "${azurerm_resource_group.rg.location}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
-  network_security_group_id = "${azurerm_network_security_group.nsg_TRUST.id}"
 
   ip_configuration {
     name                          = "FW-TRUST"

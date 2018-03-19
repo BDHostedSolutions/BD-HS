@@ -13,7 +13,6 @@ resource "azurerm_network_interface" "app-vm1-nic" {
   name                      = "${var.resource_name_prefix}-${var.appvm1_name}-eth0"
   location                  = "${azurerm_resource_group.rg.location}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
-  network_security_group_id = "${azurerm_network_security_group.nsg_App1.id}"
 
   tags {
     display_name = "NetworkInterface"
