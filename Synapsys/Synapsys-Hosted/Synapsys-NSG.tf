@@ -1,6 +1,6 @@
 resource "azurerm_network_security_group" "nsg_RDP" {
   name                = "${var.rdp_nsg_name}"
-  location            = "${var.location}"
+  location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   security_rule {
@@ -180,7 +180,7 @@ resource "azurerm_network_security_group" "nsg_RDP" {
 
 resource "azurerm_network_security_group" "nsg_App1" {
   name                = "${var.app1_nsg_name}"
-  location            = "${var.location}"
+  location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   security_rule {
@@ -256,7 +256,7 @@ resource "azurerm_network_security_group" "nsg_App1" {
 
 resource "azurerm_network_security_group" "nsg_App2" {
   name                = "${var.app2_nsg_name}"
-  location            = "${var.location}"
+  location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   security_rule {
@@ -358,7 +358,7 @@ resource "azurerm_network_security_group" "nsg_App2" {
 
 resource "azurerm_network_security_group" "nsg_DB1" {
   name                = "${var.db1_nsg_name}"
-  location            = "${var.location}"
+  location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   security_rule {
@@ -408,7 +408,7 @@ resource "azurerm_network_security_group" "nsg_DB1" {
 
 resource "azurerm_network_security_group" "nsg_DB2" {
   name                = "${var.db2_nsg_name}"
-  location            = "${var.location}"
+  location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   security_rule {
