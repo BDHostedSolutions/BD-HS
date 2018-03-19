@@ -1,5 +1,5 @@
 resource "azurerm_availability_set" "db-server-avs" {
-  name                = "${var.db_server_avs_name}"
+  name                = "${var.resource_name_prefix}-${var.db_server_avs_name}"
   location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
   managed             = "false"

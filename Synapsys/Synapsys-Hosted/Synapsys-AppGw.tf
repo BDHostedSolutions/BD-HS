@@ -1,13 +1,13 @@
 resource "azurerm_public_ip" "AppGw_pip" {
   name                         = "AppGw-pip"
-  location                     = "${var.location}"
+  location                     = "${azurerm_resource_group.rg.location}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   public_ip_address_allocation = "dynamic"
 }
 
 resource "azurerm_application_gateway" "App_Gw" {
   name                = "${var.resource_name_prefix}-${var.appgw_name}"
-  location            = "${var.location}"
+  location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   sku {

@@ -1,7 +1,7 @@
 resource "azurerm_storage_account" "synapsysprd" {
   name                     = "${var.storage_acct_name}"
   resource_group_name      = "${azurerm_resource_group.rg.name}"
-  location                 = "${var.location}"
+  location                 = "${azurerm_resource_group.rg.location}"
   account_tier             = "Standard"
   account_replication_type = "LRS"
 
@@ -22,7 +22,7 @@ resource "azurerm_storage_container" "vhds" {
 resource "azurerm_storage_account" "synapsysdbprd" {
   name                     = "${var.db_storage_acct_name}"
   resource_group_name      = "${azurerm_resource_group.rg.name}"
-  location                 = "${var.location}"
+  location                 = "${azurerm_resource_group.rg.location}"
   account_tier             = "Standard"
   account_replication_type = "LRS"
 
@@ -34,7 +34,7 @@ resource "azurerm_storage_account" "synapsysdbprd" {
 resource "azurerm_storage_account" "veritorimagesprd" {
   name                     = "${var.veritor_storage_acct_name}"
   resource_group_name      = "${azurerm_resource_group.rg.name}"
-  location                 = "${var.location}"
+  location                 = "${azurerm_resource_group.rg.location}"
   account_tier             = "Standard"
   account_replication_type = "LRS"
 

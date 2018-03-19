@@ -1,6 +1,6 @@
 resource "azurerm_public_ip" "ilb_pip" {
   name                         = "ILB-pip"
-  location                     = "${var.location}"
+  location                     = "${azurerm_resource_group.rg.location}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   public_ip_address_allocation = "dynamic"
 
@@ -10,8 +10,8 @@ resource "azurerm_public_ip" "ilb_pip" {
 }
 
 resource "azurerm_lb" "app_ilb" {
-  name                = "${var.lb_name}"
-  location            = "${var.location}"
+  name                = "${var.resource_name_prefix}-${var.lb_name}"
+  location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   tags {
