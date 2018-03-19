@@ -6,7 +6,6 @@ provider "azurerm" {
   tenant_id       = "${var.tenant_id}"
 }
 
-
 # Remote tfstate File Reference
 terraform {
   backend "azurerm"  {
@@ -16,8 +15,7 @@ terraform {
   }
 }
 
-
-
+# Call to Infrastructure and Firewall Module
 module "fw_infra" {
     source              = "github.com/BDHostedSolutions/BD-HS//testing//tf-module"
     resource_group_name = "${var.resource_group_name}"
@@ -36,6 +34,7 @@ module "fw_infra" {
     fw_password         = "${var.fw_password}"
 }
 
+# Call to Internal Load Balancer Module
 module "ilb" {
     source   = "github.com/BDHostedSolutions/BD-HS//testing//tf-module"
     ilb_name = "${var.ilb_name}"
