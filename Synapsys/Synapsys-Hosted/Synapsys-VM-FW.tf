@@ -1,5 +1,5 @@
 resource "azurerm_availability_set" "FWAVS" {
-  name                         = "avs-hs-fw"
+  name                         = "${var.resource_name_prefix}-${var.fw_avs_name}"
   location                     = "${azurerm_resource_group.rg.location}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   managed                      = false
@@ -93,7 +93,7 @@ resource "azurerm_virtual_machine" "FW" {
 
   storage_os_disk {
     name          = "${var.resource_name_prefix}-${var.firewall_name}_OS"
-    vhd_uri       = "${azurerm_storage_account.synapsysprd.primary_blob_endpoint}${azurerm_storage_container.vhds.name}/${var.firewall_name}_OS.vhd"
+    vhd_uri       = "${azurerm_storage_account.synapsysprd.primary_blob_endpoint}${azurerm_storage_container.vhds.name}/${var.resource_name_prefix}-${var.firewall_name}_OS.vhd"
     caching       = "ReadWrite"
     create_option = "FromImage"
   }

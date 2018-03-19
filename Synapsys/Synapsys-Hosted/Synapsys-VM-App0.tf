@@ -60,7 +60,7 @@ resource "azurerm_virtual_machine" "app-vm0" {
 
   storage_os_disk {
     name          = "${var.resource_name_prefix}-${var.appvm0_name}_OS"
-    vhd_uri       = "${azurerm_storage_account.synapsysprd.primary_blob_endpoint}${azurerm_storage_container.vhds.name}/${var.appvm0_name}_OS.vhd"
+    vhd_uri       = "${azurerm_storage_account.synapsysprd.primary_blob_endpoint}${azurerm_storage_container.vhds.name}/${var.resource_name_prefix}-${var.appvm0_name}_OS.vhd"
     caching       = "ReadWrite"
     create_option = "FromImage"
   }

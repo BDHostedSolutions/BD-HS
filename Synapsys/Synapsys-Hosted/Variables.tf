@@ -24,6 +24,8 @@ variable "vm_username" {}
 
 variable "vm_password" {}
 
+variable "fw_avs_name" {}
+
 variable "firewall_name" {}
 
 variable "fw_username" {}
