@@ -62,13 +62,26 @@ resource "azurerm_network_interface" "TRUST" {
   }
 }
 
+resource "azurerm_network_interface" "DMZ" {
+  name                      = "${var.resource_name_prefix}-${var.firewall_name}-eth3"
+  location                  = "${azurerm_resource_group.rg.location}"
+  resource_group_name       = "${azurerm_resource_group.rg.name}"
+
+  ip_configuration {
+    name                          = "FW-DMZ"
+    subnet_id                     = "${azurerm_subnet.dmz_subnet.id}"
+    private_ip_address_allocation = "static"
+    private_ip_address            = "${cidrhost("${var.dmz_subnet}", 4)}"
+  }
+}
+
 resource "azurerm_virtual_machine" "FW" {
   name                = "${var.resource_name_prefix}-${var.firewall_name}"
   location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   network_interface_ids = ["${azurerm_network_interface.MGMT.id}", "${azurerm_network_interface.UNTRUST.id}",
-    "${azurerm_network_interface.TRUST.id}",
+    "${azurerm_network_interface.TRUST.id}", "${azurerm_network_interface.DMZ.id}"
   ]
 
   primary_network_interface_id = "${azurerm_network_interface.MGMT.id}"

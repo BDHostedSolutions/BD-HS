@@ -40,6 +40,15 @@ resource "azurerm_subnet" "trust_subnet" {
   route_table_id            = "${azurerm_route_table.trust_route_table.id}"
 }
 
+resource "azurerm_subnet" "dmz_subnet" {
+  name                      = "sn-dmz"
+  virtual_network_name      = "${azurerm_virtual_network.vnet.name}"
+  resource_group_name       = "${azurerm_resource_group.rg.name}"
+  address_prefix            = "${var.dmz_subnet}"
+  network_security_group_id = "${azurerm_network_security_group.nsg_DMZ.id}"
+  route_table_id            = "${azurerm_route_table.dmz_route_table.id}"
+}
+
 resource "azurerm_subnet" "appgw_subnet" {
   name                 = "sn-appgw"
   virtual_network_name = "${azurerm_virtual_network.vnet.name}"

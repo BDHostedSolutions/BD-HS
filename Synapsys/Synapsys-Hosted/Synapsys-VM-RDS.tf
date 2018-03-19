@@ -16,7 +16,8 @@ resource "azurerm_network_interface" "RDS-NIC" {
   ip_configuration {
     name                          = "RDS"
     subnet_id                     = "${azurerm_subnet.trust_subnet.id}"
-    private_ip_address_allocation = "dynamic"
+    private_ip_address_allocation = "static"
+    private_ip_address            = "172.16.34.20"
   }
 
   depends_on = ["azurerm_network_interface.TRUST"]

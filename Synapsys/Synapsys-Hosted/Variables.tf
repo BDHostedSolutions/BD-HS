@@ -48,6 +48,8 @@ variable "untrust_subnet" {}
 
 variable "trust_subnet" {}
 
+variable "dmz_subnet" {}
+
 variable "appgw_subnet" {}
 
 variable "bdips" {}
@@ -75,6 +77,8 @@ variable "db_server_avs_name" {}
 variable "rdsvm_name" {}
 
 variable "rds_server_avs_name" {}
+
+variable "dcvm0_name" {}
 
 variable "lb_name" {}
 
