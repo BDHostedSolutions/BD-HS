@@ -7,7 +7,7 @@ resource "azurerm_network_interface" "dcvm0-nic" {
     name                          = "ipconfig1"
     subnet_id                     = "${azurerm_subnet.trust_subnet.id}"
     private_ip_address_allocation = "static"
-    private_ip_address            = "172.16.34.20"
+    private_ip_address            = "${cidrhost("${var.mgmt_subnet}", 11)}"
   }
 
   depends_on = ["azurerm_network_interface.TRUST"]
