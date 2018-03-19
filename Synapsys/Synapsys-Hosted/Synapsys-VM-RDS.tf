@@ -54,3 +54,29 @@ resource "azurerm_virtual_machine" "rdsvm" {
     provision_vm_agent = true
   }
 }
+
+resource "azurerm_virtual_machine_extension" "rdsvm_domain_join" {
+  name                 = "join-domain"
+  location             = "${azurerm_resource_group.rg.location}"
+  resource_group_name  = "${azurerm_resource_group.rg.name}"
+  virtual_machine_name = "${azurerm_virtual_machine.rdsvm.name}"
+  publisher            = "Microsoft.Compute"
+  type                 = "JsonADDomainExtension"
+  type_handler_version = "1.0"
+
+  settings = <<SETTINGS
+    {
+        "Name": "hs.local",
+        "OUPath": "",
+        "User": "hs\\${var.join_domain_user}",
+        "Restart": "true",
+        "Options": "3"
+    }
+SETTINGS
+
+  protected_settings = <<PROTECTED_SETTINGS
+    {
+        "Password": "${var.join_domain_pass}"
+    }
+PROTECTED_SETTINGS
+}

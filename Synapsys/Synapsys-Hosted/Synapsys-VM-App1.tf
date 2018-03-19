@@ -25,6 +25,8 @@ resource "azurerm_network_interface" "app-vm1-nic" {
     load_balancer_backend_address_pools_ids = ["${azurerm_lb_backend_address_pool.ilb_bep.id}"]
     load_balancer_inbound_nat_rules_ids     = ["${azurerm_lb_nat_rule.rdp1.id}"]
   }
+
+  depends_on = ["azurerm_network_interface.DMZ"]
 }
 
 resource "azurerm_virtual_machine" "app-vm1" {
@@ -64,4 +66,30 @@ resource "azurerm_virtual_machine" "app-vm1" {
   }
 
   depends_on = ["azurerm_storage_account.synapsysprd"]
+}
+
+resource "azurerm_virtual_machine_extension" "appvm1_domain_join" {
+  name                 = "join-domain"
+  location             = "${azurerm_resource_group.rg.location}"
+  resource_group_name  = "${azurerm_resource_group.rg.name}"
+  virtual_machine_name = "${azurerm_virtual_machine.app-vm1.name}"
+  publisher            = "Microsoft.Compute"
+  type                 = "JsonADDomainExtension"
+  type_handler_version = "1.0"
+
+  settings = <<SETTINGS
+    {
+        "Name": "hs.local",
+        "OUPath": "",
+        "User": "hs\\${var.join_domain_user}",
+        "Restart": "true",
+        "Options": "3"
+    }
+SETTINGS
+
+  protected_settings = <<PROTECTED_SETTINGS
+    {
+        "Password": "${var.join_domain_pass}"
+    }
+PROTECTED_SETTINGS
 }

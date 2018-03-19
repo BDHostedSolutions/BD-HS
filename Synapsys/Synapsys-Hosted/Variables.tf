@@ -101,3 +101,11 @@ variable "ssl_data" {}
 variable "ssl_password" {}
 
 variable "auth_cert_data" {}
+
+variable "join_domain_user" {
+  description = "Enter HS domain user to join VMs to domain. Do not include HS prefix"
+}
+
+variable "join_domain_pass" {
+  description = "Enter password of HS user to join VMs to domain"
+}
