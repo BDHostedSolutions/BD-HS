@@ -37,6 +37,8 @@ resource "azurerm_storage_account" "veritorimagesprd" {
   location                 = "${azurerm_resource_group.rg.location}"
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  enable_blob_encryption   = true
+  enable_file_encryption   = true
 
   tags {
     display_name = "Storage Account for Veritor Images"

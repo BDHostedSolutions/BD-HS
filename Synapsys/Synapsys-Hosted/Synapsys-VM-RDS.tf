@@ -17,7 +17,7 @@ resource "azurerm_network_interface" "RDS-NIC" {
     name                          = "RDS"
     subnet_id                     = "${azurerm_subnet.trust_subnet.id}"
     private_ip_address_allocation = "static"
-    private_ip_address            = "${cidrhost("${var.mgmt_subnet}", 20)}"
+    private_ip_address            = "${cidrhost("${var.trust_subnet}", 20)}"
   }
 
   depends_on = ["azurerm_network_interface.TRUST"]
@@ -55,28 +55,28 @@ resource "azurerm_virtual_machine" "rdsvm" {
   }
 }
 
-resource "azurerm_virtual_machine_extension" "rdsvm_domain_join" {
-  name                 = "join-domain"
-  location             = "${azurerm_resource_group.rg.location}"
-  resource_group_name  = "${azurerm_resource_group.rg.name}"
-  virtual_machine_name = "${azurerm_virtual_machine.rdsvm.name}"
-  publisher            = "Microsoft.Compute"
-  type                 = "JsonADDomainExtension"
-  type_handler_version = "1.0"
+# resource "azurerm_virtual_machine_extension" "rdsvm_domain_join" {
+#   name                 = "join-domain"
+#   location             = "${azurerm_resource_group.rg.location}"
+#   resource_group_name  = "${azurerm_resource_group.rg.name}"
+#   virtual_machine_name = "${azurerm_virtual_machine.rdsvm.name}"
+#   publisher            = "Microsoft.Compute"
+#   type                 = "JsonADDomainExtension"
+#   type_handler_version = "1.0"
 
-  settings = <<SETTINGS
-    {
-        "Name": "hs.local",
-        "OUPath": "",
-        "User": "hs\\${var.join_domain_user}",
-        "Restart": "true",
-        "Options": "3"
-    }
-SETTINGS
+#   settings = <<SETTINGS
+#     {
+#         "Name": "hs.local",
+#         "OUPath": "",
+#         "User": "hs\\${var.join_domain_user}",
+#         "Restart": "true",
+#         "Options": "3"
+#     }
+# SETTINGS
 
-  protected_settings = <<PROTECTED_SETTINGS
-    {
-        "Password": "${var.join_domain_pass}"
-    }
-PROTECTED_SETTINGS
-}
+#   protected_settings = <<PROTECTED_SETTINGS
+#     {
+#         "Password": "${var.join_domain_pass}"
+#     }
+# PROTECTED_SETTINGS
+# }
