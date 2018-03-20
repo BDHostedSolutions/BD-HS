@@ -23,7 +23,7 @@ Run the following commands from a CLI terminal inside the relevant directory.
 
 ## Subdirectories
 
-* `/Synapsys/Synapsys-Hosted` Integrated Hybrid Infrastructure w/ Syapsys + HS Architecture.
+* `/Synapsys/Synapsys-Hosted` Integrated Hybrid Infrastructure w/ Synapsys + HS Architecture.
 * `/Synapsys/Synapsys` Full Synapsys/Infostratus Infrastructure.
 * `/Synapsys/TS-Prod` Full TS Production Infrastructure.
 * `/Synapsys/TS-Staging` Full TS Staging Infrastructure.
