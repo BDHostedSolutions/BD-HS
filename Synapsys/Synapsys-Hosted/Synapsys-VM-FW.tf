@@ -22,7 +22,7 @@ resource "azurerm_public_ip" "FW_untrust_pip" {
 }
 
 resource "azurerm_network_interface" "MGMT" {
-  name                      = "${var.resource_name_prefix}-${var.firewall_name}-eth0"
+  name                      = "PCEUS2-${var.firewall_name}-eth0"
   location                  = "${azurerm_resource_group.rg.location}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
 
@@ -36,7 +36,7 @@ resource "azurerm_network_interface" "MGMT" {
 }
 
 resource "azurerm_network_interface" "UNTRUST" {
-  name                      = "${var.resource_name_prefix}-${var.firewall_name}-eth1"
+  name                      = "PCEUS2-${var.firewall_name}-eth1"
   location                  = "${azurerm_resource_group.rg.location}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
 
@@ -50,7 +50,7 @@ resource "azurerm_network_interface" "UNTRUST" {
 }
 
 resource "azurerm_network_interface" "TRUST" {
-  name                      = "${var.resource_name_prefix}-${var.firewall_name}-eth2"
+  name                      = "PCEUS2-${var.firewall_name}-eth2"
   location                  = "${azurerm_resource_group.rg.location}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
 
@@ -63,7 +63,7 @@ resource "azurerm_network_interface" "TRUST" {
 }
 
 resource "azurerm_network_interface" "DMZ" {
-  name                      = "${var.resource_name_prefix}-${var.firewall_name}-eth3"
+  name                      = "PCEUS2-${var.firewall_name}-eth3"
   location                  = "${azurerm_resource_group.rg.location}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
 
@@ -76,7 +76,7 @@ resource "azurerm_network_interface" "DMZ" {
 }
 
 resource "azurerm_virtual_machine" "FW" {
-  name                = "${var.resource_name_prefix}-${var.firewall_name}"
+  name                = "PCEUS2-${var.firewall_name}"
   location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
@@ -102,14 +102,14 @@ resource "azurerm_virtual_machine" "FW" {
   }
 
   storage_os_disk {
-    name          = "${var.resource_name_prefix}-${var.firewall_name}_OS"
-    vhd_uri       = "${azurerm_storage_account.synapsysprd.primary_blob_endpoint}${azurerm_storage_container.vhds.name}/${var.resource_name_prefix}-${var.firewall_name}_OS.vhd"
+    name          = "PCEUS2-${var.firewall_name}_OS"
+    vhd_uri       = "${azurerm_storage_account.synapsysprd.primary_blob_endpoint}${azurerm_storage_container.vhds.name}/PCEUS2-${var.firewall_name}_OS.vhd"
     caching       = "ReadWrite"
     create_option = "FromImage"
   }
 
   os_profile {
-    computer_name  = "${var.resource_name_prefix}-${var.firewall_name}"
+    computer_name  = "PCEUS2-${var.firewall_name}"
     admin_username = "${var.fw_username}"
     admin_password = "${var.fw_password}"
   }

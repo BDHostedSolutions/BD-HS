@@ -12,7 +12,7 @@ resource "azurerm_network_security_group" "nsg_MGMT" {
     source_port_range          = "*"
     destination_port_range     = "443"
     source_address_prefix      = "66.194.102.38"
-    destination_address_prefix = "10.3.0.4"
+    destination_address_prefix = "${cidrhost("${var.mgmt_subnet}", 4)}"
   }
 
   security_rule {
@@ -24,7 +24,7 @@ resource "azurerm_network_security_group" "nsg_MGMT" {
     source_port_range          = "*"
     destination_port_range     = "443"
     source_address_prefix      = "216.115.73.53"
-    destination_address_prefix = "10.3.0.4"
+    destination_address_prefix = "${cidrhost("${var.mgmt_subnet}", 4)}"
   }
 
   security_rule {
@@ -36,7 +36,7 @@ resource "azurerm_network_security_group" "nsg_MGMT" {
     source_port_range          = "*"
     destination_port_range     = "443"
     source_address_prefix      = "12.129.108.27"
-    destination_address_prefix = "10.3.0.4"
+    destination_address_prefix = "${cidrhost("${var.mgmt_subnet}", 4)}"
   }
 
   security_rule {
