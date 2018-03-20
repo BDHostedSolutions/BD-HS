@@ -16,21 +16,21 @@ resource "azurerm_application_gateway" "App_Gw" {
     capacity = 2
   }
 
-  ssl_certificate {
-    name     = "star.carefusionanalytics.com"
-    data     = "${var.ssl_data}"
-    password = "${var.ssl_password}"
-  }
+  # ssl_certificate {
+  #   name     = "star.carefusionanalytics.com"
+  #   data     = "${var.ssl_data}"
+  #   password = "${var.ssl_password}"
+  # }
 
   gateway_ip_configuration {
     name      = "appGatewayIpConfig"
     subnet_id = "${azurerm_subnet.appgw_subnet.id}"
   }
 
-  authentication_certificate {
-    name = "star.carefusionanalytics.com"
-    data = "${var.auth_cert_data}"
-  }
+  # authentication_certificate {
+  #   name = "star.carefusionanalytics.com"
+  #   data = "${var.auth_cert_data}"
+  # }
 
   frontend_port {
     name = "HTTP"
@@ -60,17 +60,17 @@ resource "azurerm_application_gateway" "App_Gw" {
     request_timeout       = "30"
   }
 
-  backend_http_settings {
-    name                  = "HTTPS-Backend"
-    cookie_based_affinity = "Disabled"
-    port                  = 443
-    protocol              = "Https"
-    request_timeout       = "30"
+  # backend_http_settings {
+  #   name                  = "HTTPS-Backend"
+  #   cookie_based_affinity = "Disabled"
+  #   port                  = 443
+  #   protocol              = "Https"
+  #   request_timeout       = "30"
 
-    authentication_certificate = {
-      name = "star.carefusionanalytics.com"
-    }
-  }
+  #   authentication_certificate = {
+  #     name = "star.carefusionanalytics.com"
+  #   }
+  # }
 
   http_listener {
     name                           = "BASIC-HTTP"
@@ -79,13 +79,13 @@ resource "azurerm_application_gateway" "App_Gw" {
     protocol                       = "Http"
   }
 
-  http_listener {
-    name                           = "BASIC-HTTPS"
-    frontend_ip_configuration_name = "appGatewayFrontendIP"
-    frontend_port_name             = "HTTPS"
-    protocol                       = "Https"
-    ssl_certificate_name           = "star.carefusionanalytics.com"
-  }
+  # http_listener {
+  #   name                           = "BASIC-HTTPS"
+  #   frontend_ip_configuration_name = "appGatewayFrontendIP"
+  #   frontend_port_name             = "HTTPS"
+  #   protocol                       = "Https"
+  #   ssl_certificate_name           = "star.carefusionanalytics.com"
+  # }
 
   request_routing_rule {
     name                       = "BASIC-HTTP-FW-POOL"
@@ -95,13 +95,13 @@ resource "azurerm_application_gateway" "App_Gw" {
     backend_http_settings_name = "HTTP-Backend"
   }
 
-  request_routing_rule {
-    name                       = "BASIC-HTTPS-FW-POOL"
-    rule_type                  = "Basic"
-    http_listener_name         = "BASIC-HTTPS"
-    backend_address_pool_name  = "FW-Pool"
-    backend_http_settings_name = "HTTPS-Backend"
-  }
+  # request_routing_rule {
+  #   name                       = "BASIC-HTTPS-FW-POOL"
+  #   rule_type                  = "Basic"
+  #   http_listener_name         = "BASIC-HTTPS"
+  #   backend_address_pool_name  = "FW-Pool"
+  #   backend_http_settings_name = "HTTPS-Backend"
+  # }
 
   tags {
     display_name = "Application Gateway"
