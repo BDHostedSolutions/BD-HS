@@ -1,14 +1,3 @@
-resource "azurerm_public_ip" "ilb_pip" {
-  name                         = "ILB-pip"
-  location                     = "${azurerm_resource_group.rg.location}"
-  resource_group_name          = "${azurerm_resource_group.rg.name}"
-  public_ip_address_allocation = "dynamic"
-
-  tags {
-    display_name = "Public IP"
-  }
-}
-
 resource "azurerm_lb" "app_ilb" {
   name                = "${var.resource_name_prefix}-${var.lb_name}"
   location            = "${azurerm_resource_group.rg.location}"
@@ -19,8 +8,10 @@ resource "azurerm_lb" "app_ilb" {
   }
 
   frontend_ip_configuration {
-    name                 = "LoadBalancerFrontend"
-    public_ip_address_id = "${azurerm_public_ip.ilb_pip.id}"
+    name                          = "LoadBalancerFrontend"
+    subnet_id                     = "${azurerm_subnet.dmz_subnet.id}"
+    private_ip_address            = "${cidrhost("${var.dmz_subnet}", 6)}"
+    private_ip_address_allocation = "static"
   }
 }
 

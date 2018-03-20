@@ -22,8 +22,6 @@ resource "azurerm_network_interface" "app-vm1-nic" {
     name                                    = "ipconfig1"
     subnet_id                               = "${azurerm_subnet.dmz_subnet.id}"
     private_ip_address_allocation           = "dynamic"
-    load_balancer_backend_address_pools_ids = ["${azurerm_lb_backend_address_pool.ilb_bep.id}"]
-    load_balancer_inbound_nat_rules_ids     = ["${azurerm_lb_nat_rule.rdp1.id}"]
   }
 
   depends_on = ["azurerm_network_interface.DMZ"]
