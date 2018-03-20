@@ -89,7 +89,7 @@ resource "azurerm_virtual_machine" "FW" {
   vm_size                      = "Standard_D3v2"
 
   plan {
-    name      = "bundle1"
+    name      = "bundle2"
     publisher = "paloaltonetworks"
     product   = "vmseries1"
   }
@@ -97,7 +97,7 @@ resource "azurerm_virtual_machine" "FW" {
   storage_image_reference {
     publisher = "paloaltonetworks"
     offer     = "vmseries1"
-    sku       = "bundle1"
+    sku       = "bundle2"
     version   = "latest"
   }
 
