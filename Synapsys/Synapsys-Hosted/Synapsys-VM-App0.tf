@@ -47,6 +47,7 @@ resource "azurerm_virtual_machine" "app-vm0" {
   network_interface_ids = ["${azurerm_network_interface.app-vm0-nic.id}"]
   availability_set_id   = "${azurerm_availability_set.app-server-avs.id}"
   vm_size               = "Standard_A3"
+  license_type          = "Windows_Server"
 
   tags {
     display_name = "DS APP Server Virtual Machines"

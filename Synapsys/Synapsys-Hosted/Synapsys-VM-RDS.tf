@@ -29,6 +29,7 @@ resource "azurerm_virtual_machine" "rdsvm" {
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   network_interface_ids = ["${azurerm_network_interface.RDS-NIC.id}"]
   vm_size               = "Standard_D2"
+  license_type          = "Windows_Server"
 
   storage_image_reference {
     publisher = "MicrosoftWindowsServer"
