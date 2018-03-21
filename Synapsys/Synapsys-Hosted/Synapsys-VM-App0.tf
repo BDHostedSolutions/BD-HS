@@ -80,6 +80,36 @@ resource "azurerm_virtual_machine" "app-vm0" {
   depends_on = ["azurerm_storage_account.synapsysprd"]
 }
 
+resource "azurerm_virtual_machine_extension" "app-vm0_iaasantimalware" {
+  name                       = "${azurerm_virtual_machine.app-vm0.name}-IaaSAntimalware"
+  location                   = "${azurerm_resource_group.rg.location}"
+  resource_group_name        = "${azurerm_resource_group.rg.name}"
+  virtual_machine_name       = "${azurerm_virtual_machine.app-vm0.name}"
+  publisher                  = "Microsoft.Azure.Security"
+  type                       = "IaaSAntimalware"
+  type_handler_version       = "1.3"
+  auto_upgrade_minor_version = true
+
+  settings = <<SETTINGS
+    {
+        "AntimalwareEnabled": "true",
+        "ScheduledScanSettings": {
+            "isEnabled": "true",
+            "scanType": "Quick",
+            "day": "7",
+            "time": "120"
+        },
+        "Exclusions": {
+            "Paths": "C:\\Users",
+            "Extensions": ".txt",
+            "Processes": "taskmgr.exe"
+        },
+        "RealtimeProtectionEnabled": "true"
+    }
+  SETTINGS
+
+  depends_on = ["azurerm_virtual_machine.app-vm0"]
+}
 # resource "azurerm_virtual_machine_extension" "appvm0_domain_join" {
 #   name                 = "join-domain"
 #   location             = "${azurerm_resource_group.rg.location}"
