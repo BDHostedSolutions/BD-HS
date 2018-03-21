@@ -10,18 +10,18 @@ resource "azurerm_public_ip" "App2_pip" {
 }
 
 resource "azurerm_network_interface" "app-vm1-nic" {
-  name                      = "${var.resource_name_prefix}-${var.appvm1_name}-eth0"
-  location                  = "${azurerm_resource_group.rg.location}"
-  resource_group_name       = "${azurerm_resource_group.rg.name}"
+  name                = "${var.resource_name_prefix}-${var.appvm1_name}-eth0"
+  location            = "${azurerm_resource_group.rg.location}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
 
   tags {
     display_name = "App VM1 Network Interface"
   }
 
   ip_configuration {
-    name                                    = "ipconfig1"
-    subnet_id                               = "${azurerm_subnet.dmz_subnet.id}"
-    private_ip_address_allocation           = "dynamic"
+    name                          = "ipconfig1"
+    subnet_id                     = "${azurerm_subnet.dmz_subnet.id}"
+    private_ip_address_allocation = "dynamic"
   }
 
   depends_on = ["azurerm_network_interface.DMZ"]
@@ -76,6 +76,7 @@ resource "azurerm_virtual_machine" "app-vm1" {
 #   type                 = "JsonADDomainExtension"
 #   type_handler_version = "1.0"
 
+
 #   settings = <<SETTINGS
 #     {
 #         "Name": "hs.local",
@@ -86,9 +87,11 @@ resource "azurerm_virtual_machine" "app-vm1" {
 #     }
 # SETTINGS
 
+
 #   protected_settings = <<PROTECTED_SETTINGS
 #     {
 #         "Password": "${var.join_domain_pass}"
 #     }
 # PROTECTED_SETTINGS
 # }
+

@@ -22,9 +22,9 @@ resource "azurerm_public_ip" "FW_untrust_pip" {
 }
 
 resource "azurerm_network_interface" "MGMT" {
-  name                      = "PCEUS2-${var.firewall_name}-eth0"
-  location                  = "${azurerm_resource_group.rg.location}"
-  resource_group_name       = "${azurerm_resource_group.rg.name}"
+  name                = "PCEUS2-${var.firewall_name}-eth0"
+  location            = "${azurerm_resource_group.rg.location}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
 
   ip_configuration {
     name                          = "FW-MGMT"
@@ -36,9 +36,9 @@ resource "azurerm_network_interface" "MGMT" {
 }
 
 resource "azurerm_network_interface" "UNTRUST" {
-  name                      = "PCEUS2-${var.firewall_name}-eth1"
-  location                  = "${azurerm_resource_group.rg.location}"
-  resource_group_name       = "${azurerm_resource_group.rg.name}"
+  name                = "PCEUS2-${var.firewall_name}-eth1"
+  location            = "${azurerm_resource_group.rg.location}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
 
   ip_configuration {
     name                          = "FW-UNTRUST"
@@ -50,9 +50,9 @@ resource "azurerm_network_interface" "UNTRUST" {
 }
 
 resource "azurerm_network_interface" "TRUST" {
-  name                      = "PCEUS2-${var.firewall_name}-eth2"
-  location                  = "${azurerm_resource_group.rg.location}"
-  resource_group_name       = "${azurerm_resource_group.rg.name}"
+  name                = "PCEUS2-${var.firewall_name}-eth2"
+  location            = "${azurerm_resource_group.rg.location}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
 
   ip_configuration {
     name                          = "FW-TRUST"
@@ -63,9 +63,9 @@ resource "azurerm_network_interface" "TRUST" {
 }
 
 resource "azurerm_network_interface" "DMZ" {
-  name                      = "PCEUS2-${var.firewall_name}-eth3"
-  location                  = "${azurerm_resource_group.rg.location}"
-  resource_group_name       = "${azurerm_resource_group.rg.name}"
+  name                = "PCEUS2-${var.firewall_name}-eth3"
+  location            = "${azurerm_resource_group.rg.location}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
 
   ip_configuration {
     name                          = "FW-DMZ"
@@ -81,7 +81,8 @@ resource "azurerm_virtual_machine" "FW" {
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   network_interface_ids = ["${azurerm_network_interface.MGMT.id}", "${azurerm_network_interface.UNTRUST.id}",
-    "${azurerm_network_interface.TRUST.id}", "${azurerm_network_interface.DMZ.id}"
+    "${azurerm_network_interface.TRUST.id}",
+    "${azurerm_network_interface.DMZ.id}",
   ]
 
   primary_network_interface_id = "${azurerm_network_interface.MGMT.id}"

@@ -36,22 +36,18 @@ resource "azurerm_application_gateway" "App_Gw" {
     name = "HTTP"
     port = 80
   }
-
   frontend_port {
     name = "HTTPS"
     port = 443
   }
-
   frontend_ip_configuration {
     name                 = "appGatewayFrontendIP"
     public_ip_address_id = "${azurerm_public_ip.AppGw_pip.id}"
   }
-
   backend_address_pool {
     name            = "FW-Pool"
     ip_address_list = ["${cidrhost("${var.untrust_subnet}", 4)}"]
   }
-
   backend_http_settings {
     name                  = "HTTP-Backend"
     cookie_based_affinity = "Disabled"
@@ -66,6 +62,7 @@ resource "azurerm_application_gateway" "App_Gw" {
   #   port                  = 443
   #   protocol              = "Https"
   #   request_timeout       = "30"
+
 
   #   authentication_certificate = {
   #     name = "star.carefusionanalytics.com"

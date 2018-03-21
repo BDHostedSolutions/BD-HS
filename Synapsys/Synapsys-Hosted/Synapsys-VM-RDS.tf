@@ -8,9 +8,9 @@ resource "azurerm_availability_set" "rds-server-avs" {
 }
 
 resource "azurerm_network_interface" "RDS-NIC" {
-  name                      = "${var.resource_name_prefix}-${var.rdsvm_name}-eth0"
-  location                  = "${azurerm_resource_group.rg.location}"
-  resource_group_name       = "${azurerm_resource_group.rg.name}"
+  name                = "${var.resource_name_prefix}-${var.rdsvm_name}-eth0"
+  location            = "${azurerm_resource_group.rg.location}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
 
   ip_configuration {
     name                          = "RDS"
@@ -64,6 +64,7 @@ resource "azurerm_virtual_machine" "rdsvm" {
 #   type                 = "JsonADDomainExtension"
 #   type_handler_version = "1.0"
 
+
 #   settings = <<SETTINGS
 #     {
 #         "Name": "hs.local",
@@ -74,9 +75,11 @@ resource "azurerm_virtual_machine" "rdsvm" {
 #     }
 # SETTINGS
 
+
 #   protected_settings = <<PROTECTED_SETTINGS
 #     {
 #         "Password": "${var.join_domain_pass}"
 #     }
 # PROTECTED_SETTINGS
 # }
+

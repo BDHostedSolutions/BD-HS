@@ -21,9 +21,9 @@ resource "azurerm_public_ip" "DB_pip" {
 }
 
 resource "azurerm_network_interface" "db-vm-nic" {
-  name                      = "${var.resource_name_prefix}-${var.dbvm_name}-eth0"
-  location                  = "${azurerm_resource_group.rg.location}"
-  resource_group_name       = "${azurerm_resource_group.rg.name}"
+  name                = "${var.resource_name_prefix}-${var.dbvm_name}-eth0"
+  location            = "${azurerm_resource_group.rg.location}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
 
   tags {
     display_name = "DB VM0 Network Interface"
@@ -47,7 +47,7 @@ resource "azurerm_virtual_machine" "db-vm" {
   availability_set_id   = "${azurerm_availability_set.db-server-avs.id}"
   vm_size               = "Standard_D3_v2"
   license_type          = "Windows_Server"
-  
+
   tags {
     display_name = "SQL Server Virtual Machine"
   }
@@ -88,6 +88,7 @@ resource "azurerm_virtual_machine" "db-vm" {
 #   type                 = "JsonADDomainExtension"
 #   type_handler_version = "1.0"
 
+
 #   settings = <<SETTINGS
 #     {
 #         "Name": "hs.local",
@@ -98,9 +99,11 @@ resource "azurerm_virtual_machine" "db-vm" {
 #     }
 # SETTINGS
 
+
 #   protected_settings = <<PROTECTED_SETTINGS
 #     {
 #         "Password": "${var.join_domain_pass}"
 #     }
 # PROTECTED_SETTINGS
 # }
+

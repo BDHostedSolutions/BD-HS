@@ -9,7 +9,7 @@ provider "azurerm" {
 
 # Remote tfstate File Reference
 terraform {
-  backend "azurerm"  {
+  backend "azurerm" {
     storage_account_name = "tfstatefiles"
     container_name       = "tfstate"
     key                  = "synapsys-hosted.terraform.tfstate"
@@ -114,10 +114,10 @@ variable "auth_cert_data" {}
 
 variable "join_domain_user" {
   description = "Enter HS domain user to join VMs to domain. Do not include HS prefix"
-  default = "user"
+  default     = "user"
 }
 
 variable "join_domain_pass" {
   description = "Enter password of HS user to join VMs to domain"
-  default = "pass"
+  default     = "pass"
 }
