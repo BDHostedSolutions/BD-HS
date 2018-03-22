@@ -53,13 +53,13 @@ resource "azurerm_virtual_machine" "dcvm0" {
 }
 
 resource "azurerm_virtual_machine_extension" "dcvm0_iaasantimalware" {
-  name                       = "${azurerm_virtual_machine.dcvm0.name}-IaaSAntimalware"
+  name                       = "IaaSAntimalware"
   location                   = "${azurerm_resource_group.rg.location}"
   resource_group_name        = "${azurerm_resource_group.rg.name}"
   virtual_machine_name       = "${azurerm_virtual_machine.dcvm0.name}"
   publisher                  = "Microsoft.Azure.Security"
   type                       = "IaaSAntimalware"
-  type_handler_version       = "1.3"
+  type_handler_version       = "1.5"
   auto_upgrade_minor_version = true
 
   settings = <<SETTINGS
