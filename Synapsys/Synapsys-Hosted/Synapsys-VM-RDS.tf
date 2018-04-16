@@ -53,6 +53,11 @@ resource "azurerm_virtual_machine" "rdsvm" {
   os_profile_windows_config {
     provision_vm_agent = true
   }
+
+  boot_diagnostics {
+    enabled     = true
+    storage_uri = "${azurerm_storage_account.synapsysprd.primary_blob_endpoint}"
+  }
 }
 
 resource "azurerm_virtual_machine_extension" "rdsvm_iaasantimalware" {

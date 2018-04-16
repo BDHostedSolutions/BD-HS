@@ -45,6 +45,11 @@ resource "azurerm_virtual_machine" "dcvm0" {
     provision_vm_agent = true
   }
 
+  boot_diagnostics {
+    enabled     = true
+    storage_uri = "${azurerm_storage_account.synapsysprd.primary_blob_endpoint}"
+  }
+
   tags {
     display_name = "Synapsys Domain Controller"
   }
