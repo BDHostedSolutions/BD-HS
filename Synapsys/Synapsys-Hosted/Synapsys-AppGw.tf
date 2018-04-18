@@ -11,9 +11,9 @@ resource "azurerm_application_gateway" "App_Gw" {
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   sku {
-    name     = "Standard_Medium"
+    name     = "Standard_Small"
     tier     = "Standard"
-    capacity = 2
+    capacity = 1
   }
 
   # ssl_certificate {
