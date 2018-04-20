@@ -9,16 +9,16 @@ resource "azurerm_availability_set" "app-server-avs" {
   }
 }
 
-resource "azurerm_public_ip" "App_pip" {
-  name                         = "App-pip"
-  location                     = "${azurerm_resource_group.rg.location}"
-  resource_group_name          = "${azurerm_resource_group.rg.name}"
-  public_ip_address_allocation = "dynamic"
+# resource "azurerm_public_ip" "App_pip" {
+#   name                         = "App-pip"
+#   location                     = "${azurerm_resource_group.rg.location}"
+#   resource_group_name          = "${azurerm_resource_group.rg.name}"
+#   public_ip_address_allocation = "dynamic"
 
-  tags {
-    display_name = "App VM0 Public IP"
-  }
-}
+#   tags {
+#     display_name = "App VM0 Public IP"
+#   }
+# }
 
 resource "azurerm_network_interface" "app-vm0-nic" {
   name                = "${var.resource_name_prefix}-${var.appvm0_name}-eth0"

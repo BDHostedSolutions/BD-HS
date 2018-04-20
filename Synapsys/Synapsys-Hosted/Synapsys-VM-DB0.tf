@@ -9,16 +9,16 @@ resource "azurerm_availability_set" "db-server-avs" {
   }
 }
 
-resource "azurerm_public_ip" "DB_pip" {
-  name                         = "DB-pip"
-  location                     = "${azurerm_resource_group.rg.location}"
-  resource_group_name          = "${azurerm_resource_group.rg.name}"
-  public_ip_address_allocation = "dynamic"
+# resource "azurerm_public_ip" "DB_pip" {
+#   name                         = "DB-pip"
+#   location                     = "${azurerm_resource_group.rg.location}"
+#   resource_group_name          = "${azurerm_resource_group.rg.name}"
+#   public_ip_address_allocation = "dynamic"
 
-  tags {
-    display_name = "DB VM0 Public IP"
-  }
-}
+#   tags {
+#     display_name = "DB VM0 Public IP"
+#   }
+# }
 
 resource "azurerm_network_interface" "db-vm-nic" {
   name                = "${var.resource_name_prefix}-${var.dbvm_name}-eth0"
@@ -33,7 +33,7 @@ resource "azurerm_network_interface" "db-vm-nic" {
     name                          = "ipconfig1"
     subnet_id                     = "${azurerm_subnet.trust_subnet.id}"
     private_ip_address_allocation = "dynamic"
-    public_ip_address_id          = "${azurerm_public_ip.DB_pip.id}"
+    #public_ip_address_id          = "${azurerm_public_ip.DB_pip.id}"
   }
 
   depends_on = ["azurerm_network_interface.TRUST"]

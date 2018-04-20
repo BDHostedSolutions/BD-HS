@@ -1,13 +1,13 @@
-resource "azurerm_public_ip" "App2_pip" {
-  name                         = "App2-pip"
-  location                     = "${azurerm_resource_group.rg.location}"
-  resource_group_name          = "${azurerm_resource_group.rg.name}"
-  public_ip_address_allocation = "dynamic"
+# resource "azurerm_public_ip" "App2_pip" {
+#   name                         = "App2-pip"
+#   location                     = "${azurerm_resource_group.rg.location}"
+#   resource_group_name          = "${azurerm_resource_group.rg.name}"
+#   public_ip_address_allocation = "dynamic"
 
-  tags {
-    display_name = "App VM1 Public IP"
-  }
-}
+#   tags {
+#     display_name = "App VM1 Public IP"
+#   }
+# }
 
 resource "azurerm_network_interface" "app-vm1-nic" {
   name                = "${var.resource_name_prefix}-${var.appvm1_name}-eth0"
