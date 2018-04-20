@@ -36,9 +36,10 @@ resource "azurerm_network_interface" "MGMT" {
 }
 
 resource "azurerm_network_interface" "UNTRUST" {
-  name                = "${var.resource_name_prefix}-${var.firewall_name}-eth1"
-  location            = "${azurerm_resource_group.rg.location}"
-  resource_group_name = "${azurerm_resource_group.rg.name}"
+  name                 = "${var.resource_name_prefix}-${var.firewall_name}-eth1"
+  location             = "${azurerm_resource_group.rg.location}"
+  resource_group_name  = "${azurerm_resource_group.rg.name}"
+  enable_ip_forwarding = true
 
   ip_configuration {
     name                          = "FW-UNTRUST"
@@ -50,9 +51,10 @@ resource "azurerm_network_interface" "UNTRUST" {
 }
 
 resource "azurerm_network_interface" "TRUST" {
-  name                = "${var.resource_name_prefix}-${var.firewall_name}-eth2"
-  location            = "${azurerm_resource_group.rg.location}"
-  resource_group_name = "${azurerm_resource_group.rg.name}"
+  name                 = "${var.resource_name_prefix}-${var.firewall_name}-eth2"
+  location             = "${azurerm_resource_group.rg.location}"
+  resource_group_name  = "${azurerm_resource_group.rg.name}"
+  enable_ip_forwarding = true
 
   ip_configuration {
     name                          = "FW-TRUST"
@@ -63,9 +65,10 @@ resource "azurerm_network_interface" "TRUST" {
 }
 
 resource "azurerm_network_interface" "DMZ" {
-  name                = "${var.resource_name_prefix}-${var.firewall_name}-eth3"
-  location            = "${azurerm_resource_group.rg.location}"
-  resource_group_name = "${azurerm_resource_group.rg.name}"
+  name                 = "${var.resource_name_prefix}-${var.firewall_name}-eth3"
+  location             = "${azurerm_resource_group.rg.location}"
+  resource_group_name  = "${azurerm_resource_group.rg.name}"
+  enable_ip_forwarding = true
 
   ip_configuration {
     name                          = "FW-DMZ"
