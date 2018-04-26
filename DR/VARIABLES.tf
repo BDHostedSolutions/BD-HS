@@ -14,11 +14,13 @@ variable "tenant_id" {}
 variable "address_space" {}
 variable "mgmt_subnet" {}
 variable "untrust_subnet" {}
-#variable "trust_subnet" {}
+variable "trust_subnet" {}
 variable "dmz_subnet" {}
 variable "mm_subnet" {}
 variable "hs_subnet" {}
 variable "appgw_subnet" {}
+
+variable "storage_acct_name" {}
 
 variable "firewall_name" {}
 variable "fw_username" {}

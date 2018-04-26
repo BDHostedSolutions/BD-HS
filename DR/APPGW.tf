@@ -1,6 +1,6 @@
 #AppGw
 resource "azurerm_application_gateway" "App_Gw" {
-  name                = "DRUS-AppGw"
+  name                = "DRWESTUS2-AppGw"
   location            = "${data.azurerm_resource_group.DR.location}"
   resource_group_name = "${data.azurerm_resource_group.DR.name}"
 
