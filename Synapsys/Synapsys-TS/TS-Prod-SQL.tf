@@ -5,10 +5,6 @@ resource "azurerm_sql_server" "ds_sql" {
   version                      = "12.0"
   administrator_login          = "${var.vm_username}"
   administrator_login_password = "${var.vm_password}"
-
-  tags {
-    "display_name" = "Azure SQL"
-  }
 }
 
 resource "azurerm_sql_firewall_rule" "dsallowBDIps" {
@@ -36,10 +32,6 @@ resource "azurerm_sql_database" "dsSQLDB" {
   edition                          = "${var.db_edition}"
   max_size_bytes                   = "268435456000"
   requested_service_objective_name = "${var.db_rson}"
-
-  tags {
-    display_name = "TestDB"
-  }
 }
 
 resource "azurerm_sql_server" "cis_sql" {
@@ -49,10 +41,6 @@ resource "azurerm_sql_server" "cis_sql" {
   version                      = "12.0"
   administrator_login          = "${var.vm_username}"
   administrator_login_password = "${var.vm_password}"
-
-  tags {
-    "display_name" = "Azure SQL"
-  }
 }
 
 resource "azurerm_sql_firewall_rule" "cisallowBDIps" {
@@ -80,8 +68,4 @@ resource "azurerm_sql_database" "cisSQLDB" {
   edition                          = "${var.db_edition}"
   max_size_bytes                   = "268435456000"
   requested_service_objective_name = "${var.db_rson}"
-
-  tags {
-    display_name = "TestDB"
-  }
 }
