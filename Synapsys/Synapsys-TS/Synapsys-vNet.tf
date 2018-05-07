@@ -40,13 +40,31 @@ resource "azurerm_subnet" "trust_subnet" {
   route_table_id            = "${azurerm_route_table.trust_route_table.id}"
 }
 
-resource "azurerm_subnet" "dmz_subnet" {
+resource "azurerm_subnet" "syn_dmz_subnet" {
+  name                      = "sn-syn-dmz"
+  virtual_network_name      = "${azurerm_virtual_network.vnet.name}"
+  resource_group_name       = "${azurerm_resource_group.rg.name}"
+  address_prefix            = "${var.syn_dmz_subnet}"
+  network_security_group_id = "${azurerm_network_security_group.nsg_syn_dmz.id}"
+  route_table_id            = "${azurerm_route_table.syn_dmz_route_table.id}"
+}
+
+resource "azurerm_subnet" "syn_data_subnet" {
+  name                      = "sn-syn-data"
+  virtual_network_name      = "${azurerm_virtual_network.vnet.name}"
+  resource_group_name       = "${azurerm_resource_group.rg.name}"
+  address_prefix            = "${var.syn_data_subnet}"
+  network_security_group_id = "${azurerm_network_security_group.nsg_syn_data.id}"
+  route_table_id            = "${azurerm_route_table.syn_data_route_table.id}"
+}
+
+resource "azurerm_subnet" "ts_dmz_subnet" {
   name                      = "sn-dmz"
   virtual_network_name      = "${azurerm_virtual_network.vnet.name}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
-  address_prefix            = "${var.dmz_subnet}"
-  network_security_group_id = "${azurerm_network_security_group.nsg_DMZ.id}"
-  route_table_id            = "${azurerm_route_table.dmz_route_table.id}"
+  address_prefix            = "${var.ts_dmz_subnet}"
+  network_security_group_id = "${azurerm_network_security_group.nsg_ts_dmz.id}"
+  route_table_id            = "${azurerm_route_table.ts_dmz_route_table.id}"
 }
 
 resource "azurerm_subnet" "appgw_subnet" {

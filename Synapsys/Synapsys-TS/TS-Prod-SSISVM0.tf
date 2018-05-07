@@ -5,25 +5,15 @@ resource "azurerm_availability_set" "ssis-avs" {
   managed             = true
 }
 
-resource "azurerm_public_ip" "ssisvm0_pip" {
-  name                         = "${var.ssisvm0_name}-pip"
-  location                     = "${var.location}"
-  resource_group_name          = "${azurerm_resource_group.rg.name}"
-  public_ip_address_allocation = "dynamic"
-  idle_timeout_in_minutes      = 4
-}
-
 resource "azurerm_network_interface" "ssisvm0-nic" {
   name                      = "${var.ssisvm0_name}-eth0"
   location                  = "${var.location}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
-  network_security_group_id = "${azurerm_network_security_group.local_sql_rdp_nsg.id}"
 
   ip_configuration {
     name                          = "ipconfig1"
-    subnet_id                     = "${azurerm_subnet.stg_subnet.id}"
+    subnet_id                     = "${azurerm_subnet.ts_dmz_subnet.id}"
     private_ip_address_allocation = "dynamic"
-    public_ip_address_id          = "${azurerm_public_ip.ssisvm0_pip.id}"
   }
 }
 

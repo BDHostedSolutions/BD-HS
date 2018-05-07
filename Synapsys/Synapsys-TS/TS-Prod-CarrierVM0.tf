@@ -5,26 +5,15 @@ resource "azurerm_availability_set" "carrier-avs" {
   managed             = true
 }
 
-resource "azurerm_public_ip" "carriervm0_pip" {
-  name                         = "${var.carriervm0_name}-pip"
-  location                     = "${var.location}"
-  resource_group_name          = "${azurerm_resource_group.rg.name}"
-  public_ip_address_allocation = "dynamic"
-  idle_timeout_in_minutes      = 4
-}
-
 resource "azurerm_network_interface" "carriervm0-nic" {
   name                      = "${var.carriervm0_name}-eth0"
   location                  = "${var.location}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
-  network_security_group_id = "${azurerm_network_security_group.rdp_nsg.id}"
 
   ip_configuration {
     name                                    = "ipconfig1"
-    subnet_id                               = "${azurerm_subnet.stg_subnet.id}"
+    subnet_id                               = "${azurerm_subnet.ts_dmz_subnet.id}"
     private_ip_address_allocation           = "dynamic"
-    public_ip_address_id                    = "${azurerm_public_ip.carriervm0_pip.id}"
-    load_balancer_backend_address_pools_ids = ["${azurerm_lb_backend_address_pool.carrier_ilb_pool.id}"]
   }
 }
 

@@ -48,6 +48,12 @@ variable "db_storage_acct_name" {}
 
 variable "veritor_storage_acct_name" {}
 
+variable "etl_storage_acct_name" {}
+
+variable "etl_backup_storage_acct_name" {}
+
+variable "etl_db_backup_storage_acct_name" {}
+
 variable "vnet_name" {}
 
 variable "address_space" {}
@@ -58,7 +64,11 @@ variable "untrust_subnet" {}
 
 variable "trust_subnet" {}
 
-variable "dmz_subnet" {}
+variable "syn_dmz_subnet" {}
+
+variable "syn_data_subnet" {}
+
+variable "ts_dmz_subnet" {}
 
 variable "appgw_subnet" {}
 
@@ -90,6 +100,18 @@ variable "rds_server_avs_name" {}
 
 variable "dcvm0_name" {}
 
+variable "carrier_avs_name" {}
+
+variable "carriervm0_name" {}
+
+variable "ssis_avs_name" {}
+
+variable "ssisvm0_name" {}
+
+variable "sapds_avs_name" {}
+
+variable "sapdsvm0_name" {}
+
 variable "lb_name" {}
 
 variable "appgw_name" {}
@@ -105,6 +127,20 @@ variable "db1_nsg_name" {}
 variable "db2_nsg_name" {}
 
 variable "servicebus_name" {}
+
+variable "cis_sql_server_name" {}
+
+variable "cis_sql_db_name" {}
+
+variable "ds_sql_server_name" {}
+
+variable "ds_sql_db_name" {}
+
+variable "db_rson" {}
+
+variable "db_collation" {}
+
+variable "db_edition" {}
 
 variable "ssl_data" {}
 
