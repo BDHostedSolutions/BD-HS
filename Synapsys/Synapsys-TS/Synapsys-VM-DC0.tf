@@ -30,9 +30,9 @@ resource "azurerm_virtual_machine" "dcvm0" {
 
   storage_os_disk {
     name          = "${var.resource_name_prefix}-${var.dcvm0_name}_OS"
-    vhd_uri       = "${azurerm_storage_account.synapsysprd.primary_blob_endpoint}${azurerm_storage_container.vhds.name}/PCEUS2-${var.dcvm0_name}_OS.vhd"
     caching       = "ReadWrite"
     create_option = "FromImage"
+    managed_disk_type = "Standard_LRS"
   }
 
   os_profile {
@@ -53,8 +53,6 @@ resource "azurerm_virtual_machine" "dcvm0" {
   tags {
     display_name = "Synapsys Domain Controller"
   }
-
-  depends_on = ["azurerm_storage_account.synapsysprd"]
 }
 
 resource "azurerm_virtual_machine_extension" "dcvm0_iaasantimalware" {

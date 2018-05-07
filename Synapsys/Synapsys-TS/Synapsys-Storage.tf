@@ -10,15 +10,6 @@ resource "azurerm_storage_account" "synapsysprd" {
   }
 }
 
-resource "azurerm_storage_container" "vhds" {
-  name                  = "vhds"
-  resource_group_name   = "${azurerm_resource_group.rg.name}"
-  storage_account_name  = "${var.storage_acct_name}"
-  container_access_type = "private"
-
-  depends_on = ["azurerm_storage_account.synapsysprd"]
-}
-
 resource "azurerm_storage_account" "synapsysdbprd" {
   name                     = "${var.db_storage_acct_name}"
   resource_group_name      = "${azurerm_resource_group.rg.name}"

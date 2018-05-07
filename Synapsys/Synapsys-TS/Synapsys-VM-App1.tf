@@ -50,10 +50,10 @@ resource "azurerm_virtual_machine" "app-vm1" {
   }
 
   storage_os_disk {
-    name          = "${var.resource_name_prefix}-${var.appvm1_name}_OS"
-    vhd_uri       = "${azurerm_storage_account.synapsysprd.primary_blob_endpoint}${azurerm_storage_container.vhds.name}/${var.resource_name_prefix}-${var.appvm1_name}_OS.vhd"
-    caching       = "ReadWrite"
-    create_option = "FromImage"
+    name              = "${var.resource_name_prefix}-${var.appvm1_name}_OS"
+    caching           = "ReadWrite"
+    create_option     = "FromImage"
+    managed_disk_type = "Standard_LRS"
   }
 
   os_profile {
@@ -66,7 +66,10 @@ resource "azurerm_virtual_machine" "app-vm1" {
     provision_vm_agent = true
   }
 
-  depends_on = ["azurerm_storage_account.synapsysprd"]
+  boot_diagnostics {
+    enabled     = true
+    storage_uri = "${azurerm_storage_account.synapsysprd.primary_blob_endpoint}"
+  }
 }
 
 resource "azurerm_virtual_machine_extension" "app-vm1_iaasantimalware" {

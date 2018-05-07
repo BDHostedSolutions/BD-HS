@@ -106,10 +106,10 @@ resource "azurerm_virtual_machine" "FW" {
   }
 
   storage_os_disk {
-    name          = "${var.resource_name_prefix}-${var.firewall_name}_OS"
-    vhd_uri       = "${azurerm_storage_account.synapsysprd.primary_blob_endpoint}${azurerm_storage_container.vhds.name}/PCEUS2-${var.firewall_name}_OS.vhd"
-    caching       = "ReadWrite"
-    create_option = "FromImage"
+    name              = "${var.resource_name_prefix}-${var.firewall_name}_OS"
+    caching           = "ReadWrite"
+    create_option     = "FromImage"
+    managed_disk_type = "Standard_LRS"
   }
 
   os_profile {
@@ -121,4 +121,10 @@ resource "azurerm_virtual_machine" "FW" {
   os_profile_linux_config {
     disable_password_authentication = "false"
   }
+
+  boot_diagnostics {
+    enabled     = true
+    storage_uri = "${azurerm_storage_account.synapsysprd.primary_blob_endpoint}"
+  }
+  
 }
