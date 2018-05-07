@@ -2,7 +2,7 @@ resource "azurerm_availability_set" "FWAVS" {
   name                         = "${var.resource_name_prefix}-${var.fw_avs_name}"
   location                     = "${azurerm_resource_group.rg.location}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
-  managed                      = false
+  managed                      = true
   platform_update_domain_count = "5"
   platform_fault_domain_count  = "2"
 }
@@ -64,29 +64,13 @@ resource "azurerm_network_interface" "TRUST" {
   }
 }
 
-resource "azurerm_network_interface" "DMZ" {
-  name                 = "${var.resource_name_prefix}-${var.firewall_name}-nic3"
-  location             = "${azurerm_resource_group.rg.location}"
-  resource_group_name  = "${azurerm_resource_group.rg.name}"
-  enable_ip_forwarding = true
-
-  ip_configuration {
-    name                          = "FW-DMZ"
-    subnet_id                     = "${azurerm_subnet.dmz_subnet.id}"
-    private_ip_address_allocation = "static"
-    private_ip_address            = "${cidrhost("${var.dmz_subnet}", 4)}"
-  }
-}
-
 resource "azurerm_virtual_machine" "FW" {
   name                = "${var.resource_name_prefix}-${var.firewall_name}"
   location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   network_interface_ids = ["${azurerm_network_interface.MGMT.id}", "${azurerm_network_interface.UNTRUST.id}",
-    "${azurerm_network_interface.TRUST.id}",
-    "${azurerm_network_interface.DMZ.id}",
-  ]
+    "${azurerm_network_interface.TRUST.id}"]
 
   primary_network_interface_id = "${azurerm_network_interface.MGMT.id}"
   availability_set_id          = "${azurerm_availability_set.FWAVS.id}"
@@ -126,5 +110,4 @@ resource "azurerm_virtual_machine" "FW" {
     enabled     = true
     storage_uri = "${azurerm_storage_account.synapsysprd.primary_blob_endpoint}"
   }
-  
 }

@@ -2,11 +2,7 @@ resource "azurerm_availability_set" "db-server-avs" {
   name                = "${var.resource_name_prefix}-${var.db_server_avs_name}"
   location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
-  managed             = "false"
-
-  tags {
-    display_name = "DB Availability Set"
-  }
+  managed             = true
 }
 
 # resource "azurerm_public_ip" "DB_pip" {
@@ -47,10 +43,6 @@ resource "azurerm_virtual_machine" "db-vm" {
   availability_set_id   = "${azurerm_availability_set.db-server-avs.id}"
   vm_size               = "Standard_D3_v2"
   license_type          = "Windows_Server"
-
-  tags {
-    display_name = "SQL Server Virtual Machine"
-  }
 
   storage_image_reference {
     publisher = "MicrosoftWindowsServer"
@@ -139,4 +131,3 @@ resource "azurerm_virtual_machine_extension" "db-vm_iaasantimalware" {
 #     }
 # PROTECTED_SETTINGS
 # }
-

@@ -2,7 +2,7 @@ resource "azurerm_availability_set" "rds-server-avs" {
   name                         = "${var.resource_name_prefix}-${var.rds_server_avs_name}"
   location                     = "${azurerm_resource_group.rg.location}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
-  managed                      = false
+  managed                      = true
   platform_update_domain_count = "5"
   platform_fault_domain_count  = "2"
 }
@@ -117,4 +117,3 @@ resource "azurerm_virtual_machine_extension" "rdsvm_iaasantimalware" {
 #     }
 # PROTECTED_SETTINGS
 # }
-

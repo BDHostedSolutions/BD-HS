@@ -349,11 +349,6 @@ resource "azurerm_network_security_group" "nsg_App2" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
-
-  tags {
-    display_name = "NSG for Web Service-ext access-with RDP"
-    description  = "Applies to each NIC"
-  }
 }
 
 resource "azurerm_network_security_group" "nsg_DB1" {
@@ -398,11 +393,6 @@ resource "azurerm_network_security_group" "nsg_DB1" {
     destination_port_range     = "4155"
     source_address_prefix      = "INTERNET"
     destination_address_prefix = "*"
-  }
-
-  tags {
-    display_name = "NSG for VMs running local vnet SQL Server"
-    description  = "Applies to individual NICs"
   }
 }
 
@@ -526,10 +516,5 @@ resource "azurerm_network_security_group" "nsg_DB2" {
     destination_port_range     = "8172"
     source_address_prefix      = "*"
     destination_address_prefix = "*"
-  }
-
-  tags {
-    display_name = "NSG for VMs running local vnet SQL Server with RDP Access"
-    description  = "Applies to individual NICs"
   }
 }

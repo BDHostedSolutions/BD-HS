@@ -3,10 +3,6 @@ resource "azurerm_lb" "app_ilb" {
   location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
-  tags {
-    display_name = "Internal Load Balancer"
-  }
-
   frontend_ip_configuration {
     name                          = "LoadBalancerFrontend"
     subnet_id                     = "${azurerm_subnet.dmz_subnet.id}"

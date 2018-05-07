@@ -2,32 +2,13 @@ resource "azurerm_availability_set" "app-server-avs" {
   name                = "${var.resource_name_prefix}-${var.app_server_avs_name}"
   location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
-  managed             = false
-
-  tags {
-    display_name = "App Availability Set"
-  }
+  managed             = true
 }
-
-# resource "azurerm_public_ip" "App_pip" {
-#   name                         = "App-pip"
-#   location                     = "${azurerm_resource_group.rg.location}"
-#   resource_group_name          = "${azurerm_resource_group.rg.name}"
-#   public_ip_address_allocation = "dynamic"
-
-#   tags {
-#     display_name = "App VM0 Public IP"
-#   }
-# }
 
 resource "azurerm_network_interface" "app-vm0-nic" {
   name                = "${var.resource_name_prefix}-${var.appvm0_name}-nic0"
   location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
-
-  tags {
-    display_name = "App VM0 Network Interface"
-  }
 
   ip_configuration {
     name                          = "ipconfig1"
@@ -48,10 +29,6 @@ resource "azurerm_virtual_machine" "app-vm0" {
   availability_set_id   = "${azurerm_availability_set.app-server-avs.id}"
   vm_size               = "Standard_A3"
   license_type          = "Windows_Server"
-
-  tags {
-    display_name = "DS APP Server Virtual Machines"
-  }
 
   storage_image_reference {
     publisher = "MicrosoftWindowsServer"
@@ -140,4 +117,3 @@ resource "azurerm_virtual_machine_extension" "app-vm0_iaasantimalware" {
 #     }
 # PROTECTED_SETTINGS
 # }
-
