@@ -58,8 +58,8 @@ resource "azurerm_route_table" "syn_data_route_table" {
   }
 }
 
-resource "azurerm_route_table" "ts_data_route_table" {
-  name                = "ts_data_route_table"
+resource "azurerm_route_table" "ts_dmz_route_table" {
+  name                = "ts_dmz_route_table"
   location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 

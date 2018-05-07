@@ -196,8 +196,92 @@ resource "azurerm_network_security_group" "nsg_TRUST" {
   }
 }
 
-resource "azurerm_network_security_group" "nsg_DMZ" {
-  name                = "DMZ-NSG"
+resource "azurerm_network_security_group" "nsg_syn_dmz" {
+  name                = "SYN-DMZ-NSG"
+  location            = "${azurerm_resource_group.rg.location}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
+
+  security_rule {
+    name                       = "AllowRDPInBound"
+    priority                   = 1000
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = 3389
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Inbound-TS-Prod"
+    priority                   = 1100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "172.16.0.0/19"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Outbound-TS-Prod"
+    priority                   = 1000
+    direction                  = "Outbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "172.16.0.0/19"
+  }
+}
+
+  resource "azurerm_network_security_group" "nsg_syn_data" {
+  name                = "SYN-DATA-NSG"
+  location            = "${azurerm_resource_group.rg.location}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
+
+  security_rule {
+    name                       = "AllowRDPInBound"
+    priority                   = 1000
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = 3389
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Inbound-TS-Prod"
+    priority                   = 1100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "172.16.0.0/19"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Outbound-TS-Prod"
+    priority                   = 1000
+    direction                  = "Outbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "172.16.0.0/19"
+  }
+}
+
+  resource "azurerm_network_security_group" "nsg_ts_dmz" {
+  name                = "TS-DMZ-NSG"
   location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 

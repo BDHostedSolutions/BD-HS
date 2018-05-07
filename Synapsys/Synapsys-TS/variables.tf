@@ -12,8 +12,8 @@ terraform {
   backend "azurerm" {
     storage_account_name = "tfstatefiles"
     container_name       = "tfstate"
-    key                  = "synapsys-hosted.terraform.tfstate"
-    access_key           = "${var.access_key}"
+    key                  = "ts-synapsys.terraform.tfstate"
+    access_key           = "nWj7Yk9yZKXGYj9TPRrRB/MuQhlOX9a3xwwvY2Vqq8pFUs+0zJEu2TU2aN/+8hvLs0Ojk/SLKPpPBPKbgaf2aA=="
   }
 }
 
@@ -24,8 +24,6 @@ variable "client_id" {}
 variable "client_secret" {}
 
 variable "tenant_id" {}
-
-variable "access_key" {}
 
 variable "resource_name_prefix" {}
 

@@ -5,8 +5,8 @@ resource "azurerm_lb" "app_ilb" {
 
   frontend_ip_configuration {
     name                          = "LoadBalancerFrontend"
-    subnet_id                     = "${azurerm_subnet.dmz_subnet.id}"
-    private_ip_address            = "${cidrhost("${var.dmz_subnet}", 6)}"
+    subnet_id                     = "${azurerm_subnet.trust_subnet.id}"
+    private_ip_address            = "${cidrhost("${var.trust_subnet}", 6)}"
     private_ip_address_allocation = "static"
   }
 }

@@ -59,7 +59,7 @@ resource "azurerm_subnet" "syn_data_subnet" {
 }
 
 resource "azurerm_subnet" "ts_dmz_subnet" {
-  name                      = "sn-dmz"
+  name                      = "sn-ts-dmz"
   virtual_network_name      = "${azurerm_virtual_network.vnet.name}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
   address_prefix            = "${var.ts_dmz_subnet}"
