@@ -59,7 +59,7 @@ resource "azurerm_virtual_machine" "app-vm0" {
 }
 
 resource "azurerm_virtual_machine_extension" "app-vm0_iaasantimalware" {
-  name                       = "IaaSAntimalware"
+  name                       = "${var.resource_name_prefix}-${var.appvm0_name}-IaaSAntimalware"
   location                   = "${azurerm_resource_group.rg.location}"
   resource_group_name        = "${azurerm_resource_group.rg.name}"
   virtual_machine_name       = "${azurerm_virtual_machine.app-vm0.name}"

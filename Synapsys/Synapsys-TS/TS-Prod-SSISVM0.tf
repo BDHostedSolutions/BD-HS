@@ -1,12 +1,12 @@
 resource "azurerm_availability_set" "ssis-avs" {
-  name                = "${var.ssis_avs_name}"
+  name                = "${var.resource_name_prefix}-${var.ssis_avs_name}"
   location            = "${var.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
   managed             = true
 }
 
 resource "azurerm_network_interface" "ssisvm0-nic" {
-  name                      = "${var.ssisvm0_name}-eth0"
+  name                      = "${var.resource_name_prefix}-${var.ssisvm0_name}-eth0"
   location                  = "${var.location}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
 
@@ -18,7 +18,7 @@ resource "azurerm_network_interface" "ssisvm0-nic" {
 }
 
 resource "azurerm_virtual_machine" "ssisvm0" {
-  name                  = "${var.ssisvm0_name}"
+  name                  = "${var.resource_name_prefix}-${var.ssisvm0_name}"
   location              = "${var.location}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   network_interface_ids = ["${azurerm_network_interface.ssisvm0-nic.id}"]
@@ -33,14 +33,14 @@ resource "azurerm_virtual_machine" "ssisvm0" {
   }
 
   storage_os_disk {
-    name          = "${var.ssisvm0_name}_OS"
+    name          = "${var.resource_name_prefix}-${var.ssisvm0_name}_OS"
     caching       = "ReadWrite"
     create_option = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
 
   os_profile {
-    computer_name  = "${var.ssisvm0_name}"
+    computer_name  = "${var.resource_name_prefix}-${var.ssisvm0_name}"
     admin_username = "${var.vm_username}"
     admin_password = "${var.vm_password}"
   }
@@ -57,7 +57,7 @@ resource "azurerm_virtual_machine" "ssisvm0" {
 }
 
 resource "azurerm_virtual_machine_extension" "ssisvm0_enablevmaccess" {
-  name                       = "${var.ssisvm0_name}-EnableVMAccess"
+  name                       = "${var.resource_name_prefix}-${var.ssisvm0_name}-EnableVMAccess"
   location                   = "${var.location}"
   resource_group_name        = "${azurerm_resource_group.rg.name}"
   virtual_machine_name       = "${azurerm_virtual_machine.ssisvm0.name}"
@@ -71,7 +71,7 @@ resource "azurerm_virtual_machine_extension" "ssisvm0_enablevmaccess" {
 }
 
 resource "azurerm_virtual_machine_extension" "ssisvm0_iaasantimalware" {
-  name                       = "${var.ssisvm0_name}-IaaSAntimalware"
+  name                       = "${var.resource_name_prefix}-${var.ssisvm0_name}-IaaSAntimalware"
   location                   = "${var.location}"
   resource_group_name        = "${azurerm_resource_group.rg.name}"
   virtual_machine_name       = "${azurerm_virtual_machine.ssisvm0.name}"

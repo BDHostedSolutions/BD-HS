@@ -61,7 +61,7 @@ resource "azurerm_virtual_machine" "rdsvm" {
 }
 
 resource "azurerm_virtual_machine_extension" "rdsvm_iaasantimalware" {
-  name                       = "IaaSAntimalware"
+  name                       = "${var.resource_name_prefix}-${var.rdsvm_name}-IaaSAntimalware"
   location                   = "${azurerm_resource_group.rg.location}"
   resource_group_name        = "${azurerm_resource_group.rg.name}"
   virtual_machine_name       = "${azurerm_virtual_machine.rdsvm.name}"

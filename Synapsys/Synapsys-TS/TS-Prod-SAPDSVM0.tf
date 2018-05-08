@@ -1,12 +1,12 @@
 resource "azurerm_availability_set" "sapds-avs" {
-  name                = "${var.sapds_avs_name}"
+  name                = "${var.resource_name_prefix}-${var.sapds_avs_name}"
   location            = "${var.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
   managed             = true
 }
 
 resource "azurerm_network_interface" "sapdsvm0-nic" {
-  name                      = "${var.sapdsvm0_name}-eth0"
+  name                      = "${var.resource_name_prefix}-${var.sapdsvm0_name}-eth0"
   location                  = "${var.location}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
 
@@ -18,7 +18,7 @@ resource "azurerm_network_interface" "sapdsvm0-nic" {
 }
 
 resource "azurerm_virtual_machine" "sapdsvm0" {
-  name                  = "${var.sapdsvm0_name}"
+  name                  = "${var.resource_name_prefix}-${var.sapdsvm0_name}"
   location              = "${var.location}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   network_interface_ids = ["${azurerm_network_interface.sapdsvm0-nic.id}"]
@@ -33,14 +33,14 @@ resource "azurerm_virtual_machine" "sapdsvm0" {
   }
 
   storage_os_disk {
-    name          = "${var.sapdsvm0_name}_OS"
+    name          = "${var.resource_name_prefix}-${var.sapdsvm0_name}_OS"
     caching       = "ReadWrite"
     create_option = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
 
   os_profile {
-    computer_name  = "${var.sapdsvm0_name}"
+    computer_name  = "${var.resource_name_prefix}-${var.sapdsvm0_name}"
     admin_username = "${var.vm_username}"
     admin_password = "${var.vm_password}"
   }
@@ -57,7 +57,7 @@ resource "azurerm_virtual_machine" "sapdsvm0" {
 }
 
 resource "azurerm_virtual_machine_extension" "sapdsvm0_enablevmaccess" {
-  name                       = "${var.sapdsvm0_name}-EnableVMAccess"
+  name                       = "${var.resource_name_prefix}-${var.sapdsvm0_name}-EnableVMAccess"
   location                   = "${var.location}"
   resource_group_name        = "${azurerm_resource_group.rg.name}"
   virtual_machine_name       = "${azurerm_virtual_machine.sapdsvm0.name}"
@@ -71,7 +71,7 @@ resource "azurerm_virtual_machine_extension" "sapdsvm0_enablevmaccess" {
 }
 
 resource "azurerm_virtual_machine_extension" "sapdsvm0_iaasantimalware" {
-  name                       = "${var.sapdsvm0_name}-IaaSAntimalware"
+  name                       = "${var.resource_name_prefix}-${var.sapdsvm0_name}-IaaSAntimalware"
   location                   = "${var.location}"
   resource_group_name        = "${azurerm_resource_group.rg.name}"
   virtual_machine_name       = "${azurerm_virtual_machine.sapdsvm0.name}"
