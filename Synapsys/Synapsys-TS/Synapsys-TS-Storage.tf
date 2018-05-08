@@ -1,3 +1,41 @@
+resource "azurerm_storage_account" "synapsysprd" {
+  name                     = "${var.storage_acct_name}"
+  resource_group_name      = "${azurerm_resource_group.rg.name}"
+  location                 = "${azurerm_resource_group.rg.location}"
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+
+  tags {
+    display_name = "Boot Diag Storage Account"
+  }
+}
+
+resource "azurerm_storage_account" "synapsysdbprd" {
+  name                     = "${var.db_storage_acct_name}"
+  resource_group_name      = "${azurerm_resource_group.rg.name}"
+  location                 = "${azurerm_resource_group.rg.location}"
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+
+  tags {
+    display_name = "DB Backup Storage Account"
+  }
+}
+
+resource "azurerm_storage_account" "veritorimagesprd" {
+  name                     = "${var.veritor_storage_acct_name}"
+  resource_group_name      = "${azurerm_resource_group.rg.name}"
+  location                 = "${azurerm_resource_group.rg.location}"
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+  enable_blob_encryption   = true
+  enable_file_encryption   = true
+
+  tags {
+    display_name = "Storage Account for Veritor Images"
+  }
+}
+
 resource "azurerm_storage_account" "etl_storage_acct" {
   name                      = "${var.etl_storage_acct_name}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
