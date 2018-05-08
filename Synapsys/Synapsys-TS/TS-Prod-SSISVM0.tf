@@ -23,7 +23,7 @@ resource "azurerm_virtual_machine" "ssisvm0" {
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   network_interface_ids = ["${azurerm_network_interface.ssisvm0-nic.id}"]
   availability_set_id   = "${azurerm_availability_set.ssis-avs.id}"
-  vm_size               = "Standard_A3"
+  vm_size               = "${var.ssis_vm_size}"
 
   storage_image_reference {
     publisher = "MicrosoftWindowsServer"

@@ -74,7 +74,7 @@ resource "azurerm_virtual_machine" "FW" {
 
   primary_network_interface_id = "${azurerm_network_interface.MGMT.id}"
   availability_set_id          = "${azurerm_availability_set.FWAVS.id}"
-  vm_size                      = "Standard_D3_v2"
+  vm_size                      = "${var.fw_vm_size}"
 
   plan {
     name      = "bundle2"

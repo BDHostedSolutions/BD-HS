@@ -39,6 +39,8 @@ variable "fw_avs_name" {}
 
 variable "firewall_name" {}
 
+variable "fw_vm_size" {}
+
 variable "fw_username" {}
 
 variable "fw_password" {}
@@ -89,29 +91,43 @@ variable "appvm0_name" {}
 
 variable "appvm1_name" {}
 
+variable "app_vm_size" {}
+
 variable "app_server_avs_name" {}
 
 variable "dbvm_name" {}
 
 variable "db_server_avs_name" {}
 
+variable "sql_vm_size" {}
+
 variable "rdsvm_name" {}
 
 variable "rds_server_avs_name" {}
 
+variable "rds_vm_size" {}
+
 variable "dcvm0_name" {}
+
+variable "dc_vm_size" {}
 
 variable "carrier_avs_name" {}
 
 variable "carriervm0_name" {}
 
+variable "carrier_vm_size" {}
+
 variable "ssis_avs_name" {}
 
 variable "ssisvm0_name" {}
 
+variable "ssis_vm_size" {}
+
 variable "sapds_avs_name" {}
 
 variable "sapdsvm0_name" {}
+
+variable "sap_vm_size" {}
 
 variable "lb_name" {}
 
