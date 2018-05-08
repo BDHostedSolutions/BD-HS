@@ -6,14 +6,14 @@ resource "azurerm_availability_set" "carrier-avs" {
 }
 
 resource "azurerm_network_interface" "carriervm0-nic" {
-  name                      = "${var.resource_name_prefix}-${var.carriervm0_name}-eth0"
-  location                  = "${var.location}"
-  resource_group_name       = "${azurerm_resource_group.rg.name}"
+  name                = "${var.resource_name_prefix}-${var.carriervm0_name}-eth0"
+  location            = "${var.location}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
 
   ip_configuration {
-    name                                    = "ipconfig1"
-    subnet_id                               = "${azurerm_subnet.ts_dmz_subnet.id}"
-    private_ip_address_allocation           = "dynamic"
+    name                          = "ipconfig1"
+    subnet_id                     = "${azurerm_subnet.ts_dmz_subnet.id}"
+    private_ip_address_allocation = "dynamic"
   }
 }
 
@@ -33,9 +33,9 @@ resource "azurerm_virtual_machine" "carriervm0" {
   }
 
   storage_os_disk {
-    name          = "${var.resource_name_prefix}-${var.carriervm0_name}_OS"
-    caching       = "ReadWrite"
-    create_option = "FromImage"
+    name              = "${var.resource_name_prefix}-${var.carriervm0_name}_OS"
+    caching           = "ReadWrite"
+    create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
 

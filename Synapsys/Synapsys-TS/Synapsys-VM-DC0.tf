@@ -29,9 +29,9 @@ resource "azurerm_virtual_machine" "dcvm0" {
   }
 
   storage_os_disk {
-    name          = "${var.resource_name_prefix}-${var.dcvm0_name}_OS"
-    caching       = "ReadWrite"
-    create_option = "FromImage"
+    name              = "${var.resource_name_prefix}-${var.dcvm0_name}_OS"
+    caching           = "ReadWrite"
+    create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
 

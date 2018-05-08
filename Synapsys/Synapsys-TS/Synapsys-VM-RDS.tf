@@ -90,6 +90,7 @@ resource "azurerm_virtual_machine_extension" "rdsvm_iaasantimalware" {
 
   depends_on = ["azurerm_virtual_machine.rdsvm"]
 }
+
 # resource "azurerm_virtual_machine_extension" "rdsvm_domain_join" {
 #   name                 = "join-domain"
 #   location             = "${azurerm_resource_group.rg.location}"
@@ -117,3 +118,4 @@ resource "azurerm_virtual_machine_extension" "rdsvm_iaasantimalware" {
 #     }
 # PROTECTED_SETTINGS
 # }
+

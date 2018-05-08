@@ -11,9 +11,9 @@ resource "azurerm_network_interface" "app-vm0-nic" {
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   ip_configuration {
-    name                          = "ipconfig1"
-    subnet_id                     = "${azurerm_subnet.syn_dmz_subnet.id}"
-    private_ip_address_allocation = "dynamic"
+    name                                    = "ipconfig1"
+    subnet_id                               = "${azurerm_subnet.syn_dmz_subnet.id}"
+    private_ip_address_allocation           = "dynamic"
     load_balancer_backend_address_pools_ids = ["${azurerm_lb_backend_address_pool.ilb_bep.id}"]
     load_balancer_inbound_nat_rules_ids     = ["${azurerm_lb_nat_rule.rdp0.id}"]
   }
@@ -88,6 +88,7 @@ resource "azurerm_virtual_machine_extension" "app-vm0_iaasantimalware" {
 
   depends_on = ["azurerm_virtual_machine.app-vm0"]
 }
+
 # resource "azurerm_virtual_machine_extension" "appvm0_domain_join" {
 #   name                 = "join-domain"
 #   location             = "${azurerm_resource_group.rg.location}"
@@ -115,3 +116,4 @@ resource "azurerm_virtual_machine_extension" "app-vm0_iaasantimalware" {
 #     }
 # PROTECTED_SETTINGS
 # }
+

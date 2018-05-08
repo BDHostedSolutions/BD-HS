@@ -70,7 +70,8 @@ resource "azurerm_virtual_machine" "FW" {
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   network_interface_ids = ["${azurerm_network_interface.MGMT.id}", "${azurerm_network_interface.UNTRUST.id}",
-    "${azurerm_network_interface.TRUST.id}"]
+    "${azurerm_network_interface.TRUST.id}",
+  ]
 
   primary_network_interface_id = "${azurerm_network_interface.MGMT.id}"
   availability_set_id          = "${azurerm_availability_set.FWAVS.id}"

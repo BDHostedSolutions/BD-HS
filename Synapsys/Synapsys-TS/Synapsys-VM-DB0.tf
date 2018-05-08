@@ -86,6 +86,7 @@ resource "azurerm_virtual_machine_extension" "db-vm_iaasantimalware" {
 
   depends_on = ["azurerm_virtual_machine.db-vm"]
 }
+
 # resource "azurerm_virtual_machine_extension" "db0_domain_join" {
 #   name                 = "join-domain"
 #   location             = "${azurerm_resource_group.rg.location}"
@@ -113,3 +114,4 @@ resource "azurerm_virtual_machine_extension" "db-vm_iaasantimalware" {
 #     }
 # PROTECTED_SETTINGS
 # }
+

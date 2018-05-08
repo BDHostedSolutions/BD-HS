@@ -238,7 +238,7 @@ resource "azurerm_network_security_group" "nsg_syn_dmz" {
   }
 }
 
-  resource "azurerm_network_security_group" "nsg_syn_data" {
+resource "azurerm_network_security_group" "nsg_syn_data" {
   name                = "SYN-DATA-NSG"
   location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
@@ -280,7 +280,7 @@ resource "azurerm_network_security_group" "nsg_syn_dmz" {
   }
 }
 
-  resource "azurerm_network_security_group" "nsg_ts_dmz" {
+resource "azurerm_network_security_group" "nsg_ts_dmz" {
   name                = "TS-DMZ-NSG"
   location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"

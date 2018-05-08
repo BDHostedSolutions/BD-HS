@@ -6,9 +6,9 @@ resource "azurerm_availability_set" "ssis-avs" {
 }
 
 resource "azurerm_network_interface" "ssisvm0-nic" {
-  name                      = "${var.resource_name_prefix}-${var.ssisvm0_name}-eth0"
-  location                  = "${var.location}"
-  resource_group_name       = "${azurerm_resource_group.rg.name}"
+  name                = "${var.resource_name_prefix}-${var.ssisvm0_name}-eth0"
+  location            = "${var.location}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
 
   ip_configuration {
     name                          = "ipconfig1"
@@ -33,9 +33,9 @@ resource "azurerm_virtual_machine" "ssisvm0" {
   }
 
   storage_os_disk {
-    name          = "${var.resource_name_prefix}-${var.ssisvm0_name}_OS"
-    caching       = "ReadWrite"
-    create_option = "FromImage"
+    name              = "${var.resource_name_prefix}-${var.ssisvm0_name}_OS"
+    caching           = "ReadWrite"
+    create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
 
