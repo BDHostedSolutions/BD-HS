@@ -27,6 +27,8 @@ variable "tenant_id" {}
 
 variable "resource_name_prefix" {}
 
+variable "sql_rn_prefix" {}
+
 variable "resource_group_name" {}
 
 variable "location" {}
