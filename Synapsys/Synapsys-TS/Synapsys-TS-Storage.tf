@@ -4,6 +4,8 @@ resource "azurerm_storage_account" "synapsysprd" {
   location                 = "${azurerm_resource_group.rg.location}"
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  enable_file_encryption    = true
+  enable_blob_encryption    = true
 
   tags {
     display_name = "Boot Diag Storage Account"
@@ -16,6 +18,8 @@ resource "azurerm_storage_account" "synapsysdbprd" {
   location                 = "${azurerm_resource_group.rg.location}"
   account_tier             = "Standard"
   account_replication_type = "LRS"
+  enable_file_encryption    = true
+  enable_blob_encryption    = true
 
   tags {
     display_name = "DB Backup Storage Account"
@@ -28,8 +32,8 @@ resource "azurerm_storage_account" "veritorimagesprd" {
   location                 = "${azurerm_resource_group.rg.location}"
   account_tier             = "Standard"
   account_replication_type = "LRS"
-  enable_blob_encryption   = true
-  enable_file_encryption   = true
+  enable_file_encryption    = true
+  enable_blob_encryption    = true
 
   tags {
     display_name = "Storage Account for Veritor Images"
