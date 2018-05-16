@@ -11,7 +11,7 @@ resource "azurerm_network_security_group" "nsg_MGMT" {
     protocol                   = "*"
     source_port_range          = "*"
     destination_port_ranges    = [443, 80, 22]
-    source_address_prefix      = "66.194.102.38"
+    source_address_prefix      = "65.216.175.247"
     destination_address_prefix = "${cidrhost("${var.mgmt_subnet}", 4)}"
   }
 
@@ -65,7 +65,7 @@ resource "azurerm_network_security_group" "nsg_UNTRUST" {
     protocol                   = "*"
     source_port_range          = "*"
     destination_port_range     = "*"
-    source_address_prefix      = "66.194.102.38"
+    source_address_prefix      = "65.216.175.247"
     destination_address_prefix = "*"
   }
 
@@ -155,7 +155,7 @@ resource "azurerm_network_security_group" "nsg_TRUST" {
     protocol                   = "*"
     source_port_range          = "*"
     destination_port_range     = "*"
-    source_address_prefix      = "66.194.102.38"
+    source_address_prefix      = "65.216.175.247"
     destination_address_prefix = "*"
   }
 
