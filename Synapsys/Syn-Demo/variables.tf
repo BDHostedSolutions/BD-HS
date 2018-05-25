@@ -1,3 +1,4 @@
+#----root/variables.tf
 
 variable "subscription_id" {}
 

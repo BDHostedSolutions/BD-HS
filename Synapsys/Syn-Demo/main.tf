@@ -1,3 +1,5 @@
+#----root/main.tf
+
 provider "azurerm" {
   version         = "~> 1.6"
   subscription_id = "${var.subscription_id}"
