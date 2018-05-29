@@ -1,5 +1,8 @@
 #----root/variables.tf
 
+variable "env" {
+    description = "Location of Demo Environment. US, EU, CA, AP"
+}
 variable "subscription_id" {}
 
 variable "client_id" {}
@@ -8,19 +11,29 @@ variable "client_secret" {}
 
 variable "tenant_id" {}
 
-variable "resource_group_name" {}
+variable "resource_group_name" {
+    type = "map"
+}
 
-variable "location" {}
+variable "location" {
+    type = "map"
+}
 
 variable "demovm_size" {}
 
 variable "vm_username" {}
 variable "vm_password" {}
-variable "demovm_name" {}
-variable "storage_acct_name" {}
+variable "demovm_name" {
+    type = "map"
+}
+variable "storage_acct_name" {
+    type = "map"
+}
 variable "demo_subnet" {}
 
-variable "vnet_name" {}
+variable "vnet_name" {
+    type = "map"
+}
 
 variable "address_space" {}
 
