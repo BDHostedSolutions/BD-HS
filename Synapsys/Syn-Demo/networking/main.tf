@@ -45,4 +45,17 @@ resource "azurerm_network_security_group" "nsg_demo" {
     source_address_prefix      = "INTERNET"
     destination_address_prefix = "*"
   }
+
+  security_rule {
+    name                       = "Allow-RDP"
+    description                = "Allow 3389"
+    priority                   = 300
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3389"
+    source_address_prefix      = "INTERNET"
+    destination_address_prefix = "*"
+  }
 }

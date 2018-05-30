@@ -26,15 +26,11 @@ variable "vm_password" {}
 variable "demovm_name" {
     type = "map"
 }
-variable "storage_acct_name" {
-    type = "map"
-}
 variable "demo_subnet" {}
 
 variable "vnet_name" {
     type = "map"
 }
-
 variable "address_space" {}
 
 variable "demo_nsg_name" {}

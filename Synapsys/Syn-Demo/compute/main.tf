@@ -43,11 +43,6 @@ resource "azurerm_virtual_machine" "demovm" {
   os_profile_windows_config {
     provision_vm_agent = true
   }
-
-  boot_diagnostics {
-    enabled     = true
-    storage_uri = "${var.boot_diag}"
-  }
 }
 
 resource "azurerm_virtual_machine_extension" "demovm_iaasantimalware" {
