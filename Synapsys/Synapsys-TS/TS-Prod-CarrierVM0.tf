@@ -40,7 +40,7 @@ resource "azurerm_virtual_machine" "carriervm0" {
   }
 
   os_profile {
-    computer_name  = "${var.resource_name_prefix}-${var.carriervm0_name}"
+    computer_name  = "${var.resource_name_prefix}-Carrier"
     admin_username = "${var.vm_username}"
     admin_password = "${var.vm_password}"
   }

@@ -40,7 +40,7 @@ resource "azurerm_virtual_machine" "sapdsvm0" {
   }
 
   os_profile {
-    computer_name  = "${var.resource_name_prefix}-${var.sapdsvm0_name}"
+    computer_name  = "${var.resource_name_prefix}-SAPDS"
     admin_username = "${var.vm_username}"
     admin_password = "${var.vm_password}"
   }
