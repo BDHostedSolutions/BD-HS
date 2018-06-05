@@ -24,6 +24,7 @@ resource "azurerm_virtual_machine" "ssisvm0" {
   network_interface_ids = ["${azurerm_network_interface.ssisvm0-nic.id}"]
   availability_set_id   = "${azurerm_availability_set.ssis-avs.id}"
   vm_size               = "${var.ssis_vm_size}"
+  license_type          = "Windows_Server" # Hybrid Benefit
 
   storage_image_reference {
     publisher = "MicrosoftWindowsServer"

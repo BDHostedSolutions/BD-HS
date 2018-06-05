@@ -24,6 +24,7 @@ resource "azurerm_virtual_machine" "sapdsvm0" {
   network_interface_ids = ["${azurerm_network_interface.sapdsvm0-nic.id}"]
   availability_set_id   = "${azurerm_availability_set.sapds-avs.id}"
   vm_size               = "${var.sap_vm_size}"
+  license_type          = "Windows_Server" # Hybrid Benefit
 
   storage_image_reference {
     publisher = "MicrosoftWindowsServer"

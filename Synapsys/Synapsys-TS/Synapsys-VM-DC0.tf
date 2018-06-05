@@ -17,7 +17,7 @@ resource "azurerm_virtual_machine" "dcvm0" {
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   network_interface_ids = ["${azurerm_network_interface.dcvm0-nic.id}"]
   vm_size               = "${var.dc_vm_size}"
-  license_type          = "Windows_Server"
+  license_type          = "Windows_Server" # Hybrid Benefit
 
   storage_image_reference {
     publisher = "MicrosoftWindowsServer"

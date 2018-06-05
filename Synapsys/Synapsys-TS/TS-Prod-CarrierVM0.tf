@@ -24,6 +24,7 @@ resource "azurerm_virtual_machine" "carriervm0" {
   network_interface_ids = ["${azurerm_network_interface.carriervm0-nic.id}"]
   availability_set_id   = "${azurerm_availability_set.carrier-avs.id}"
   vm_size               = "${var.carrier_vm_size}"
+  license_type          = "Windows_Server" # Hybrid Benefit
 
   storage_image_reference {
     publisher = "MicrosoftWindowsServer"

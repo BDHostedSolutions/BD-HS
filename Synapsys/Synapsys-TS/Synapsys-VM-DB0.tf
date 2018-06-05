@@ -24,7 +24,7 @@ resource "azurerm_virtual_machine" "db-vm" {
   network_interface_ids = ["${azurerm_network_interface.db-vm-nic.id}"]
   availability_set_id   = "${azurerm_availability_set.db-server-avs.id}"
   vm_size               = "${var.sql_vm_size}"
-  license_type          = "Windows_Server"
+  license_type          = "Windows_Server" # Hybrid Benefit
 
   storage_image_reference {
     publisher = "MicrosoftWindowsServer"
