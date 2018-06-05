@@ -91,7 +91,7 @@ resource "azurerm_virtual_machine" "FW" {
   }
 
   storage_os_disk {
-    name              = "${var.resource_name_prefix}-${var.firewall_name}_OS"
+    name              = "${var.resource_name_prefix}-${var.firewall_name}_OS_d8bc67a390c8418d8b567b337ad91bb1"
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"

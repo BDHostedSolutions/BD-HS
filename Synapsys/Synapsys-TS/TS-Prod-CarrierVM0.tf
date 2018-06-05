@@ -56,20 +56,6 @@ resource "azurerm_virtual_machine" "carriervm0" {
   }
 }
 
-resource "azurerm_virtual_machine_extension" "carriervm0_enablevmaccess" {
-  name                       = "${var.resource_name_prefix}-${var.carriervm0_name}-EnableVMAccess"
-  location                   = "${var.location}"
-  resource_group_name        = "${azurerm_resource_group.rg.name}"
-  virtual_machine_name       = "${azurerm_virtual_machine.carriervm0.name}"
-  publisher                  = "Microsoft.Compute"
-  type                       = "VMAccessAgent"
-  type_handler_version       = "2.0"
-  auto_upgrade_minor_version = true
-  settings                   = ""
-
-  depends_on = ["azurerm_virtual_machine.carriervm0"]
-}
-
 resource "azurerm_virtual_machine_extension" "carriervm0_iaasantimalware" {
   name                       = "${var.resource_name_prefix}-${var.carriervm0_name}-IaaSAntimalware"
   location                   = "${var.location}"
