@@ -70,3 +70,16 @@ resource "azurerm_route_table" "ts_dmz_route_table" {
     next_hop_in_ip_address = "${cidrhost("${var.trust_subnet}", 4)}"
   }
 }
+
+resource "azurerm_route_table" "hosted_route_table" {
+  name                = "hosted_route_table"
+  location            = "${azurerm_resource_group.rg.location}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
+
+  route {
+    name                   = "default-route"
+    address_prefix         = "0.0.0.0/0"
+    next_hop_type          = "VirtualAppliance"
+    next_hop_in_ip_address = "${cidrhost("${var.trust_subnet}", 4)}"
+  }
+}

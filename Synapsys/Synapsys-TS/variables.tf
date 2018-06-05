@@ -69,6 +69,8 @@ variable "untrust_subnet" {}
 
 variable "trust_subnet" {}
 
+variable "hosted_subnet" {}
+
 variable "syn_dmz_subnet" {}
 
 variable "syn_data_subnet" {}
@@ -135,16 +137,6 @@ variable "lb_name" {}
 
 variable "appgw_name" {}
 
-variable "rdp_nsg_name" {}
-
-variable "app1_nsg_name" {}
-
-variable "app2_nsg_name" {}
-
-variable "db1_nsg_name" {}
-
-variable "db2_nsg_name" {}
-
 variable "servicebus_name" {}
 
 variable "cis_sql_server_name" {}
@@ -160,12 +152,6 @@ variable "db_rson" {}
 variable "db_collation" {}
 
 variable "db_edition" {}
-
-variable "ssl_data" {}
-
-variable "ssl_password" {}
-
-variable "auth_cert_data" {}
 
 variable "join_domain_user" {
   description = "Enter HS domain user to join VMs to domain. Do not include HS prefix"

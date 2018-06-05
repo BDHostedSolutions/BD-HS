@@ -14,12 +14,10 @@ resource "azurerm_network_interface" "RDS-NIC" {
 
   ip_configuration {
     name                          = "RDS"
-    subnet_id                     = "${azurerm_subnet.trust_subnet.id}"
+    subnet_id                     = "${azurerm_subnet.hosted_subnet.id}"
     private_ip_address_allocation = "static"
-    private_ip_address            = "${cidrhost("${var.trust_subnet}", 20)}"
+    private_ip_address            = "${cidrhost("${var.hosted_subnet}", 20)}"
   }
-
-  depends_on = ["azurerm_network_interface.TRUST"]
 }
 
 resource "azurerm_virtual_machine" "rdsvm" {

@@ -94,18 +94,6 @@ resource "azurerm_network_security_group" "nsg_UNTRUST" {
   }
 
   security_rule {
-    name                       = "Inbound-TS-Prod"
-    priority                   = 1300
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "172.16.0.0/19"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
     name                       = "Outbound-LAS-VPN-Tunnel"
     priority                   = 1000
     direction                  = "Outbound"
@@ -115,18 +103,6 @@ resource "azurerm_network_security_group" "nsg_UNTRUST" {
     destination_port_range     = "*"
     source_address_prefix      = "*"
     destination_address_prefix = "216.115.73.53"
-  }
-
-  security_rule {
-    name                       = "Outbound-TS-Prod"
-    priority                   = 1100
-    direction                  = "Outbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "172.16.0.0/19"
   }
 }
 
@@ -160,14 +136,56 @@ resource "azurerm_network_security_group" "nsg_TRUST" {
   }
 
   security_rule {
-    name                       = "Inbound-TS-Prod"
+    name                       = "Outbound-LAS-VPN-Tunnel"
+    priority                   = 1000
+    direction                  = "Outbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "216.115.73.53"
+  }
+}
+
+resource "azurerm_network_security_group" "nsg_HOSTED" {
+  name                = "HOSTED-NSG"
+  location            = "${azurerm_resource_group.rg.location}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
+
+  security_rule {
+    name                       = "Inbound-BHM-Site"
+    priority                   = 1000
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "65.216.175.247"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Inbound-LAS-VPN-Tunnel"
+    priority                   = 1100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "216.115.73.53"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Inbound-ATL-VPN-Tunnel"
     priority                   = 1200
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "*"
     source_port_range          = "*"
     destination_port_range     = "*"
-    source_address_prefix      = "172.16.0.0/19"
+    source_address_prefix      = "12.129.108.27"
     destination_address_prefix = "*"
   }
 
@@ -182,20 +200,7 @@ resource "azurerm_network_security_group" "nsg_TRUST" {
     source_address_prefix      = "*"
     destination_address_prefix = "216.115.73.53"
   }
-
-  security_rule {
-    name                       = "Outbound-TS-Prod"
-    priority                   = 1100
-    direction                  = "Outbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "172.16.0.0/19"
-  }
 }
-
 resource "azurerm_network_security_group" "nsg_syn_dmz" {
   name                = "SYN-DMZ-NSG"
   location            = "${azurerm_resource_group.rg.location}"
@@ -211,30 +216,6 @@ resource "azurerm_network_security_group" "nsg_syn_dmz" {
     destination_port_range     = 3389
     source_address_prefix      = "*"
     destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = "Inbound-TS-Prod"
-    priority                   = 1100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "172.16.0.0/19"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = "Outbound-TS-Prod"
-    priority                   = 1000
-    direction                  = "Outbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "172.16.0.0/19"
   }
 }
 
@@ -254,30 +235,6 @@ resource "azurerm_network_security_group" "nsg_syn_data" {
     source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
-
-  security_rule {
-    name                       = "Inbound-TS-Prod"
-    priority                   = 1100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "172.16.0.0/19"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = "Outbound-TS-Prod"
-    priority                   = 1000
-    direction                  = "Outbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "172.16.0.0/19"
-  }
 }
 
 resource "azurerm_network_security_group" "nsg_ts_dmz" {
@@ -285,9 +242,113 @@ resource "azurerm_network_security_group" "nsg_ts_dmz" {
   location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
+security_rule {
+    name                       = "Allow-BDNet1"
+    description                = "Allow RDP"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3389"
+    source_address_prefix      = "${var.bdips}"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow-BDNet2"
+    description                = "Allow RDP"
+    priority                   = 101
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3389"
+    source_address_prefix      = "${var.bdips1}"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow-BDNet3"
+    description                = "Allow RDP"
+    priority                   = 102
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3389"
+    source_address_prefix      = "${var.bdips2}"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow-BDNet4"
+    description                = "Allow RDP"
+    priority                   = 103
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3389"
+    source_address_prefix      = "${var.bdips3}"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow-BDNet1-WD"
+    description                = "Allow WD"
+    priority                   = 200
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "8172"
+    source_address_prefix      = "${var.bdips}"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow-BDNet2-WD"
+    description                = "Allow WD"
+    priority                   = 201
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "8172"
+    source_address_prefix      = "${var.bdips1}"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow-BDNet3-WD"
+    description                = "Allow WD"
+    priority                   = 202
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "8172"
+    source_address_prefix      = "${var.bdips2}"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow-BDNet4-WD"
+    description                = "Allow WD"
+    priority                   = 203
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "8172"
+    source_address_prefix      = "${var.bdips3}"
+    destination_address_prefix = "*"
+  }
+
   security_rule {
     name                       = "AllowRDPInBound"
-    priority                   = 1000
+    priority                   = 300
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "Tcp"
@@ -297,27 +358,29 @@ resource "azurerm_network_security_group" "nsg_ts_dmz" {
     destination_address_prefix = "*"
   }
 
-  security_rule {
-    name                       = "Inbound-TS-Prod"
-    priority                   = 1100
+    security_rule {
+    name                       = "Allow-Port-80"
+    description                = "Allow 80"
+    priority                   = 400
     direction                  = "Inbound"
     access                     = "Allow"
-    protocol                   = "*"
+    protocol                   = "Tcp"
     source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "172.16.0.0/19"
+    destination_port_range     = "80"
+    source_address_prefix      = "INTERNET"
     destination_address_prefix = "*"
   }
 
   security_rule {
-    name                       = "Outbound-TS-Prod"
-    priority                   = 1000
-    direction                  = "Outbound"
+    name                       = "Allow-Port-443"
+    description                = "Allow 443"
+    priority                   = 401
+    direction                  = "Inbound"
     access                     = "Allow"
-    protocol                   = "*"
+    protocol                   = "Tcp"
     source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
-    destination_address_prefix = "172.16.0.0/19"
+    destination_port_range     = "443"
+    source_address_prefix      = "INTERNET"
+    destination_address_prefix = "*"
   }
 }

@@ -5,12 +5,10 @@ resource "azurerm_network_interface" "dcvm0-nic" {
 
   ip_configuration {
     name                          = "ipconfig1"
-    subnet_id                     = "${azurerm_subnet.trust_subnet.id}"
+    subnet_id                     = "${azurerm_subnet.hosted_subnet.id}"
     private_ip_address_allocation = "static"
-    private_ip_address            = "${cidrhost("${var.trust_subnet}", 11)}"
+    private_ip_address            = "${cidrhost("${var.hosted_subnet}", 11)}"
   }
-
-  depends_on = ["azurerm_network_interface.TRUST"]
 }
 
 resource "azurerm_virtual_machine" "dcvm0" {

@@ -22,7 +22,7 @@ resource "azurerm_public_ip" "FW_untrust_pip" {
 }
 
 resource "azurerm_network_interface" "MGMT" {
-  name                = "${var.resource_name_prefix}-${var.firewall_name}-nic0"
+  name                = "${var.resource_name_prefix}-${var.firewall_name}-eth0"
   location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
@@ -36,7 +36,7 @@ resource "azurerm_network_interface" "MGMT" {
 }
 
 resource "azurerm_network_interface" "UNTRUST" {
-  name                 = "${var.resource_name_prefix}-${var.firewall_name}-nic1"
+  name                 = "${var.resource_name_prefix}-${var.firewall_name}-eth1"
   location             = "${azurerm_resource_group.rg.location}"
   resource_group_name  = "${azurerm_resource_group.rg.name}"
   enable_ip_forwarding = true
@@ -51,7 +51,7 @@ resource "azurerm_network_interface" "UNTRUST" {
 }
 
 resource "azurerm_network_interface" "TRUST" {
-  name                 = "${var.resource_name_prefix}-${var.firewall_name}-nic2"
+  name                 = "${var.resource_name_prefix}-${var.firewall_name}-eth2"
   location             = "${azurerm_resource_group.rg.location}"
   resource_group_name  = "${azurerm_resource_group.rg.name}"
   enable_ip_forwarding = true

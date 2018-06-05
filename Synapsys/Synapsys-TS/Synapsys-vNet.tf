@@ -67,6 +67,15 @@ resource "azurerm_subnet" "ts_dmz_subnet" {
   route_table_id            = "${azurerm_route_table.ts_dmz_route_table.id}"
 }
 
+resource "azurerm_subnet" "hosted_subnet" {
+  name                      = "sn-hosted"
+  virtual_network_name      = "${azurerm_virtual_network.vnet.name}"
+  resource_group_name       = "${azurerm_resource_group.rg.name}"
+  address_prefix            = "${var.hosted_subnet}"
+  network_security_group_id = "${azurerm_network_security_group.nsg_HOSTED.id}"
+  route_table_id            = "${azurerm_route_table.hosted_route_table.id}"
+}
+
 resource "azurerm_subnet" "appgw_subnet" {
   name                 = "sn-appgw"
   virtual_network_name = "${azurerm_virtual_network.vnet.name}"
