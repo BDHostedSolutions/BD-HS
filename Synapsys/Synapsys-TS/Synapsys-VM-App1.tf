@@ -33,6 +33,7 @@ resource "azurerm_virtual_machine" "app-vm1" {
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
+    disk_size_gb      = "128"
   }
 
   os_profile {
