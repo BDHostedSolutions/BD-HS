@@ -16,6 +16,18 @@ resource "azurerm_network_security_group" "nsg_MGMT" {
   }
 
   security_rule {
+    name                       = "Allow-BHM-FW-Mgmt-2"
+    priority                   = 1001
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_ranges    = [443, 80, 22]
+    source_address_prefix      = "66.194.102.38"
+    destination_address_prefix = "${cidrhost("${var.mgmt_subnet}", 4)}"
+  }
+
+  security_rule {
     name                       = "Allow-LAS-FW-Mgmt"
     priority                   = 1100
     direction                  = "Inbound"
@@ -24,18 +36,6 @@ resource "azurerm_network_security_group" "nsg_MGMT" {
     source_port_range          = "*"
     destination_port_ranges    = [443, 80, 22]
     source_address_prefix      = "216.115.73.53"
-    destination_address_prefix = "${cidrhost("${var.mgmt_subnet}", 4)}"
-  }
-
-  security_rule {
-    name                       = "Allow-ATL-FW-Mgmt"
-    priority                   = 1200
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_ranges    = [443, 80, 22]
-    source_address_prefix      = "12.129.108.27"
     destination_address_prefix = "${cidrhost("${var.mgmt_subnet}", 4)}"
   }
 
@@ -78,18 +78,6 @@ resource "azurerm_network_security_group" "nsg_UNTRUST" {
     source_port_range          = "*"
     destination_port_range     = "*"
     source_address_prefix      = "216.115.73.53"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = "Inbound-ATL-VPN-Tunnel"
-    priority                   = 1200
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "12.129.108.27"
     destination_address_prefix = "*"
   }
 
@@ -174,18 +162,6 @@ resource "azurerm_network_security_group" "nsg_HOSTED" {
     source_port_range          = "*"
     destination_port_range     = "*"
     source_address_prefix      = "216.115.73.53"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = "Inbound-ATL-VPN-Tunnel"
-    priority                   = 1200
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "12.129.108.27"
     destination_address_prefix = "*"
   }
 
