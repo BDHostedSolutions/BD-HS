@@ -29,6 +29,7 @@ resource "azurerm_subnet" "untrust_subnet" {
   resource_group_name       = "${azurerm_resource_group.rg.name}"
   address_prefix            = "${var.untrust_subnet}"
   network_security_group_id = "${azurerm_network_security_group.nsg_UNTRUST.id}"
+  route_table_id            = "${azurerm_route_table.untrust_route_table.id}"
 }
 
 resource "azurerm_subnet" "trust_subnet" {

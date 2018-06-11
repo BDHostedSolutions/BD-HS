@@ -11,7 +11,7 @@ resource "azurerm_network_security_group" "nsg_MGMT" {
     protocol                   = "*"
     source_port_range          = "*"
     destination_port_ranges    = [443, 80, 22]
-    source_address_prefix      = "65.216.175.247"
+    source_address_prefix      = "204.193.35.250"
     destination_address_prefix = "${cidrhost("${var.mgmt_subnet}", 4)}"
   }
 
@@ -112,18 +112,6 @@ resource "azurerm_network_security_group" "nsg_TRUST" {
   }
 
   security_rule {
-    name                       = "Inbound-BHM-Site"
-    priority                   = 1100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "65.216.175.247"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
     name                       = "Outbound-LAS-VPN-Tunnel"
     priority                   = 1000
     direction                  = "Outbound"
@@ -140,18 +128,6 @@ resource "azurerm_network_security_group" "nsg_HOSTED" {
   name                = "HOSTED-NSG"
   location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
-
-  security_rule {
-    name                       = "Inbound-BHM-Site"
-    priority                   = 1000
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "65.216.175.247"
-    destination_address_prefix = "*"
-  }
 
   security_rule {
     name                       = "Inbound-LAS-VPN-Tunnel"
@@ -201,15 +177,99 @@ resource "azurerm_network_security_group" "nsg_syn_data" {
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   security_rule {
-    name                       = "AllowRDPInBound"
-    priority                   = 1000
+    name                       = "Allow-SYN-DMZ"
+    priority                   = 100
     direction                  = "Inbound"
     access                     = "Allow"
-    protocol                   = "Tcp"
+    protocol                   = "*"
     source_port_range          = "*"
-    destination_port_range     = 3389
-    source_address_prefix      = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "172.16.131.0/24"
     destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow-SYNRDS01"
+    priority                   = 110
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "3389"
+    source_address_prefix      = "172.16.130.20"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow-SYNDC01"
+    priority                   = 120
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "172.16.130.11"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "DenyVnetInBound"
+    priority                   = 130
+    direction                  = "Inbound"
+    access                     = "Deny"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "VirtualNetwork"
+    destination_address_prefix = "VirtualNetwork"
+  }
+
+  security_rule {
+    name                       = "Allow-To-SYN-DMZ"
+    priority                   = 100
+    direction                  = "Outbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "172.16.131.0/24"
+  }
+
+  security_rule {
+    name                       = "Allow-To-SYNRDS01"
+    priority                   = 110
+    direction                  = "Outbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "3389"
+    source_address_prefix      = "*"
+    destination_address_prefix = "172.16.130.20"
+  }
+
+  security_rule {
+    name                       = "Allow-To-SYNDC01"
+    priority                   = 120
+    direction                  = "Outbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "172.16.130.11"
+  }
+
+  security_rule {
+    name                       = "DenyVnetOutBound"
+    priority                   = 130
+    direction                  = "Outbound"
+    access                     = "Deny"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "VirtualNetwork"
+    destination_address_prefix = "VirtualNetwork"
   }
 }
 
@@ -319,18 +379,6 @@ security_rule {
     source_port_range          = "*"
     destination_port_range     = "8172"
     source_address_prefix      = "${var.bdips3}"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = "AllowRDPInBound"
-    priority                   = 300
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = 3389
-    source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
 
