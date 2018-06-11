@@ -1,5 +1,5 @@
 resource "azurerm_lb" "ts_prod_ilb" {
-  name                = "${var.ts_prod_ilb_name}"
+  name                = "${var.resource_name_prefix}-${var.ts_prod_ilb_name}"
   location            = "${var.location}"
   sku                 = "Basic"
   resource_group_name = "${azurerm_resource_group.rg.name}"

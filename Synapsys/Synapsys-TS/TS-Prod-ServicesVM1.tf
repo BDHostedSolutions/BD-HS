@@ -8,6 +8,7 @@ resource "azurerm_network_interface" "ts-servicesvm1-nic" {
     name                          = "ipconfig1"
     subnet_id                     = "${azurerm_subnet.ts_dmz_subnet.id}"
     private_ip_address_allocation = "dynamic"
+    load_balancer_backend_address_pools_ids = ["${azurerm_lb_backend_address_pool.ts_prod_ilb_pool.id}"]
   }
 }
 
