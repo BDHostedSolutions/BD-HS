@@ -58,26 +58,26 @@ resource "azurerm_network_security_group" "nsg_UNTRUST" {
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   security_rule {
-    name                       = "Inbound-BHM-Site"
+    name                       = "Inbound-LAS-VPN-Tunnel"
     priority                   = 1000
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "*"
     source_port_range          = "*"
     destination_port_range     = "*"
-    source_address_prefix      = "65.216.175.247"
+    source_address_prefix      = "216.115.73.53"
     destination_address_prefix = "*"
   }
 
   security_rule {
-    name                       = "Inbound-LAS-VPN-Tunnel"
+    name                       = "Allow-Shavlik"
     priority                   = 1100
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "*"
     source_port_range          = "*"
     destination_port_range     = "*"
-    source_address_prefix      = "216.115.73.53"
+    source_address_prefix      = "104.209.141.43"
     destination_address_prefix = "*"
   }
 
@@ -108,6 +108,18 @@ resource "azurerm_network_security_group" "nsg_TRUST" {
     source_port_range          = "*"
     destination_port_range     = "*"
     source_address_prefix      = "216.115.73.53"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow-Shavlik"
+    priority                   = 1100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "104.209.141.43"
     destination_address_prefix = "*"
   }
 
@@ -379,6 +391,18 @@ security_rule {
     source_port_range          = "*"
     destination_port_range     = "8172"
     source_address_prefix      = "${var.bdips3}"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow-Shavlik"
+    priority                   = 300
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "104.209.141.43"
     destination_address_prefix = "*"
   }
 

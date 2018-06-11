@@ -223,15 +223,21 @@ resource "azurerm_route_table" "hosted_route_table" {
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   route {
-    name                   = "internet-route"
-    address_prefix         = "0.0.0.0/0"
+    name                   = "appgw-route"
+    address_prefix         = "172.16.135.0/24"
     next_hop_type          = "VirtualAppliance"
     next_hop_in_ip_address = "${cidrhost("${var.trust_subnet}", 4)}"
   }
 
   route {
-    name                   = "syn-dmz-route"
-    address_prefix         = "172.16.131.0/24"
+    name                   = "block-mgmt"
+    address_prefix         = "172.16.128.0/24"
+    next_hop_type          = "None"
+  }
+
+  route {
+    name                   = "internet-route"
+    address_prefix         = "0.0.0.0/0"
     next_hop_type          = "VirtualAppliance"
     next_hop_in_ip_address = "${cidrhost("${var.trust_subnet}", 4)}"
   }
@@ -244,14 +250,15 @@ resource "azurerm_route_table" "hosted_route_table" {
   }
 
   route {
-    name                   = "ts-dmz-route"
-    address_prefix         = "172.16.133.0/24"
+    name                   = "syn-dmz-route"
+    address_prefix         = "172.16.131.0/24"
     next_hop_type          = "VirtualAppliance"
     next_hop_in_ip_address = "${cidrhost("${var.trust_subnet}", 4)}"
   }
+
   route {
-    name                   = "appgw-route"
-    address_prefix         = "172.16.135.0/24"
+    name                   = "ts-dmz-route"
+    address_prefix         = "172.16.133.0/24"
     next_hop_type          = "VirtualAppliance"
     next_hop_in_ip_address = "${cidrhost("${var.trust_subnet}", 4)}"
   }
@@ -261,12 +268,6 @@ resource "azurerm_route_table" "hosted_route_table" {
     address_prefix         = "172.16.129.0/24"
     next_hop_type          = "VirtualAppliance"
     next_hop_in_ip_address = "${cidrhost("${var.trust_subnet}", 4)}"
-  }
-
-  route {
-    name                   = "block-mgmt"
-    address_prefix         = "172.16.128.0/24"
-    next_hop_type          = "None"
   }
 }
 

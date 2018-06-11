@@ -1,12 +1,6 @@
-resource "azurerm_availability_set" "carrier-avs" {
-  name                = "${var.resource_name_prefix}-${var.carrier_avs_name}"
-  location            = "${var.location}"
-  resource_group_name = "${azurerm_resource_group.rg.name}"
-  managed             = true
-}
 
-resource "azurerm_network_interface" "carriervm0-nic" {
-  name                = "${var.resource_name_prefix}-${var.carriervm0_name}-eth0"
+resource "azurerm_network_interface" "ts-servicesvm1-nic" {
+  name                = "${var.resource_name_prefix}-${var.ts-servicesvm1_name}-eth0"
   location            = "${var.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
@@ -17,13 +11,13 @@ resource "azurerm_network_interface" "carriervm0-nic" {
   }
 }
 
-resource "azurerm_virtual_machine" "carriervm0" {
-  name                  = "${var.resource_name_prefix}-${var.carriervm0_name}"
+resource "azurerm_virtual_machine" "ts-servicesvm1" {
+  name                  = "${var.resource_name_prefix}-${var.ts-servicesvm1_name}"
   location              = "${var.location}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
-  network_interface_ids = ["${azurerm_network_interface.carriervm0-nic.id}"]
-  availability_set_id   = "${azurerm_availability_set.carrier-avs.id}"
-  vm_size               = "${var.carrier_vm_size}"
+  network_interface_ids = ["${azurerm_network_interface.ts-servicesvm1-nic.id}"]
+  availability_set_id   = "${azurerm_availability_set.ts-services-avs.id}"
+  vm_size               = "${var.ts-services_vm_size}"
   license_type          = "Windows_Server" # Hybrid Benefit
 
   storage_image_reference {
@@ -34,7 +28,7 @@ resource "azurerm_virtual_machine" "carriervm0" {
   }
 
   storage_os_disk {
-    name              = "${var.resource_name_prefix}-${var.carriervm0_name}_OS"
+    name              = "${var.resource_name_prefix}-${var.ts-servicesvm1_name}_OS"
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
@@ -42,7 +36,7 @@ resource "azurerm_virtual_machine" "carriervm0" {
   }
 
   os_profile {
-    computer_name  = "${var.resource_name_prefix}-Carrier"
+    computer_name  = "${var.resource_name_prefix}-${var.ts-servicesvm1_name}"
     admin_username = "${var.vm_username}"
     admin_password = "${var.vm_password}"
   }
@@ -58,11 +52,11 @@ resource "azurerm_virtual_machine" "carriervm0" {
   }
 }
 
-resource "azurerm_virtual_machine_extension" "carriervm0_iaasantimalware" {
-  name                       = "${var.resource_name_prefix}-${var.carriervm0_name}-IaaSAntimalware"
+resource "azurerm_virtual_machine_extension" "ts-servicesvm1_iaasantimalware" {
+  name                       = "${var.resource_name_prefix}-${var.ts-servicesvm1_name}-IaaSAntimalware"
   location                   = "${var.location}"
   resource_group_name        = "${azurerm_resource_group.rg.name}"
-  virtual_machine_name       = "${azurerm_virtual_machine.carriervm0.name}"
+  virtual_machine_name       = "${azurerm_virtual_machine.ts-servicesvm1.name}"
   publisher                  = "Microsoft.Azure.Security"
   type                       = "IaaSAntimalware"
   type_handler_version       = "1.3"
@@ -86,5 +80,5 @@ resource "azurerm_virtual_machine_extension" "carriervm0_iaasantimalware" {
     }
   SETTINGS
 
-  depends_on = ["azurerm_virtual_machine.carriervm0"]
+  depends_on = ["azurerm_virtual_machine.ts-servicesvm1"]
 }

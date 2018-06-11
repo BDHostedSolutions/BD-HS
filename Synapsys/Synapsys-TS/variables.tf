@@ -115,25 +115,17 @@ variable "dcvm0_name" {}
 
 variable "dc_vm_size" {}
 
-variable "carrier_avs_name" {}
+variable "ts-services_avs_name" {}
 
-variable "carriervm0_name" {}
+variable "ts-servicesvm0_name" {}
 
-variable "carrier_vm_size" {}
+variable "ts-services_vm_size" {}
 
-variable "ssis_avs_name" {}
-
-variable "ssisvm0_name" {}
-
-variable "ssis_vm_size" {}
-
-variable "sapds_avs_name" {}
-
-variable "sapdsvm0_name" {}
-
-variable "sap_vm_size" {}
+variable "ts-servicesvm1_name" {}
 
 variable "lb_name" {}
+
+variable "ts_prod_ilb_name" {}
 
 variable "appgw_name" {}
 
