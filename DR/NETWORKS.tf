@@ -1,9 +1,9 @@
 data "azurerm_resource_group" "DR" {
-  name = "HS-DR-WestUS2-RG-01"
+  name = "HS-DR-WestUS-RG-01"
 }
 
 resource "azurerm_virtual_network" "vnet" {
-  name                = "HS-DR-WestUS2-vnet"
+  name                = "HS-DR-WestUS-vnet"
   location            = "${data.azurerm_resource_group.DR.location}"
   address_space       = ["${var.address_space}"]
   resource_group_name = "${data.azurerm_resource_group.DR.name}"

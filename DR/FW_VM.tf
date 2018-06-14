@@ -1,25 +1,9 @@
-resource "azurerm_storage_account" "fw-sa" {
-  name                     = "${var.storage_acct_name}"
-  resource_group_name      = "${data.azurerm_resource_group.DR.name}"
-  location                 = "${data.azurerm_resource_group.DR.location}"
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
-}
-
-resource "azurerm_storage_container" "vhds" {
-  name                  = "vhds"
-  resource_group_name   = "${data.azurerm_resource_group.DR.name}"
-  storage_account_name  = "${var.storage_acct_name}"
-  container_access_type = "private"
-
-  depends_on = ["azurerm_storage_account.fw-sa"]
-}
 
 resource "azurerm_availability_set" "FWAVS" {
   name                         = "avs-hs-fw"
   location                     = "${data.azurerm_resource_group.DR.location}"
   resource_group_name          = "${data.azurerm_resource_group.DR.name}"
-  managed                      = false
+  managed                      = true
   platform_update_domain_count = "5"
   platform_fault_domain_count  = "2"
 }
@@ -48,9 +32,9 @@ resource "azurerm_virtual_machine" "FW" {
 
   storage_os_disk {
     name          = "${var.firewall_name}_OS"
-    vhd_uri       = "${azurerm_storage_account.fw-sa.primary_blob_endpoint}${azurerm_storage_container.vhds.name}/${var.firewall_name}_OS.vhd"
-    caching       = "ReadWrite"
-    create_option = "FromImage"
+    caching           = "ReadWrite"
+    create_option     = "FromImage"
+    managed_disk_type = "Standard_LRS"
   }
 
   os_profile {

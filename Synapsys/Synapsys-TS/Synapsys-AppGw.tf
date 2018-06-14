@@ -35,7 +35,7 @@ resource "azurerm_application_gateway" "App_Gw" {
   }
   backend_address_pool {
     name            = "FW-Pool"
-    ip_address_list = ["${cidrhost("${var.untrust_subnet}", 4)}"]
+    #ip_address_list = ["${cidrhost("${var.untrust_subnet}", 4)}"]
   }
   backend_http_settings {
     name                  = "HTTP-Backend"
