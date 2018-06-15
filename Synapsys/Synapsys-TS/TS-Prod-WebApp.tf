@@ -17,6 +17,20 @@ resource "azurerm_app_service" "CarrierPurge" {
 
     site_config {
         dotnet_framework_version    = "v4.0"
+        php_version                 = "5.6"
+        use_32_bit_worker_process   = "True"
+        always_on                   = "True"
+        default_documents           = [
+            "Default.htm",
+            "Default.html",
+            "Default.asp",
+            "index.htm",
+            "index.html",
+            "iisstart.htm",
+            "default.aspx",
+            "index.php",
+            "hostingstart.html"
+        ]
     }
 
     app_settings {
