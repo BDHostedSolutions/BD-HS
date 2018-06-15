@@ -11,19 +11,7 @@ resource "azurerm_network_security_group" "nsg_MGMT" {
     protocol                   = "*"
     source_port_range          = "*"
     destination_port_ranges    = [443, 80, 22]
-    source_address_prefix      = "204.193.35.250"
-    destination_address_prefix = "${cidrhost("${var.mgmt_subnet}", 4)}"
-  }
-
-  security_rule {
-    name                       = "Allow-BHM-FW-Mgmt-2"
-    priority                   = 1001
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_ranges    = [443, 80, 22]
-    source_address_prefix      = "66.194.102.38"
+    source_address_prefixes    = ["204.193.35.248", "204.193.35.250", "66.194.102.38", "216.115.73.53"]
     destination_address_prefix = "${cidrhost("${var.mgmt_subnet}", 4)}"
   }
 
@@ -70,18 +58,6 @@ resource "azurerm_network_security_group" "nsg_UNTRUST" {
   }
 
   security_rule {
-    name                       = "Allow-Shavlik"
-    priority                   = 1100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "104.209.141.43"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
     name                       = "Outbound-LAS-VPN-Tunnel"
     priority                   = 1000
     direction                  = "Outbound"
@@ -108,18 +84,6 @@ resource "azurerm_network_security_group" "nsg_TRUST" {
     source_port_range          = "*"
     destination_port_range     = "*"
     source_address_prefix      = "216.115.73.53"
-    destination_address_prefix = "*"
-  }
-
-  security_rule {
-    name                       = "Allow-Shavlik"
-    priority                   = 1100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "104.209.141.43"
     destination_address_prefix = "*"
   }
 
@@ -395,18 +359,6 @@ security_rule {
   }
 
   security_rule {
-    name                       = "Allow-Shavlik"
-    priority                   = 300
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "104.209.141.43"
-    destination_address_prefix = "*"
-  }
-
-    security_rule {
     name                       = "Allow-Port-80"
     description                = "Allow 80"
     priority                   = 400
