@@ -107,6 +107,13 @@ resource "azurerm_route_table" "syn_dmz_route_table" {
     address_prefix         = "172.16.128.0/24"
     next_hop_type          = "None"
   }
+
+  route {
+    name                   = "shavlik-route"
+    address_prefix         = "172.16.0.9/32"
+    next_hop_type          = "VirtualAppliance"
+    next_hop_in_ip_address = "${cidrhost("${var.trust_subnet}", 4)}"
+  }
 }
 
 resource "azurerm_route_table" "syn_data_route_table" {
@@ -160,6 +167,13 @@ resource "azurerm_route_table" "syn_data_route_table" {
     name                   = "block-mgmt"
     address_prefix         = "172.16.128.0/24"
     next_hop_type          = "None"
+  }
+
+  route {
+    name                   = "shavlik-route"
+    address_prefix         = "172.16.0.9/32"
+    next_hop_type          = "VirtualAppliance"
+    next_hop_in_ip_address = "${cidrhost("${var.trust_subnet}", 4)}"
   }
 }
 
@@ -215,6 +229,13 @@ resource "azurerm_route_table" "ts_dmz_route_table" {
     address_prefix         = "172.16.128.0/24"
     next_hop_type          = "None"
   }
+
+  route {
+    name                   = "shavlik-route"
+    address_prefix         = "172.16.0.9/32"
+    next_hop_type          = "VirtualAppliance"
+    next_hop_in_ip_address = "${cidrhost("${var.trust_subnet}", 4)}"
+  }
 }
 
 resource "azurerm_route_table" "hosted_route_table" {
@@ -269,6 +290,13 @@ resource "azurerm_route_table" "hosted_route_table" {
     next_hop_type          = "VirtualAppliance"
     next_hop_in_ip_address = "${cidrhost("${var.trust_subnet}", 4)}"
   }
+
+  route {
+    name                   = "shavlik-route"
+    address_prefix         = "172.16.0.9/32"
+    next_hop_type          = "VirtualAppliance"
+    next_hop_in_ip_address = "${cidrhost("${var.trust_subnet}", 4)}"
+  }
 }
 
 resource "azurerm_route_table" "untrust_route_table" {
@@ -301,5 +329,26 @@ resource "azurerm_route_table" "untrust_route_table" {
     name                   = "block-mgmt"
     address_prefix         = "172.16.128.0/24"
     next_hop_type          = "None"
+  }
+
+  route {
+    name                   = "syn-dmz-route"
+    address_prefix         = "172.16.131.0/24"
+    next_hop_type          = "VirtualAppliance"
+    next_hop_in_ip_address = "${cidrhost("${var.untrust_subnet}", 4)}"
+  }
+
+  route {
+    name                   = "syn-data-route"
+    address_prefix         = "172.16.132.0/24"
+    next_hop_type          = "VirtualAppliance"
+    next_hop_in_ip_address = "${cidrhost("${var.untrust_subnet}", 4)}"
+  }
+  
+  route {
+    name                   = "ts-dmz-route"
+    address_prefix         = "172.16.133.0/24"
+    next_hop_type          = "VirtualAppliance"
+    next_hop_in_ip_address = "${cidrhost("${var.untrust_subnet}", 4)}"
   }
 }

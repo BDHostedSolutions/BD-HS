@@ -58,6 +58,18 @@ resource "azurerm_network_security_group" "nsg_UNTRUST" {
   }
 
   security_rule {
+    name                       = "Allow-Shavlik"
+    priority                   = 1100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "172.16.0.9"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
     name                       = "Outbound-LAS-VPN-Tunnel"
     priority                   = 1000
     direction                  = "Outbound"
@@ -134,17 +146,6 @@ resource "azurerm_network_security_group" "nsg_syn_dmz" {
   location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
-  security_rule {
-    name                       = "AllowRDPInBound"
-    priority                   = 1000
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = 3389
-    source_address_prefix      = "*"
-    destination_address_prefix = "*"
-  }
 }
 
 resource "azurerm_network_security_group" "nsg_syn_data" {
@@ -177,6 +178,18 @@ resource "azurerm_network_security_group" "nsg_syn_data" {
   }
 
   security_rule {
+    name                       = "Allow-Shavlik-Server"
+    priority                   = 115
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "172.16.0.9"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
     name                       = "Allow-SYNDC01"
     priority                   = 120
     direction                  = "Inbound"
@@ -185,6 +198,18 @@ resource "azurerm_network_security_group" "nsg_syn_data" {
     source_port_range          = "*"
     destination_port_range     = "*"
     source_address_prefix      = "172.16.130.11"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "AllowAzureLoadBalancer"
+    priority                   = 125
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "*"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "AzureLoadBalancer"
     destination_address_prefix = "*"
   }
 
@@ -234,18 +259,6 @@ resource "azurerm_network_security_group" "nsg_syn_data" {
     destination_port_range     = "*"
     source_address_prefix      = "*"
     destination_address_prefix = "172.16.130.11"
-  }
-
-  security_rule {
-    name                       = "DenyVnetOutBound"
-    priority                   = 130
-    direction                  = "Outbound"
-    access                     = "Deny"
-    protocol                   = "*"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "VirtualNetwork"
-    destination_address_prefix = "VirtualNetwork"
   }
 }
 
