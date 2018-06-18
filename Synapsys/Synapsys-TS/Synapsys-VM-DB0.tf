@@ -9,6 +9,7 @@ resource "azurerm_network_interface" "db-vm-nic" {
   name                = "${var.resource_name_prefix}-${var.dbvm_name}-nic0"
   location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
+  #enable_accelerated_networking = "True"
 
   ip_configuration {
     name                          = "ipconfig1"

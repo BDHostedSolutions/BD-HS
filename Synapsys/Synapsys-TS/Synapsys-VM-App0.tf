@@ -9,7 +9,7 @@ resource "azurerm_network_interface" "app-vm0-nic" {
   name                = "${var.resource_name_prefix}-${var.appvm0_name}-nic0"
   location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
-  enable_accelerated_networking = "True"
+  #enable_accelerated_networking = "True"
 
   ip_configuration {
     name                                    = "ipconfig1"

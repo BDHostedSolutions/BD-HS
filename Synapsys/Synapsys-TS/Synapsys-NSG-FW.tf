@@ -65,7 +65,7 @@ resource "azurerm_network_security_group" "nsg_UNTRUST" {
     protocol                   = "*"
     source_port_range          = "*"
     destination_port_range     = "*"
-    source_address_prefix      = "172.16.0.9"
+    source_address_prefixes      = ["172.16.0.9", "104.209.141.43"]
     destination_address_prefix = "*"
   }
 
@@ -118,8 +118,112 @@ resource "azurerm_network_security_group" "nsg_HOSTED" {
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   security_rule {
+    name                       = "Allow-BDNet1"
+    description                = "Allow RDP"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3389"
+    source_address_prefix      = "${var.bdips}"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow-BDNet2"
+    description                = "Allow RDP"
+    priority                   = 101
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3389"
+    source_address_prefix      = "${var.bdips1}"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow-BDNet3"
+    description                = "Allow RDP"
+    priority                   = 102
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3389"
+    source_address_prefix      = "${var.bdips2}"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow-BDNet4"
+    description                = "Allow RDP"
+    priority                   = 103
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "3389"
+    source_address_prefix      = "${var.bdips3}"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow-BDNet1-WD"
+    description                = "Allow WD"
+    priority                   = 200
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "8172"
+    source_address_prefix      = "${var.bdips}"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow-BDNet2-WD"
+    description                = "Allow WD"
+    priority                   = 201
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "8172"
+    source_address_prefix      = "${var.bdips1}"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow-BDNet3-WD"
+    description                = "Allow WD"
+    priority                   = 202
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "8172"
+    source_address_prefix      = "${var.bdips2}"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow-BDNet4-WD"
+    description                = "Allow WD"
+    priority                   = 203
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "8172"
+    source_address_prefix      = "${var.bdips3}"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
     name                       = "Inbound-LAS-VPN-Tunnel"
-    priority                   = 1100
+    priority                   = 300
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "*"
@@ -131,7 +235,7 @@ resource "azurerm_network_security_group" "nsg_HOSTED" {
 
   security_rule {
     name                       = "Outbound-LAS-VPN-Tunnel"
-    priority                   = 1000
+    priority                   = 100
     direction                  = "Outbound"
     access                     = "Allow"
     protocol                   = "*"
