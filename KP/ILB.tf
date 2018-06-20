@@ -1,6 +1,6 @@
 resource "azurerm_lb" "ILB_DMZ" {
-  name                = "${var.ILB_name}"
-  location            = "${var.location}"
+  name                = "${var.resource_name_prefix}-${var.ILB_name}"
+  location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   frontend_ip_configuration {
@@ -12,7 +12,7 @@ resource "azurerm_lb" "ILB_DMZ" {
 }
 
 resource "azurerm_lb_backend_address_pool" "Web_Pool" {
-  name                = "Web-Pool"
+  name                = "KPWeb-Pool"
   resource_group_name = "${azurerm_resource_group.rg.name}"
   loadbalancer_id     = "${azurerm_lb.ILB_DMZ.id}"
 }
@@ -25,7 +25,7 @@ resource "azurerm_lb_rule" "HTTP_LBRule" {
   frontend_port                  = 80
   backend_port                   = 80
   frontend_ip_configuration_name = "LoadBalancerFrontend"
-  load_distribution              = "Default"
+  load_distribution              = "SourceIP"
   backend_address_pool_id        = "${azurerm_lb_backend_address_pool.Web_Pool.id}"
   probe_id                       = "${azurerm_lb_probe.HTTP_Probe.id}"
 }
@@ -38,7 +38,7 @@ resource "azurerm_lb_rule" "HTTPS_LBRule" {
   frontend_port                  = 443
   backend_port                   = 443
   frontend_ip_configuration_name = "LoadBalancerFrontend"
-  load_distribution              = "Default"
+  load_distribution              = "SourceIP"
   backend_address_pool_id        = "${azurerm_lb_backend_address_pool.Web_Pool.id}"
   probe_id                       = "${azurerm_lb_probe.HTTPS_Probe.id}"
 }

@@ -1,19 +1,19 @@
 #Azure vNet Module
 resource "azurerm_resource_group" "rg" {
-  name     = "${var.shared_resource_group_name}"
+  name     = "${var.resource_group_name}"
   location = "${var.location}"
 }
 
 resource "azurerm_virtual_network" "vnet" {
-  name                = "${azurerm_resource_group.rg.name}-vnet"
-  location            = "${var.location}"
+  name                = "${var.resource_name_prefix}-KP-Prod-VNet"
+  location            = "${azurerm_resource_group.rg.location}"
   address_space       = ["${var.address_space}"]
   resource_group_name = "${azurerm_resource_group.rg.name}"
   dns_servers         = ["${var.dns_servers}"]
 }
 
 resource "azurerm_subnet" "mgmt_subnet" {
-  name                      = "${var.subnet_name_prefix}mgmt"
+  name                      = "sn-mgmt"
   virtual_network_name      = "${azurerm_virtual_network.vnet.name}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
   address_prefix            = "${var.mgmt_subnet}"
@@ -21,7 +21,7 @@ resource "azurerm_subnet" "mgmt_subnet" {
 }
 
 resource "azurerm_subnet" "untrust_subnet" {
-  name                      = "${var.subnet_name_prefix}untrust"
+  name                      = "sn-untrust"
   virtual_network_name      = "${azurerm_virtual_network.vnet.name}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
   address_prefix            = "${var.untrust_subnet}"
@@ -29,7 +29,7 @@ resource "azurerm_subnet" "untrust_subnet" {
 }
 
 resource "azurerm_subnet" "trust_subnet" {
-  name                      = "${var.subnet_name_prefix}trust"
+  name                      = "sn-trust"
   virtual_network_name      = "${azurerm_virtual_network.vnet.name}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
   address_prefix            = "${var.trust_subnet}"
@@ -38,7 +38,7 @@ resource "azurerm_subnet" "trust_subnet" {
 }
 
 resource "azurerm_subnet" "dmz_subnet" {
-  name                      = "${var.subnet_name_prefix}dmz"
+  name                      = "sn-dmz"
   virtual_network_name      = "${azurerm_virtual_network.vnet.name}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
   address_prefix            = "${var.dmz_subnet}"
@@ -47,9 +47,8 @@ resource "azurerm_subnet" "dmz_subnet" {
 }
 
 resource "azurerm_subnet" "appgw_subnet" {
-  name                      = "${var.subnet_name_prefix}appgw"
+  name                      = "sn-appgw"
   virtual_network_name      = "${azurerm_virtual_network.vnet.name}"
   resource_group_name       = "${azurerm_resource_group.rg.name}"
   address_prefix            = "${var.appgw_subnet}"
-  network_security_group_id = "${azurerm_network_security_group.nsg_APPGW.id}"
 }

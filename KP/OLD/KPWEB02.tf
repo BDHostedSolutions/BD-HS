@@ -1,8 +1,12 @@
+data "azurerm_image" "KPWEB02-Image" {
+  name                = "CustomImage"
+  resource_group_name = "shared"
+}
 
 resource "azurerm_network_interface" "KPWEB02-NIC" {
-  name                      = "${var.resource_name_prefix}-${var.kpweb02_name}-eth0"
-  location                  = "${azurerm_resource_group.rg.location}"
-  resource_group_name       = "${azurerm_resource_group.rg.name}"
+  name                      = "${var.kpweb02_name}-eth0"
+  location                  = "${var.location}"
+  resource_group_name       = "${azurerm_resource_group.vmrg.name}"
   network_security_group_id = "${azurerm_network_security_group.nsg_DMZ.id}"
 
   ip_configuration {
@@ -15,29 +19,26 @@ resource "azurerm_network_interface" "KPWEB02-NIC" {
 }
 
 resource "azurerm_virtual_machine" "KPWEB02" {
-  name                  = "${var.resource_name_prefix}-${var.kpweb02_name}"
-  location              = "${azurerm_resource_group.rg.location}"
-  resource_group_name   = "${azurerm_resource_group.rg.name}"
+  name                  = "${var.kpweb02_name}"
+  location              = "${var.location}"
+  resource_group_name   = "${azurerm_resource_group.vmrg.name}"
   network_interface_ids = ["${azurerm_network_interface.KPAPP-NIC.id}"]
   availability_set_id   = "${azurerm_availability_set.WEBAVS.id}"
-  vm_size               = "${var.kpweb_size}"
+  vm_size               = "Standard_F4s"
 
   storage_image_reference {
-    publisher = "MicrosoftWindowsServer"
-    offer     = "WindowsServer"
-    sku       = "2016-Datacenter"
-    version   = "latest"
+    id = "${data.azurerm_image.KPWEB02-Image.id}"
   }
 
   storage_os_disk {
-    name              = "${var.resource_name_prefix}-${var.kpweb02_name}_OS"
+    name              = "${var.kpweb02_name}_OS"
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
 
   os_profile {
-    computer_name  = "${var.resource_name_prefix}-${var.kpweb02_name}"
+    computer_name  = "${var.kpweb02_name}"
     admin_username = "${var.vm_username}"
     admin_password = "${var.vm_password}"
   }
