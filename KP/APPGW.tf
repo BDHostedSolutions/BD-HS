@@ -203,12 +203,12 @@ resource "azurerm_application_gateway" "App_Gw" {
     backend_http_settings_name = "CA-HTTPSBackend"
   }
 
-    request_routing_rule {
+  request_routing_rule {
     name                       = "CACORE-HTTPS-FW"
     rule_type                  = "Basic"
     http_listener_name         = "CACORE-HTTPS"
     backend_address_pool_name  = "IDMCOR-to-FW"
-    backend_http_settings_name = "HTTPSBackend"
+    backend_http_settings_name = "HTTPS-Backend"
   }
 
   request_routing_rule {
@@ -216,10 +216,10 @@ resource "azurerm_application_gateway" "App_Gw" {
     rule_type                  = "Basic"
     http_listener_name         = "CACORE-HTTP"
     backend_address_pool_name  = "IDMCOR-to-FW"
-    backend_http_settings_name = "HTTPBackend"
+    backend_http_settings_name = "HTTP-Backend"
   }
 
-    request_routing_rule {
+  request_routing_rule {
     name                       = "CAFILE-HTTP-FW"
     rule_type                  = "Basic"
     http_listener_name         = "CAFILE-HTTP"
@@ -235,7 +235,7 @@ resource "azurerm_application_gateway" "App_Gw" {
     backend_http_settings_name = "CA-HTTPSBackend"
   }
 
-    request_routing_rule {
+  request_routing_rule {
     name                       = "CAWS-HTTP-FW"
     rule_type                  = "Basic"
     http_listener_name         = "CAWS-HTTP"
@@ -252,42 +252,42 @@ resource "azurerm_application_gateway" "App_Gw" {
   }
 
   probe {
-    name                       = "cacore-probe"
-    protocol                   = "HTTPS"
-    path                       = "/idmsts/ids/login"
-    host                       = "cacore.carefusionanalytics.com"
-    interval                   = "30"
-    timeout                    = "30"
-    unhealthy_threshold        = "3"
+    name                = "cacore-probe"
+    protocol            = "HTTPS"
+    path                = "/idmsts/ids/login"
+    host                = "cacore.carefusionanalytics.com"
+    interval            = "30"
+    timeout             = "30"
+    unhealthy_threshold = "3"
   }
 
   probe {
-    name                       = "ca-probe-http"
-    protocol                   = "HTTP"
-    path                       = "/"
-    host                       = "ca.carefusionanalytics.com"
-    interval                   = "30"
-    timeout                    = "30"
-    unhealthy_threshold        = "3"
+    name                = "ca-probe-http"
+    protocol            = "HTTP"
+    path                = "/"
+    host                = "ca.carefusionanalytics.com"
+    interval            = "30"
+    timeout             = "30"
+    unhealthy_threshold = "3"
   }
 
   probe {
-    name                       = "ca-probe-https"
-    protocol                   = "HTTPS"
-    path                       = "/"
-    host                       = "ca.carefusionanalytics.com"
-    interval                   = "30"
-    timeout                    = "30"
-    unhealthy_threshold        = "3"
+    name                = "ca-probe-https"
+    protocol            = "HTTPS"
+    path                = "/"
+    host                = "ca.carefusionanalytics.com"
+    interval            = "30"
+    timeout             = "30"
+    unhealthy_threshold = "3"
   }
 
   probe {
-    name                       = "cafile-probe-https"
-    protocol                   = "HTTPS"
-    path                       = "/AgentDownloads/"
-    host                       = "cafile.carefusionanalytics.com"
-    interval                   = "30"
-    timeout                    = "30"
-    unhealthy_threshold        = "3"
+    name                = "cafile-probe-https"
+    protocol            = "HTTPS"
+    path                = "/AgentDownloads/"
+    host                = "cafile.carefusionanalytics.com"
+    interval            = "30"
+    timeout             = "30"
+    unhealthy_threshold = "3"
   }
 }

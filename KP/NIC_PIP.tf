@@ -20,10 +20,10 @@ resource "azurerm_public_ip" "FW_untrust_pip" {
 }
 
 resource "azurerm_network_interface" "MGMT" {
-  name                      = "${var.resource_name_prefix}-${var.firewall_name}-eth0"
-  location                  = "${azurerm_resource_group.rg.location}"
-  resource_group_name       = "${azurerm_resource_group.rg.name}"
-  network_security_group_id = "${azurerm_network_security_group.nsg_MGMT.id}"
+  name                          = "${var.resource_name_prefix}-${var.firewall_name}-eth0"
+  location                      = "${azurerm_resource_group.rg.location}"
+  resource_group_name           = "${azurerm_resource_group.rg.name}"
+  enable_accelerated_networking = "True"
 
   ip_configuration {
     name                          = "FW-MGMT"
@@ -35,10 +35,11 @@ resource "azurerm_network_interface" "MGMT" {
 }
 
 resource "azurerm_network_interface" "UNTRUST" {
-  name                      = "${var.resource_name_prefix}-${var.firewall_name}-eth1"
-  location                  = "${azurerm_resource_group.rg.location}"
-  resource_group_name       = "${azurerm_resource_group.rg.name}"
-  network_security_group_id = "${azurerm_network_security_group.nsg_UNTRUST.id}"
+  name                          = "${var.resource_name_prefix}-${var.firewall_name}-eth1"
+  location                      = "${azurerm_resource_group.rg.location}"
+  resource_group_name           = "${azurerm_resource_group.rg.name}"
+  enable_ip_forwarding          = "True"
+  enable_accelerated_networking = "True"
 
   ip_configuration {
     name                          = "FW-UNTRUST"
@@ -46,14 +47,30 @@ resource "azurerm_network_interface" "UNTRUST" {
     private_ip_address_allocation = "static"
     private_ip_address            = "${cidrhost("${var.untrust_subnet}", 4)}"
     public_ip_address_id          = "${azurerm_public_ip.FW_untrust_pip.id}"
+    primary                       = "True"
+  }
+
+  ip_configuration {
+    name                          = "IDMCORE-IP"
+    subnet_id                     = "${azurerm_subnet.untrust_subnet.id}"
+    private_ip_address_allocation = "static"
+    private_ip_address            = "${cidrhost("${var.untrust_subnet}", 10)}"
+  }
+
+  ip_configuration {
+    name                          = "ILB-IP"
+    subnet_id                     = "${azurerm_subnet.untrust_subnet.id}"
+    private_ip_address_allocation = "static"
+    private_ip_address            = "${cidrhost("${var.untrust_subnet}", 9)}"
   }
 }
 
 resource "azurerm_network_interface" "TRUST" {
-  name                      = "${var.resource_name_prefix}-${var.firewall_name}-eth2"
-  location                  = "${azurerm_resource_group.rg.location}"
-  resource_group_name       = "${azurerm_resource_group.rg.name}"
-  network_security_group_id = "${azurerm_network_security_group.nsg_TRUST.id}"
+  name                          = "${var.resource_name_prefix}-${var.firewall_name}-eth2"
+  location                      = "${azurerm_resource_group.rg.location}"
+  resource_group_name           = "${azurerm_resource_group.rg.name}"
+  enable_ip_forwarding          = "True"
+  enable_accelerated_networking = "True"
 
   ip_configuration {
     name                          = "FW-TRUST"
@@ -64,10 +81,10 @@ resource "azurerm_network_interface" "TRUST" {
 }
 
 resource "azurerm_network_interface" "DMZ" {
-  name                      = "${var.resource_name_prefix}-${var.firewall_name}-eth3"
-  location                  = "${azurerm_resource_group.rg.location}"
-  resource_group_name       = "${azurerm_resource_group.rg.name}"
-  network_security_group_id = "${azurerm_network_security_group.nsg_DMZ.id}"
+  name                          = "${var.resource_name_prefix}-${var.firewall_name}-eth3"
+  location                      = "${azurerm_resource_group.rg.location}"
+  resource_group_name           = "${azurerm_resource_group.rg.name}"
+  enable_accelerated_networking = "True"
 
   ip_configuration {
     name                          = "FW-DMZ"

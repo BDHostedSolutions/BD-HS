@@ -1,4 +1,3 @@
-
 resource "azurerm_availability_set" "IDMAVS" {
   name                         = "${var.resource_name_prefix}-KP-IDM-AVS"
   location                     = "${azurerm_resource_group.rg.location}"
@@ -9,18 +8,18 @@ resource "azurerm_availability_set" "IDMAVS" {
 }
 
 resource "azurerm_network_interface" "KPIDMCOR-NIC" {
-  name                      = "${var.resource_name_prefix}-${var.kpidmcor01_name}-eth0"
-  location                  = "${azurerm_resource_group.rg.location}"
-  resource_group_name       = "${azurerm_resource_group.rg.name}"
-  network_security_group_id = "${azurerm_network_security_group.nsg_TRUST.id}"
+  name                          = "${var.resource_name_prefix}-${var.kpidmcor01_name}-eth0"
+  location                      = "${azurerm_resource_group.rg.location}"
+  resource_group_name           = "${azurerm_resource_group.rg.name}"
+  enable_accelerated_networking = "True"
 
   ip_configuration {
     name                          = "KPIDMCOR"
-    subnet_id                     = "${azurerm_subnet.trust_subnet.id}"
+    subnet_id                     = "${azurerm_subnet.dmz_subnet.id}"
     private_ip_address_allocation = "dynamic"
   }
 
-  depends_on = ["azurerm_network_interface.TRUST"]
+  depends_on = ["azurerm_network_interface.DMZ"]
 }
 
 resource "azurerm_virtual_machine" "KPIDMCOR01" {
@@ -51,5 +50,38 @@ resource "azurerm_virtual_machine" "KPIDMCOR01" {
     admin_password = "${var.vm_password}"
   }
 
-  os_profile_windows_config {}
+  os_profile_windows_config {
+    provision_vm_agent = true
+  }
+}
+
+resource "azurerm_virtual_machine_extension" "kpidmcor01_iaasantimalware" {
+  name                       = "${var.resource_name_prefix}-${var.kpidmcor01_name}-IaaSAntimalware"
+  location                   = "${azurerm_resource_group.rg.location}"
+  resource_group_name        = "${azurerm_resource_group.rg.name}"
+  virtual_machine_name       = "${azurerm_virtual_machine.KPIDMCOR01.name}"
+  publisher                  = "Microsoft.Azure.Security"
+  type                       = "IaaSAntimalware"
+  type_handler_version       = "1.5"
+  auto_upgrade_minor_version = true
+
+  settings = <<SETTINGS
+    {
+        "AntimalwareEnabled": "true",
+        "ScheduledScanSettings": {
+            "isEnabled": "true",
+            "scanType": "Quick",
+            "day": "7",
+            "time": "120"
+        },
+        "Exclusions": {
+            "Paths": "C:\\Users",
+            "Extensions": ".txt",
+            "Processes": "taskmgr.exe"
+        },
+        "RealtimeProtectionEnabled": "true"
+    }
+  SETTINGS
+
+  depends_on = ["azurerm_virtual_machine.KPIDMCOR01"]
 }

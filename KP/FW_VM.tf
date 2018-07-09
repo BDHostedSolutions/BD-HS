@@ -1,4 +1,3 @@
-
 resource "azurerm_availability_set" "FWAVS" {
   name                         = "${var.resource_name_prefix}-KP-FW-AVS"
   location                     = "${azurerm_resource_group.rg.location}"

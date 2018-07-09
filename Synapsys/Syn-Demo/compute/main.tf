@@ -1,5 +1,18 @@
 #----compute/main.tf
 
+data "azurerm_image" "demo-image" {
+  name                = "DEMO-VM1-image"
+  resource_group_name = "${var.rg_name}"
+}
+
+resource "azurerm_public_ip" "demo-pip" {
+  name                         = "DEMO-VM0-pip"
+  location                     = "${var.rg_location}"
+  resource_group_name          = "${var.rg_name}"
+  public_ip_address_allocation = "Dynamic"
+  domain_name_label            = "sea-demo-vm0"
+  
+}
 resource "azurerm_network_interface" "demovm-nic" {
   name                = "${var.demovm_name}-nic0"
   location            = "${var.rg_location}"
@@ -9,6 +22,7 @@ resource "azurerm_network_interface" "demovm-nic" {
     name                                    = "ipconfig1"
     subnet_id                               = "${var.demo_subnet}"
     private_ip_address_allocation           = "dynamic"
+    public_ip_address_id                    = "${azurerm_public_ip.demo-pip.id}"
   }
 }
 
@@ -21,10 +35,7 @@ resource "azurerm_virtual_machine" "demovm" {
   license_type          = "Windows_Server"
 
   storage_image_reference {
-    publisher = "MicrosoftWindowsServer"
-    offer     = "WindowsServer"
-    sku       = "2016-Datacenter"
-    version   = "latest"
+    id = "${data.azurerm_image.demo-image.id}"
   }
 
   storage_os_disk {

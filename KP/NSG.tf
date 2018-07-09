@@ -10,8 +10,8 @@ resource "azurerm_network_security_group" "nsg_MGMT" {
     access                     = "Allow"
     protocol                   = "*"
     source_port_range          = "*"
-    destination_port_ranges    = [80,443,22]
-    source_address_prefixes    = ["204.193.35.248","204.193.35.250","66.194.102.38","216.115.73.53"]
+    destination_port_ranges    = [80, 443, 22]
+    source_address_prefixes    = ["204.193.35.248", "204.193.35.250", "66.194.102.38", "216.115.73.53"]
     destination_address_prefix = "${cidrhost("${var.mgmt_subnet}", 4)}"
   }
 
@@ -116,5 +116,4 @@ resource "azurerm_network_security_group" "nsg_DMZ" {
   name                = "nsg-fw-dmz"
   location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
-
 }

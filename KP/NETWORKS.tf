@@ -1,15 +1,15 @@
-#Azure vNet Module
+#Azure vNet
 resource "azurerm_resource_group" "rg" {
   name     = "${var.resource_group_name}"
   location = "${var.location}"
 }
 
 resource "azurerm_virtual_network" "vnet" {
-  name                = "${var.resource_name_prefix}-KP-Prod-VNet"
+  name                = "${var.resource_name_prefix}-KP-Dev-VNet"
   location            = "${azurerm_resource_group.rg.location}"
   address_space       = ["${var.address_space}"]
   resource_group_name = "${azurerm_resource_group.rg.name}"
-  dns_servers         = ["${var.dns_servers}"]
+  dns_servers         = ["${var.dns_servers}", "${var.global_dns_servers}"]
 }
 
 resource "azurerm_subnet" "mgmt_subnet" {
@@ -47,8 +47,8 @@ resource "azurerm_subnet" "dmz_subnet" {
 }
 
 resource "azurerm_subnet" "appgw_subnet" {
-  name                      = "sn-appgw"
-  virtual_network_name      = "${azurerm_virtual_network.vnet.name}"
-  resource_group_name       = "${azurerm_resource_group.rg.name}"
-  address_prefix            = "${var.appgw_subnet}"
+  name                 = "sn-appgw"
+  virtual_network_name = "${azurerm_virtual_network.vnet.name}"
+  resource_group_name  = "${azurerm_resource_group.rg.name}"
+  address_prefix       = "${var.appgw_subnet}"
 }

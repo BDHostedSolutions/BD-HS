@@ -1,20 +1,11 @@
-resource "azurerm_availability_set" "IDBAVS" {
-  name                         = "${var.resource_name_prefix}-KP-DB-INF-AVS"
-  location                     = "${azurerm_resource_group.rg.location}"
-  resource_group_name          = "${azurerm_resource_group.rg.name}"
-  managed                      = "true"
-  platform_update_domain_count = "5"
-  platform_fault_domain_count  = "2"
-}
-
-resource "azurerm_network_interface" "KPIDB-NIC" {
-  name                          = "${var.resource_name_prefix}-${var.kpidb01_name}-eth0"
+resource "azurerm_network_interface" "KPDC-NIC" {
+  name                          = "${var.resource_name_prefix}-${var.kpdc01_name}-eth0"
   location                      = "${azurerm_resource_group.rg.location}"
   resource_group_name           = "${azurerm_resource_group.rg.name}"
   enable_accelerated_networking = "True"
 
   ip_configuration {
-    name                          = "KPIDB"
+    name                          = "KPDC"
     subnet_id                     = "${azurerm_subnet.trust_subnet.id}"
     private_ip_address_allocation = "dynamic"
   }
@@ -22,13 +13,12 @@ resource "azurerm_network_interface" "KPIDB-NIC" {
   depends_on = ["azurerm_network_interface.TRUST"]
 }
 
-resource "azurerm_virtual_machine" "KPIDB01" {
-  name                  = "${var.resource_name_prefix}-${var.kpidb01_name}"
+resource "azurerm_virtual_machine" "KPDC01" {
+  name                  = "${var.resource_name_prefix}-${var.kpdc01_name}"
   location              = "${azurerm_resource_group.rg.location}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
-  network_interface_ids = ["${azurerm_network_interface.KPIDB-NIC.id}"]
-  availability_set_id   = "${azurerm_availability_set.IDBAVS.id}"
-  vm_size               = "${var.kpidb01_size}"
+  network_interface_ids = ["${azurerm_network_interface.KPDC-NIC.id}"]
+  vm_size               = "${var.kpdc01_size}"
 
   storage_image_reference {
     publisher = "MicrosoftWindowsServer"
@@ -38,14 +28,14 @@ resource "azurerm_virtual_machine" "KPIDB01" {
   }
 
   storage_os_disk {
-    name              = "${var.resource_name_prefix}-${var.kpidb01_name}_OS"
+    name              = "${var.resource_name_prefix}-${var.kpdc01_name}_OS"
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
   }
 
   os_profile {
-    computer_name  = "${var.resource_name_prefix}-${var.kpidb01_name}"
+    computer_name  = "${var.resource_name_prefix}-${var.kpdc01_name}"
     admin_username = "${var.vm_username}"
     admin_password = "${var.vm_password}"
   }
@@ -55,11 +45,11 @@ resource "azurerm_virtual_machine" "KPIDB01" {
   }
 }
 
-resource "azurerm_virtual_machine_extension" "kpidb01_iaasantimalware" {
-  name                       = "${var.resource_name_prefix}-${var.kpidb01_name}-IaaSAntimalware"
+resource "azurerm_virtual_machine_extension" "kpdc01_iaasantimalware" {
+  name                       = "${var.resource_name_prefix}-${var.kpdc01_name}-IaaSAntimalware"
   location                   = "${azurerm_resource_group.rg.location}"
   resource_group_name        = "${azurerm_resource_group.rg.name}"
-  virtual_machine_name       = "${azurerm_virtual_machine.KPIDB01.name}"
+  virtual_machine_name       = "${azurerm_virtual_machine.KPDC01.name}"
   publisher                  = "Microsoft.Azure.Security"
   type                       = "IaaSAntimalware"
   type_handler_version       = "1.5"
@@ -83,5 +73,5 @@ resource "azurerm_virtual_machine_extension" "kpidb01_iaasantimalware" {
     }
   SETTINGS
 
-  depends_on = ["azurerm_virtual_machine.KPIDB01"]
+  depends_on = ["azurerm_virtual_machine.KPDC01"]
 }
