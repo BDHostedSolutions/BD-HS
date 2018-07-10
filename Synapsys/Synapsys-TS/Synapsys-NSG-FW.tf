@@ -250,6 +250,31 @@ resource "azurerm_network_security_group" "nsg_syn_dmz" {
   location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
+  security_rule {
+    name                       = "Allow-Port-80"
+    description                = "Allow 80"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "80"
+    source_address_prefix      = "INTERNET"
+    destination_address_prefix = "*"
+  }
+
+  security_rule {
+    name                       = "Allow-Port-443"
+    description                = "Allow 443"
+    priority                   = 101
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "443"
+    source_address_prefix      = "INTERNET"
+    destination_address_prefix = "*"
+  }
 }
 
 resource "azurerm_network_security_group" "nsg_syn_data" {
