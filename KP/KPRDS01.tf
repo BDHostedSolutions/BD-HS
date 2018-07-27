@@ -29,7 +29,8 @@ resource "azurerm_virtual_machine" "KPRDS01" {
   network_interface_ids = ["${azurerm_network_interface.KPRDS-NIC.id}"]
   availability_set_id   = "${azurerm_availability_set.RDSAVS.id}"
   vm_size               = "${var.kprds01_size}"
-
+  license_type          = "Windows_Server"
+  
   storage_image_reference {
     publisher = "MicrosoftWindowsServer"
     offer     = "WindowsServer"

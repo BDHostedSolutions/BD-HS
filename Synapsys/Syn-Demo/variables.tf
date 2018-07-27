@@ -26,6 +26,10 @@ variable "vm_password" {}
 variable "demovm_name" {
     type = "map"
 }
+
+variable "domain_name" {
+    type = "map"
+}
 variable "demo_subnet" {}
 
 variable "vnet_name" {

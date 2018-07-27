@@ -29,11 +29,12 @@ resource "azurerm_virtual_machine" "KPRPT01" {
   network_interface_ids = ["${azurerm_network_interface.KPRPT-NIC.id}"]
   availability_set_id   = "${azurerm_availability_set.RPTAVS.id}"
   vm_size               = "${var.kprpt01_size}"
+  license_type          = "Windows_Server"
 
   storage_image_reference {
     publisher = "MicrosoftWindowsServer"
     offer     = "WindowsServer"
-    sku       = "2016-Datacenter"
+    sku       = "2012-R2-Datacenter"
     version   = "latest"
   }
 

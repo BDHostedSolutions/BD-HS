@@ -10,6 +10,7 @@ resource "azurerm_public_ip" "FW_mgmt_pip" {
   location                     = "${azurerm_resource_group.rg.location}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   public_ip_address_allocation = "dynamic"
+  domain_name_label            = "fwmgmt-kp-dev"
 }
 
 resource "azurerm_public_ip" "FW_untrust_pip" {

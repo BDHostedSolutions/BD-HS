@@ -19,6 +19,7 @@ module "compute" {
   vm_username    = "${var.vm_username}"
   vm_password    = "${var.vm_password}"
   demovm_name    = "${lookup(var.demovm_name, var.env)}"
+  domain_name    = "${lookup(var.domain_name, var.env)}"
   demovm_size    = "${var.demovm_size}"
   rg_name        = "${module.rg.resource_group_name}"
   rg_location    = "${module.rg.location}"

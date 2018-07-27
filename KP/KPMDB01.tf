@@ -29,11 +29,12 @@ resource "azurerm_virtual_machine" "KPMDB01" {
   network_interface_ids = ["${azurerm_network_interface.KPMDB-NIC.id}"]
   availability_set_id   = "${azurerm_availability_set.MDBAVS.id}"
   vm_size               = "${var.kpmdb01_size}"
+  license_type          = "Windows_Server"
 
   storage_image_reference {
     publisher = "MicrosoftWindowsServer"
     offer     = "WindowsServer"
-    sku       = "2016-Datacenter"
+    sku       = "2012-R2-Datacenter"
     version   = "latest"
   }
 

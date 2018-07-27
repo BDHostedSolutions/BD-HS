@@ -10,7 +10,7 @@ resource "azurerm_public_ip" "demo-pip" {
   location                     = "${var.rg_location}"
   resource_group_name          = "${var.rg_name}"
   public_ip_address_allocation = "Dynamic"
-  domain_name_label            = "sea-demo-vm0"
+  domain_name_label            = "${var.domain_name}"
   
 }
 resource "azurerm_network_interface" "demovm-nic" {
