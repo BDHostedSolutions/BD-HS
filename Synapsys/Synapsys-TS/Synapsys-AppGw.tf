@@ -11,9 +11,9 @@ resource "azurerm_application_gateway" "App_Gw" {
   resource_group_name = "${azurerm_resource_group.rg.name}"
 
   sku {
-    name     = "Standard_Small"
+    name     = "Standard_Medium"
     tier     = "Standard"
-    capacity = 1
+    capacity = 2
   }
 
   gateway_ip_configuration {

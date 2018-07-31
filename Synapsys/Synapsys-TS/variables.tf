@@ -1,6 +1,6 @@
 /* Configure Azure Provider and declare all the Variables that will be used in Terraform configurations */
 provider "azurerm" {
-  version         = "~> 1.4"
+  version         = "~> 1.11"
   subscription_id = "${var.subscription_id}"
   client_id       = "${var.client_id}"
   client_secret   = "${var.client_secret}"
@@ -12,7 +12,7 @@ terraform {
   backend "azurerm" {
     storage_account_name = "tfstatefiles"
     container_name       = "tfstate"
-    key                  = "ts-synapsys.terraform.tfstate"
+    key                  = "ts-synapsys-cae.terraform.tfstate"
     access_key           = "nWj7Yk9yZKXGYj9TPRrRB/MuQhlOX9a3xwwvY2Vqq8pFUs+0zJEu2TU2aN/+8hvLs0Ojk/SLKPpPBPKbgaf2aA=="
   }
 }
