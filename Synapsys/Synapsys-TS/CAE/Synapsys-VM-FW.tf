@@ -12,6 +12,8 @@ resource "azurerm_public_ip" "FW_mgmt_pip" {
   location                     = "${azurerm_resource_group.rg.location}"
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   public_ip_address_allocation = "static"
+  domain_name_label            = "fwmgmt-syn"
+  
 }
 
 resource "azurerm_public_ip" "FW_untrust_pip" {
@@ -25,7 +27,7 @@ resource "azurerm_network_interface" "MGMT" {
   name                = "${var.resource_name_prefix}-${var.firewall_name}-eth0"
   location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
-  #enable_accelerated_networking = "True"
+  enable_accelerated_networking = "True"
 
   ip_configuration {
     name                          = "FW-MGMT"
@@ -40,7 +42,7 @@ resource "azurerm_network_interface" "UNTRUST" {
   name                 = "${var.resource_name_prefix}-${var.firewall_name}-eth1"
   location             = "${azurerm_resource_group.rg.location}"
   resource_group_name  = "${azurerm_resource_group.rg.name}"
-  #enable_accelerated_networking = "True"
+  enable_accelerated_networking = "True"
   enable_ip_forwarding = true
 
   ip_configuration {
@@ -56,7 +58,7 @@ resource "azurerm_network_interface" "TRUST" {
   name                 = "${var.resource_name_prefix}-${var.firewall_name}-eth2"
   location             = "${azurerm_resource_group.rg.location}"
   resource_group_name  = "${azurerm_resource_group.rg.name}"
-  #enable_accelerated_networking = "True"
+  enable_accelerated_networking = "True"
   enable_ip_forwarding = true
 
   ip_configuration {

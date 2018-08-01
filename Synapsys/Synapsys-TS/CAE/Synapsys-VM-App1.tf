@@ -1,30 +1,25 @@
-resource "azurerm_availability_set" "db-server-avs" {
-  name                = "${var.resource_name_prefix}-${var.db_server_avs_name}"
+resource "azurerm_network_interface" "app-vm1-nic" {
+  name                = "${var.resource_name_prefix}-${var.appvm1_name}-nic0"
   location            = "${azurerm_resource_group.rg.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
-  managed             = true
-}
-
-resource "azurerm_network_interface" "db-vm-nic" {
-  name                = "${var.resource_name_prefix}-${var.dbvm_name}-nic0"
-  location            = "${azurerm_resource_group.rg.location}"
-  resource_group_name = "${azurerm_resource_group.rg.name}"
-  #enable_accelerated_networking = "True"
+  enable_accelerated_networking = "True"
 
   ip_configuration {
-    name                          = "ipconfig1"
-    subnet_id                     = "${azurerm_subnet.syn_data_subnet.id}"
-    private_ip_address_allocation = "dynamic"
+    name                                    = "ipconfig1"
+    subnet_id                               = "${azurerm_subnet.syn_dmz_subnet.id}"
+    private_ip_address_allocation           = "dynamic"
+    load_balancer_backend_address_pools_ids = ["${azurerm_lb_backend_address_pool.ilb_bep.id}"]
+    load_balancer_inbound_nat_rules_ids     = ["${azurerm_lb_nat_rule.rdp1.id}"]
   }
 }
 
-resource "azurerm_virtual_machine" "db-vm" {
-  name                  = "${var.resource_name_prefix}-${var.dbvm_name}"
+resource "azurerm_virtual_machine" "app-vm1" {
+  name                  = "${var.resource_name_prefix}-${var.appvm1_name}"
   location              = "${azurerm_resource_group.rg.location}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
-  network_interface_ids = ["${azurerm_network_interface.db-vm-nic.id}"]
-  availability_set_id   = "${azurerm_availability_set.db-server-avs.id}"
-  vm_size               = "${var.sql_vm_size}"
+  network_interface_ids = ["${azurerm_network_interface.app-vm1-nic.id}"]
+  availability_set_id   = "${azurerm_availability_set.app-server-avs.id}"
+  vm_size               = "${var.app_vm_size}"
   license_type          = "Windows_Server" # Hybrid Benefit
 
   storage_image_reference {
@@ -35,7 +30,7 @@ resource "azurerm_virtual_machine" "db-vm" {
   }
 
   storage_os_disk {
-    name              = "${var.resource_name_prefix}-${var.dbvm_name}_OS"
+    name              = "${var.resource_name_prefix}-${var.appvm1_name}_OS"
     caching           = "ReadWrite"
     create_option     = "FromImage"
     managed_disk_type = "Standard_LRS"
@@ -43,7 +38,7 @@ resource "azurerm_virtual_machine" "db-vm" {
   }
 
   os_profile {
-    computer_name  = "${var.resource_name_prefix}-${var.dbvm_name}"
+    computer_name  = "${var.resource_name_prefix}-${var.appvm1_name}"
     admin_username = "${var.vm_username}"
     admin_password = "${var.vm_password}"
   }
@@ -58,11 +53,11 @@ resource "azurerm_virtual_machine" "db-vm" {
   }
 }
 
-resource "azurerm_virtual_machine_extension" "db-vm_iaasantimalware" {
-  name                       = "${var.resource_name_prefix}-${var.dbvm_name}-IaaSAntimalware"
+resource "azurerm_virtual_machine_extension" "app-vm1_iaasantimalware" {
+  name                       = "${var.resource_name_prefix}-${var.appvm1_name}-IaaSAntimalware"
   location                   = "${azurerm_resource_group.rg.location}"
   resource_group_name        = "${azurerm_resource_group.rg.name}"
-  virtual_machine_name       = "${azurerm_virtual_machine.db-vm.name}"
+  virtual_machine_name       = "${azurerm_virtual_machine.app-vm1.name}"
   publisher                  = "Microsoft.Azure.Security"
   type                       = "IaaSAntimalware"
   type_handler_version       = "1.5"
@@ -86,14 +81,14 @@ resource "azurerm_virtual_machine_extension" "db-vm_iaasantimalware" {
     }
   SETTINGS
 
-  depends_on = ["azurerm_virtual_machine.db-vm"]
+  depends_on = ["azurerm_virtual_machine.app-vm1"]
 }
 
-# resource "azurerm_virtual_machine_extension" "db0_domain_join" {
+# resource "azurerm_virtual_machine_extension" "appvm1_domain_join" {
 #   name                 = "join-domain"
 #   location             = "${azurerm_resource_group.rg.location}"
 #   resource_group_name  = "${azurerm_resource_group.rg.name}"
-#   virtual_machine_name = "${azurerm_virtual_machine.db-vm.name}"
+#   virtual_machine_name = "${azurerm_virtual_machine.app-vm1.name}"
 #   publisher            = "Microsoft.Compute"
 #   type                 = "JsonADDomainExtension"
 #   type_handler_version = "1.0"

@@ -3,6 +3,8 @@ resource "azurerm_availability_set" "ts-services-avs" {
   location            = "${var.location}"
   resource_group_name = "${azurerm_resource_group.rg.name}"
   managed             = true
+  platform_update_domain_count = "5"
+  platform_fault_domain_count  = "2"
 }
 
 resource "azurerm_network_interface" "ts-servicesvm0-nic" {
