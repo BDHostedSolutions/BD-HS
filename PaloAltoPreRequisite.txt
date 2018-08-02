@@ -1,0 +1,3 @@
+#Agree to Legal terms for Palo Alto FW VM for each subscription 
+
+Get-AzureRmMarketplaceTerms -Publisher "paloaltonetworks" -Product "vmseries1" -Name "bundle2" | Set-AzureRmMarketplaceTerms -Accept
