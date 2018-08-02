@@ -57,7 +57,7 @@ resource "azurerm_virtual_machine_extension" "kpweb02_iaasantimalware" {
   publisher                  = "Microsoft.Azure.Security"
   type                       = "IaaSAntimalware"
   type_handler_version       = "1.5"
-  auto_upgrade_minor_version = true
+  auto_upgrade_minor_version = "true"
 
   settings = <<SETTINGS
     {
