@@ -20,7 +20,10 @@ Run the following commands from a CLI terminal inside the relevant directory.
 
 ## Subdirectories
 
+* `/Demo` Demo for Terraform Training..
+* `/Dev-CA` KP Canada Development.
 * `/OLD` Initial files created from KP Canada Infrastructure.
+* `/Prod-CA` KP Canada Production.
 
 ## Terraform Azure Documentation
 

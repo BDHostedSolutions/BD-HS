@@ -10,12 +10,13 @@ provider "azurerm" {
 # Remote tfstate File Reference
 terraform {
   backend "azurerm" {
-    storage_account_name = "tfstatefiles"
+    storage_account_name = "sacchskpvmprd01"
     container_name       = "tfstate"
-    key                  = "kp-test-dev.terraform.tfstate"
-    access_key           = "nWj7Yk9yZKXGYj9TPRrRB/MuQhlOX9a3xwwvY2Vqq8pFUs+0zJEu2TU2aN/+8hvLs0Ojk/SLKPpPBPKbgaf2aA=="
+    key                  = "kp-demo.terraform.tfstate"
+    access_key           = "g6UqB+lWnmOF7bRl83fAeF7uHqLQYTil90puKIT4op/kHSgU3PH6g73fYD8KhgKeLA4P0MmYrRkLFJ/93ViTIA=="
   }
 }
+
 
 variable "subscription_id" {}
 
