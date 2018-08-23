@@ -4,7 +4,7 @@ resource "azurerm_availability_set" "app-server-avs" {
   resource_group_name = "${azurerm_resource_group.rg.name}"
   managed             = true
   platform_update_domain_count = "5"
-  platform_fault_domain_count  = "2"
+  platform_fault_domain_count  = "3"
 }
 
 resource "azurerm_network_interface" "app-vm0-nic" {
@@ -17,8 +17,6 @@ resource "azurerm_network_interface" "app-vm0-nic" {
     name                                    = "ipconfig1"
     subnet_id                               = "${azurerm_subnet.syn_dmz_subnet.id}"
     private_ip_address_allocation           = "dynamic"
-    load_balancer_backend_address_pools_ids = ["${azurerm_lb_backend_address_pool.ilb_bep.id}"]
-    load_balancer_inbound_nat_rules_ids     = ["${azurerm_lb_nat_rule.rdp0.id}"]
   }
 }
 

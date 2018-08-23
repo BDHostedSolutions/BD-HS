@@ -4,7 +4,7 @@ resource "azurerm_availability_set" "db-server-avs" {
   resource_group_name = "${azurerm_resource_group.rg.name}"
   managed             = true
   platform_update_domain_count = "5"
-  platform_fault_domain_count  = "2"
+  platform_fault_domain_count  = "3"
 }
 
 resource "azurerm_network_interface" "db-vm-nic" {

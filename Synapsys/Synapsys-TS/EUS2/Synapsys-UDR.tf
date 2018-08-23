@@ -298,3 +298,16 @@ resource "azurerm_route_table" "hosted_route_table" {
     next_hop_in_ip_address = "${cidrhost("${var.trust_subnet}", 4)}"
   }
 }
+
+resource "azurerm_route_table" "appgw_route_table" {
+  name                = "appgw_route_table"
+  location            = "${azurerm_resource_group.rg.location}"
+  resource_group_name = "${azurerm_resource_group.rg.name}"
+
+  route {
+    name                   = "route_to_syn_dmz"
+    address_prefix         = "${var.syn_dmz_subnet}"
+    next_hop_type          = "VirtualAppliance"
+    next_hop_in_ip_address = "${cidrhost("${var.untrust_subnet}", 4)}"
+  }
+}

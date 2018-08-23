@@ -87,5 +87,6 @@ resource "azurerm_subnet" "appgw_subnet" {
   virtual_network_name = "${azurerm_virtual_network.vnet.name}"
   resource_group_name  = "${azurerm_resource_group.rg.name}"
   address_prefix       = "${var.appgw_subnet}"
+  route_table_id            = "${azurerm_route_table.appgw_route_table.id}"
   service_endpoints         = ["Microsoft.ServiceBus", "Microsoft.KeyVault"]
 }

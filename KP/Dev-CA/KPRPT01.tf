@@ -42,7 +42,7 @@ resource "azurerm_virtual_machine" "KPRPT01" {
     name              = "${var.resource_name_prefix}-${var.kprpt01_name}_OS"
     caching           = "ReadWrite"
     create_option     = "FromImage"
-    managed_disk_type = "Standard_LRS"
+    managed_disk_type = "Premium_LRS"
   }
 
   os_profile {

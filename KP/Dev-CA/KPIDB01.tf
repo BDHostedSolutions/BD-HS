@@ -22,6 +22,21 @@ resource "azurerm_network_interface" "KPIDB-NIC" {
   depends_on = ["azurerm_network_interface.TRUST"]
 }
 
+resource "azurerm_managed_disk" "sysdb_1" {
+  name                 = "${var.resource_name_prefix}-${var.kpidb01_name}_SysDB_1"
+  location             = "${azurerm_resource_group.rg.location}"
+  resource_group_name  = "${azurerm_resource_group.rg.name}"
+  storage_account_type = "Premium_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = 64
+}
+
+resource "azurerm_virtual_machine_data_disk_attachment" "sysdb_1" {
+  managed_disk_id    = "${azurerm_managed_disk.sysdb_1.id}"
+  virtual_machine_id = "${azurerm_virtual_machine.KPIDB01.id}"
+  lun                = "0"
+  caching            = "ReadOnly"
+}
 resource "azurerm_virtual_machine" "KPIDB01" {
   name                  = "${var.resource_name_prefix}-${var.kpidb01_name}"
   location              = "${azurerm_resource_group.rg.location}"
@@ -42,7 +57,7 @@ resource "azurerm_virtual_machine" "KPIDB01" {
     name              = "${var.resource_name_prefix}-${var.kpidb01_name}_OS"
     caching           = "ReadWrite"
     create_option     = "FromImage"
-    managed_disk_type = "Standard_LRS"
+    managed_disk_type = "Premium_LRS"
   }
 
   os_profile {

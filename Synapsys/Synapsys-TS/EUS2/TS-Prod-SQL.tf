@@ -24,7 +24,7 @@ resource "azurerm_sql_firewall_rule" "dsallowAllAzureIps" {
 }
 
 resource "azurerm_sql_database" "dsSQLDB" {
-  name                             = "${var.resource_name_prefix}-${var.ds_sql_db_name}"
+  name                             = "${var.ds_sql_db_name}"
   resource_group_name              = "${azurerm_resource_group.rg.name}"
   location                         = "${var.location}"
   server_name                      = "${azurerm_sql_server.ds_sql.name}"
@@ -60,7 +60,7 @@ resource "azurerm_sql_firewall_rule" "cisallowAllAzureIps" {
 }
 
 resource "azurerm_sql_database" "cisSQLDB" {
-  name                             = "${var.resource_name_prefix}-${var.cis_sql_db_name}"
+  name                             = "${var.cis_sql_db_name}"
   resource_group_name              = "${azurerm_resource_group.rg.name}"
   location                         = "${var.location}"
   server_name                      = "${azurerm_sql_server.cis_sql.name}"

@@ -4,7 +4,7 @@ resource "azurerm_availability_set" "rds-server-avs" {
   resource_group_name          = "${azurerm_resource_group.rg.name}"
   managed                      = true
   platform_update_domain_count = "5"
-  platform_fault_domain_count  = "2"
+  platform_fault_domain_count  = "3"
 }
 
 resource "azurerm_network_interface" "RDS-NIC" {
@@ -25,6 +25,7 @@ resource "azurerm_virtual_machine" "rdsvm" {
   location              = "${azurerm_resource_group.rg.location}"
   resource_group_name   = "${azurerm_resource_group.rg.name}"
   network_interface_ids = ["${azurerm_network_interface.RDS-NIC.id}"]
+  primary_network_interface_id = "${azurerm_network_interface.RDS-NIC.id}"
   vm_size               = "${var.rds_vm_size}"
   license_type          = "Windows_Server" # Hybrid Benefit
 
