@@ -93,7 +93,7 @@ dc_vm_size                      = "Standard_D2s_v3"
 
 # Local Admin User/Pass
 vm_username                     = "bdiadmin"
-vm_password                     = "!Syn@PSys2018!"
+vm_password                     = ""
 
 # Firewall Server/Availability Set Names
 fw_avs_name                     = "FW-AVSet"
